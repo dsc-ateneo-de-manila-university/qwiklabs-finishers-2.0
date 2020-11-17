@@ -1,25 +1,29 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-html, body {
-    font-family: "Google Sans", sans-serif;
-    letter-spacing: 0.02em;
+html,
+body {
+  font-family: "Google Sans", sans-serif;
+  letter-spacing: 0.02em;
 }
 
-.regBtn2 {
-    display: inline-block;
-    border: 3px solid #222222;
-    background: white;
-    padding: 10px 25px;
-    font-weight: bold;
-    transition: 300ms all;
+.regBtn2, .linkBtn {
+  display: inline-block;
+  border: 3px solid #222222;
+  background: white;
+  padding: 10px 25px;
+  font-weight: bold;
+  transition: 300ms all;
+  font-family: inherit;
+  color: #222222;
+  text-decoration: none;
 }
 
-.regBtn2:hover {
-    background-color: #333; 
-    color: #fff;
-    cursor: pointer;
-}; 
+.regBtn2:hover, .linkBtn:hover {
+  background-color: #333;
+  color: #fff;
+  cursor: pointer;
+}
