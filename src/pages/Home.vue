@@ -23,7 +23,10 @@
     <h1>What are the latest quests?</h1>
     <p>Check out what’s new with Qwiklabs.</p>
     <ul class="home-cards">
-      <!-- quests from Firestore -->
+        <Card title="Stackdriver Logging" level="Fundamental" hours="5" credits="23" steps="5"/>
+        <Card title="Stackdriver Logging" level="Fundamental" hours="5" credits="23" steps="5"/>
+        <Card title="Stackdriver Logging" level="Fundamental" hours="5" credits="23" steps="5"/>
+        <Card title="Stackdriver Logging" level="Fundamental" hours="5" credits="23" steps="5"/>
     </ul>
     <a href="quests.html" class="linkBtn">View more</a>
   </section>
@@ -32,33 +35,41 @@
   <section class="home-finishers-container">
       <div class="header-groupings">
         <h1>Featured Finishers</h1>
-        <p>
+        <p class="finisher-par">
           Check out tech enthusiasts who were able to finish various Qwiklabs
           quests.
         </p>
       </div>
       <div class="people-collection">
-        <div>
-          <div class="people-collection-child">
-            <div>
-              <img src="" alt=""/>
-            </div>
-            <div class="person-info">
-              <p class="person-name"></p>
-              <p id="quest"></p>
-              <p id="completionDate"></p>
-            </div>
-          </div>
-        </div>
+        <Finisher imageName="Renzo.png" name="Renzo Tan" quest="GCP Essentials" date="Nov 18, 2020"/>
+        <Finisher imageName="Renzo.png" name="Renzo Tan" quest="GCP Essentials" date="Nov 18, 2020"/>
+        <Finisher imageName="Renzo.png" name="Renzo Tan" quest="GCP Essentials" date="Nov 18, 2020"/>
+        <Finisher imageName="Renzo.png" name="Renzo Tan" quest="GCP Essentials" date="Nov 18, 2020"/>
+        <Finisher imageName="Renzo.png" name="Renzo Tan" quest="GCP Essentials" date="Nov 18, 2020"/>
+        <Finisher imageName="Renzo.png" name="Renzo Tan" quest="GCP Essentials" date="Nov 18, 2020"/>
+        <Finisher imageName="Renzo.png" name="Renzo Tan" quest="GCP Essentials" date="Nov 18, 2020"/>
+        <Finisher imageName="Renzo.png" name="Renzo Tan" quest="GCP Essentials" date="Nov 18, 2020"/>
+        <Finisher imageName="Renzo.png" name="Renzo Tan" quest="GCP Essentials" date="Nov 18, 2020"/>
+        <Finisher imageName="Renzo.png" name="Renzo Tan" quest="GCP Essentials" date="Nov 18, 2020"/>
+        <Finisher imageName="Renzo.png" name="Renzo Tan" quest="GCP Essentials" date="Nov 18, 2020"/>
+        <Finisher imageName="Renzo.png" name="Renzo Tan" quest="GCP Essentials" date="Nov 18, 2020"/>
       </div>
       <a href="#" class="linkBtn view-more-link">View more</a>
   </section>
 
 </main>
-
 </template>
 
 <script>
+import Card from '../components/Card';
+import Finisher from '../components/Finisher'
+
+export default {
+  components: {
+    Card,
+    Finisher
+  }
+}
 </script>
 
 
@@ -102,34 +113,6 @@ p {
     margin: 13px 0;
 }
 
-@media screen and (max-width: 850px) {
-    .home-hero-container{
-        height : 75vh;
-    }
-    .text-content-group{
-        max-width: 70vw;
-        margin: 0 auto 10%;
-    }
-
-    .text-content-group h1 {
-        font-size: 1.5rem;
-    }
-    .text-content-group p{
-        font-size: 1rem;
-    }
-}
-
-@media screen and (max-width: 450px) {
-    .text-content-group{
-        padding: 20px;
-    }
-    .text-content-group h1 {
-        font-size: 1.2rem;
-    }
-    .text-content-group p{
-        font-size: 0.8rem;
-    }
-}
 
 /* Home quests */
 .home-quest{
@@ -146,135 +129,22 @@ p {
 
 .home-quest p{
     text-align: center;
-    margin-bottom: 44px;
 }
-
-
-.home-card-topbar {
-    justify-content: flex-start;
-    width: inherit;
-    height: 12px;
-    background: #222222;
-  }
    
 .home-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(295px, 2fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 2fr));
+    grid-gap: 5px;
+    margin: 25px 0;
     list-style: none;
-    width: 100%;
-    margin: 0;
-    padding: 25px;
+    width: 90%;
   }
-  
-.home-cards-item {
-    padding: 1rem;
-  }
-  
+
 .home-card {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    height: 350px;
-    background-color: white;
-    box-shadow: 0 0 5px rgba(0,0,0,0.1);
-  }
-  
-.home-card-content {
-    display: flex;
-    justify-content: space-between;
-    flex: 1 1 auto;
-    flex-direction: column;
-    padding: 25px;
-    padding-left: 25px;
-  }
-  
-.home-card-image {
-    display: block;
-    margin-top: 20px;
-    margin-left: 25px;
-    margin-bottom: 0;
-  }
-
-.home-card-image img {
-    width: 89px;
-    margin: 0 20px;
+  width: 100%;
 }
   
-.home-card-title {
-    margin-top: 0;
-    margin-bottom: 12px;
-  }
-  
-.home-card-icon {
-    vertical-align: text-bottom;
-    margin-right: 5px;
-    font-size: medium !important;
-  }
-  
-.home-card-text {
-    margin-bottom: 20px;
-    color: #222222;
-  }
-  
-.home-card__btn-holder {
-      justify-content: flex-start;
-    }
-  
-.home-card-btn {
-    padding: 10px;
-    width: 50%;
-    background-color: white;
-  }
-  
-.home-card-btn:hover{
-    background-color: #222222;
-    border-color: #222222;
-    color: white;
-  }
-
-.home-card-viewmore{
-    font-size: 20px;
-    line-height: 25px;
-    color: #222222;
-    text-decoration: none;
-    border: 4px solid #222222;
-    padding: 14px 28px;
-}
-
-.home-card-viewmore:hover{
-    color:white;
-    background-color: #222222;
-}
-
-@media screen and (max-width: 1050px) {
-
-    .home-quest h1{
-        font-size: 26px;
-        line-height: 28px;
-    }
-    
-    .home-quest p{
-        font-size: 17px;
-        line-height: 19px;
-    }
-}
-
-
-@media screen and (max-width: 320px) {
-    .home-cards {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .home-card-btn{
-        width: 70%;
-    }
-
-}
-
 /*FOR HOME FINSIHERS*/
-
 .home-finishers-container {
     background: #FFD457;
     padding: 64px 25px;
@@ -282,7 +152,12 @@ p {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
 
+.finisher-par {
+  width: 80%;
+  margin: auto;
+  text-align: center;
 }
 
 .home-finishers-container .header-groupings h1 {
@@ -296,40 +171,10 @@ p {
 }
 
 .people-collection {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-wrap: wrap;
-    padding: 0 25px;
-}
-
-.people-collection-child {
-    display: flex;
-    align-items: center;
-    width: 25%;
-    margin: 32px 0;
-    justify-content: start;
-}
-
-.people-collection-child div img{
-    width: 90px;
-    height: 90px;
-    border-radius: 100%;
-}
-
-.person-info p {
-    font-size: 16px;
-    line-height: 20px;
-    color: #222222;
-    margin-left: 12px;
-
-}
-
-.person-info .person-name {
-    font-weight: bold;
-    font-size: 16px;
-    line-height: 20px;
-    color: #222222;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px ,1fr));
+    width: 90%;
+    margin: 20px 0;
 }
 
 .home-finishers-container .link-holder {
@@ -342,7 +187,6 @@ p {
     padding: 10px 20px;
     font-weight: bold;
 }
-
    
 .view-more-link {
     color: #222222;
@@ -354,11 +198,8 @@ p {
     background-color: #222222;
 }
 
-@media screen and (max-width: 1050px) {
-    .people-collection-child {
-        width: 50%;
 
-    }
+@media screen and (max-width: 1050px) {
 
     .home-finishers-container .header-groupings h1 {
         font-size: 26px;
@@ -368,6 +209,36 @@ p {
     .home-finishers-container .header-groupings h2 {
         font-size: 17px;
     }
+
+    .home-quest h1{
+        font-size: 26px;
+        line-height: 28px;
+    }
+    
+    .home-quest p{
+        font-size: 17px;
+        line-height: 19px;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .text-content-group{
+        max-width: 70vw;
+        margin: 0 auto 10%;
+    }
+
+    .text-content-group h1 {
+        font-size: 1.5rem;
+    }
+    .text-content-group p{
+        font-size: 0.9rem;
+    }
+}
+
+@media screen and (max-width: 680px) {
+    .text-content-group p {
+      width: 100%;
+    }
 }
 
 @media screen and (max-width: 600px) {
@@ -376,21 +247,30 @@ p {
         padding-right: 10px;
         padding-left: 10px;
     }
+}
 
-    .people-collection-child {
-        width: 90%;
-        margin: 20px auto;
-    }
-    
-    .people-collection-child div img {
-        width: 90px;
-        height: 90px;
-        margin-right: 5px;
+@media screen and (max-width: 450px) {
+    .text-content-group{
+        padding: 20px;
     }
 
-    .person-info p {
-        margin-left: 12px;
+    .text-content-group p{
+      width: 100%;
+      margin: 13px 0;
+  }
+
+  .text-content-group{
+        max-width: 80vw;
     }
 }
 
+@media screen and (max-width: 350px) {
+    .people-collection {
+      width: 100%;
+    }
+
+    .home-quest {
+      padding: 64px 13px;
+    }
+}
 </style>
