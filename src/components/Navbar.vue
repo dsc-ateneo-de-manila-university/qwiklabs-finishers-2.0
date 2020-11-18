@@ -4,7 +4,7 @@
       <div class="navigation-primary">
         <router-link tag="a" to="/">
           <img src="../assets/images/logo1.png" alt = "Qwiklabs logo"/>
-          <span>FINISHERS</span>
+          <span> FINISHERS</span>
           <img src="../assets/images/logo2.png" alt = "PH Icon"/>
         </router-link>
       </div>

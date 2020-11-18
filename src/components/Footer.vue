@@ -58,12 +58,9 @@ footer .footer-container {
 }
 
 footer span {
-    font-family: "Open Sans", sans-serif;
-    font-style: normal;
     font-weight: 900;
     font-size: 18.5px;
     line-height: 23px;
-    letter-spacing: 0.02em;
     color: #FFFFFF;
     
 }
@@ -92,12 +89,9 @@ footer img {
 }
 
 footer #footer-finisher {
-    font-family: "Open Sans", sans-serif;
-    font-style: normal;
     font-weight: 900;
     font-size: 18.5px;
     line-height: 23px;
-    letter-spacing: 0.02em;
     color: #FFFFFF;
 
 }
@@ -108,12 +102,9 @@ footer #footer-finisher {
 }
 
 .footer-secondary a {
-    font-family: "Open Sans", sans-serif;
-    font-style: normal;
     font-weight: 500;
     font-size: 16px;
     line-height: 20px;
-    letter-spacing: 0.02em;
     color: #FFFFFF;
     text-decoration: none;
     margin-left: 64px;
@@ -122,23 +113,17 @@ footer #footer-finisher {
 .reg-mobile{
     display: none;
     padding: 10px 0;
-    font-family: "Open Sans", sans-serif;
-    font-style: normal;
     font-weight: bold;
     font-size: 18px;
     line-height: 23px;
-    letter-spacing: 0.02em;
     color: #FFFFFF;
     margin: 10px 0;
 }
 
 .reg-mobile h1{
-    font-family: 'Open Sans', sans-serif;
-    font-style: normal;
     font-weight: bold;
     font-size: 21px;
     line-height: 23px;
-    letter-spacing: 0.05em;
     color: #FFFFFF;
 }
 
@@ -150,30 +135,20 @@ footer #footer-finisher {
     width: 90px;
     height: 40px;
     border: 2px solid white;
-    font-family: 'Google Sans', sans-serif;
-    font-style: normal;
     font-weight: bold;
     font-size: 14px;
     line-height: 18px;
-    letter-spacing: 0.02em;
     color: #FFFFFF;
     background-color: transparent;
 }
 
 
 .footer-container-lower {
-
     width: 90%;
     margin: 0 auto;
-    font-family: "Open Sans", sans-serif;
-    font-style: normal;
-    font-weight: normal;
     font-size: 12.8px;
     line-height: 16px;
-    letter-spacing: 0.02em;
-
     color: #C4C4C4;
-
     display: flex;
     justify-content: space-between;
     position: absolute;
@@ -193,13 +168,10 @@ footer #footer-finisher {
 }
 
 .footer-container-lower .login-container #admin-login {
-    font-family: "Open Sans", sans-serif;
-    font-style: normal;
     font-weight: normal;
     font-size: 12.8px;
     line-height: 16px;
     text-align: right;
-    letter-spacing: 0.02em;
     color: #8E8E8E;
 }
 

@@ -1,0 +1,73 @@
+<template>
+    <div class="people-collection-child">
+        <div>
+            <img :src="require('@/assets/images/' + imageName + '')" alt="person-image">
+        </div>
+        <div class="person-info">
+            <p class="person-name">{{ name }}</p>
+            <p class="quest">{{ quest }}</p>
+            <p class="completionDate">{{ date }}</p>
+        </div>
+    </div>
+</template>
+
+<script>
+export default {
+    props: {
+        name: String,
+        quest: String,
+        date: String,
+        imageName: String,
+    }
+    
+}
+</script>
+
+<style scoped>
+
+.people-collection-child {
+    display: flex;
+    align-items: center;
+    width: 25%;
+    margin: 32px 0;
+    justify-content: center;
+    width: 100%;
+}
+
+.people-collection-child div img{
+    width: 90px;
+    height: 90px;
+    border-radius: 100%;
+}
+
+
+.person-info p {
+    color: #222222;
+    margin-left: 12px;
+    margin-bottom: 5px;
+}
+
+.person-info .person-name {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    color: #222222;
+}
+
+@media screen and (max-width: 600px) {
+    .people-collection-child {
+        width: 90%;
+        margin: 20px auto;
+    }
+    
+    .people-collection-child div img {
+        width: 90px;
+        height: 90px;
+        margin-right: 5px;
+    }
+
+    .person-info p {
+        margin-left: 12px;
+    }
+}
+</style>
