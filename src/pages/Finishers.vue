@@ -83,6 +83,13 @@ export default {
                             finisherName: 'Jethro Cullen Sia',
                             finisherDate:'Apr 26, 2020',
                             
+                        },
+                        {
+                            finisherId:3,
+                            finisherImage:"logo1.png",
+                            finisherName: 'Andy',
+                            finisherDate:'Aug 24, 2020',
+                            
                         }
                     ],
                 },
