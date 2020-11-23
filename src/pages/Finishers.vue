@@ -9,7 +9,14 @@
             </div>
         </div>
         <div class="finisher-content">
-            <div class="finisher-groups"></div>
+            <!-- START: Finisher Groups -->
+            <div class="finisher-groups">
+                <div v-bind:finisherGroups="finisherGroups" v-for="finisherGroup in finisherGroups" v-bind:key="finisherGroup.finisherGroupId">
+                    <FinisherGroup v-bind:finisherGroup="finisherGroup"></FinisherGroup>
+                </div>
+            </div>
+            <!--END: Finisher Groups -->
+
             <div class="finisher-filter">
                 <h5>Filtered Search</h5>
                 <label for="name">Finisher's Name</label>
@@ -28,23 +35,64 @@
 </template>
 
 <script>
+import FinisherGroup from '../components/Finishers-Components/Finisher-Group.vue';
 export default {
-
+    name:"Finishers",
+    components: {
+        FinisherGroup
+    },
+    data(){
+        return{
+            finisherGroups:[
+                {
+                    finisherGroupId:1,
+                    finisherGroupImage:'logo1.png',
+                    finisherGroupName:'Baseline Infrastructure',
+                    finisherGroupMembers:[
+                        {
+                            finisherId:1,
+                            finisherImage:"Renzo.png",
+                            finisherName: 'Christian Dominic',
+                            finisherDate:'Nov 21, 2019',
+                            
+                        },
+                        {
+                            finisherId:2,
+                            finisherImage:"logo1.png",
+                            finisherName: 'Harvey Sison',
+                            finisherDate:'Dec 18, 2019',
+                            
+                        }
+                    ],
+                },
+                {
+                    finisherGroupId:2,
+                    finisherGroupImage:'logo2.png',
+                    finisherGroupName:'BigQuery Basics for Data Analysts',
+                    finisherGroupMembers:[
+                        {
+                            finisherId:1,
+                            finisherImage:"logo2.png",
+                            finisherName: 'Harvey Sison',
+                            finisherDate:'Oct 27, 2019',
+                            
+                        },
+                        {
+                            finisherId:2,
+                            finisherImage:"Renzo.png",
+                            finisherName: 'Jethro Cullen Sia',
+                            finisherDate:'Apr 26, 2020',
+                            
+                        }
+                    ],
+                },
+            ]
+        }
+    }
 }
 </script>
 
-<style scoped>
-main {
-  margin-top: 76px;
-  min-height: calc(100vh - 76px - 312px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: Google Sans, sans-serif;
-  font-style: normal;
-  font-weight: normal;
-}
-
+<style>
 /*FOR FINISHERS PAGE*/
 .finisher-page{
     display: flex;
@@ -53,6 +101,7 @@ main {
     background-color: #FBFBFB;
     padding: 64px 96px;
     box-sizing: border-box;
+    min-height:100vh;
 }
 
 .finisher-page-header{
