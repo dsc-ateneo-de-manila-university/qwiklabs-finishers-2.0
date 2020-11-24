@@ -1,6 +1,6 @@
 <template>
-  <main>
-    <div class="finisher-more-page">
+  <main class="finisher-more-page">
+
         <div class="finisher-more-page-header">
             <h1>Finishers > <span>Stackdriver Logging</span></h1>
             <div class="finisher-more-page-search">
@@ -11,13 +11,11 @@
         <div class="finisher-more-content">
             <div class="finisher-more-group-body">   
               <div v-bind:FinisherMoreMembers="FinisherMoreMembers" v-for="FinisherMoreMember in FinisherMoreMembers" v-bind:key="FinisherMoreMember.id">           
-                <div class="finisher-more-member">
-                    <FinisherMoreMember v-bind:FinisherMoreMember="FinisherMoreMember"></FinisherMoreMember>
-                </div>
+                <FinisherMoreMember class="finisher-more-member" v-bind:FinisherMoreMember="FinisherMoreMember" ></FinisherMoreMember>
               </div>
             </div>
         </div>
-    </div>
+
   </main>
 </template>
 
@@ -47,7 +45,19 @@ export default {
           id:3, 
           name:'name3',
           date:'date3',
+          image:'logo2.png'
+        },
+                {
+          id:4, 
+          name:'name4',
+          date:'date4',
           image:'Renzo.png'
+        },
+                {
+          id:5, 
+          name:'name5',
+          date:'date5',
+          image:'logo2.png'
         },
       ]
     }
