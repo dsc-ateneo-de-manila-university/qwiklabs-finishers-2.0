@@ -5,7 +5,7 @@
             <h1>Finishers > <span>Stackdriver Logging</span></h1>
             <div class="finisher-more-page-search">
                 <input type="text" id="name" name="name" placeholder="Search for a quest or finisher">
-                <img src="assets/images/vectors/search.png">
+                <img src="../assets/images/vectors/search.png">
             </div>
         </div>
         <div class="finisher-more-content">
@@ -65,8 +65,7 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style >
+<style scoped>
 /*FOR FINISHERS LEARN MORE PAGE*/
 .finisher-more-page{
     display: flex;
@@ -135,40 +134,6 @@ export default {
     background-color: white;
 }
 
-.finisher-more-member{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    width: 14%;
-    margin: 0 1% 20px;
-}
-
-.finisher-more-member img{
-    width: 100px;
-}
-
-.finisher-more-member h5{
-    font-family: "Open Sans", sans-serif;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 14px;
-    line-height: 18px;
-    text-align: center;
-    letter-spacing: 0.02em;
-    color: #222222;
-    margin-top: 7px;
-}
-
-.finisher-more-member p{
-    font-family: "Open Sans", sans-serif;
-    font-style: normal;
-    font-size: 14px;
-    line-height: 18px;
-    text-align: center;
-    letter-spacing: 0.02em;
-    color: #222222;
-}
-
 @media screen and (max-width: 1150px) {
     .finisher-more-page-header{
         display: flex;
@@ -178,13 +143,6 @@ export default {
 
     .finisher-more-page-search{
         width: 100%;
-    }
-}
-
-@media screen and (max-width: 1000px) {
-    .finisher-more-member{
-        width: 20%;
-        margin: 0 2.5% 20px;
     }
 }
 
