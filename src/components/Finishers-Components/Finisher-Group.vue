@@ -16,7 +16,7 @@
 
 <!-- START: FINISHER GROUP BODY -->
 <div class="finisher-group-body">
-      <div v-for="finisher in finisherGroup.finisherGroupMembers" v-bind:key="finisher.finisherId" class="finisher-member">
+      <div class="finisher-member" v-for="finisher in finisherGroup.finisherGroupMembers" v-bind:key="finisher.finisherId">
         <FinisherMember v-bind:finisher="finisher"></FinisherMember>
       </div>
     </div>
@@ -41,7 +41,7 @@ export default {
 }
 </script>
 
-<style>
+<style >
 .finisher-group{
     display: flex;
     flex-direction: column;
@@ -178,87 +178,9 @@ export default {
     color: #222222;
 }
 
-.finisher-filter{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 25%;
-    height: fit-content;
-    background-color: white;
-    padding: 25px;
-    box-sizing: border-box;
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
-}
-
-.finisher-filter h5{
-    font-family: "Open Sans", sans-serif;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 20px;
-    line-height: 25px;
-    letter-spacing: 0.02em;
-    color: #222222;
-    margin: 20px 0;
-    align-self: start;
-}
-
-.finisher-filter label{
-    align-self: start;
-    font-family: "Open Sans", sans-serif;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 16px;
-    line-height: 20px;
-    letter-spacing: 0.02em;
-    color: #222222;
-    margin-bottom: 3px;
-}
-
-.finisher-filter input, .finisher-filter select, .finisher-filter option{
-    font-family: "Open Sans", sans-serif;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 16px;
-    letter-spacing: 0.02em;
-    border: 1px solid #C4C4C4;
-    color: #222222;
-    width: 100%;
-    height: 40px;
-    margin-bottom: 15px;
-    padding: 5px;
-}
-
-@media screen and (max-width: 1100px) {
-
-    .finisher-page-search{
-        display: flex;
-    }
-
-    .finisher-groups{
-        width: 100%
-    }
-
-    .finisher-filter{
-        display: none;
-    }
-}
 
 @media screen and (max-width: 850px) {
-
-    .finisher-page-header{
-        flex-direction: column;
-    }
-
-    .finisher-page-header h1{
-        align-self: flex-start;
-        margin-bottom: 0;
-    }
-
-    .finisher-page-search{
-        width: 100%;
-        margin-bottom: 20px;
-    }
-
+  
     .finisher-member{
         width: 23%
     }
@@ -285,10 +207,6 @@ export default {
 
 @media screen and (max-width: 620px) {
 
-    .finisher-page{
-        padding: 64px 76px;
-    }
-
     .finisher-group-header{
         padding-bottom: 0;
     }
@@ -307,15 +225,6 @@ export default {
     }
 
 }
-
-@media screen and (max-width: 450px) {
-
-    .finisher-page{
-        padding: 64px 26px;
-    }
-
-}
-
 
 @media screen and (max-width: 350px) {
 
