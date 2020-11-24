@@ -11,7 +11,7 @@
         <div class="finisher-more-content">
             <div class="finisher-more-group-body">   
               <div v-bind:FinisherMoreMembers="FinisherMoreMembers" v-for="FinisherMoreMember in FinisherMoreMembers" v-bind:key="FinisherMoreMember.id">           
-                <FinisherMoreMember class="finisher-more-member" v-bind:FinisherMoreMember="FinisherMoreMember" ></FinisherMoreMember>
+                <FinisherMoreMember v-bind:FinisherMoreMember="FinisherMoreMember" ></FinisherMoreMember>
               </div>
             </div>
         </div>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="finisher-more-member">
     <img :src="require('@/assets/images/' + FinisherMoreMember.image + '')" alt="member">
     <h5>{{FinisherMoreMember.name}}</h5>
     <p>{{FinisherMoreMember.date}}</p>
