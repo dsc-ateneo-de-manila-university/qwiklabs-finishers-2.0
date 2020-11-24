@@ -10,7 +10,7 @@ body {
   letter-spacing: 0.02em;
 }
 
-.regBtn2, .linkBtn {
+.btn, .linkBtn {
   display: inline-block;
   border: 3px solid #222222;
   background: white;
@@ -22,8 +22,15 @@ body {
   text-decoration: none;
 }
 
-.regBtn2:hover, .linkBtn:hover {
+.btn:hover, .linkBtn:hover {
   background-color: #333;
   color: #fff;
   cursor: pointer;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 2fr));
+  grid-gap: 2rem;
+  margin: 25px 0;
 }
