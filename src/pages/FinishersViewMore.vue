@@ -18,12 +18,17 @@
 
       <!-- START: Finisher More Content -->
       <div class="finisher-more-content finisher-group">
-        <div
-          v-bind:finisherGroups="finisherGroups"
-          v-for="finisherGroup in finisherGroups"
-          v-bind:key="finisherGroup.finisherGroupId"
-        >
-          <FinisherGroup v-bind:finisherGroup="finisherGroup"></FinisherGroup>
+        <div class="finisher-more-group-body">
+          <!-- START: FINISHER MORE MEMBERS -->
+          <div
+            class="finisher-member"
+            v-bind:finishers="finishers"
+            v-for="finisher in finishers"
+            v-bind:key="finisher.id"
+          >
+            <FinisherMoreMember v-bind:finisher="finisher"></FinisherMoreMember>
+          </div>
+          <!-- END: FINISHER MORE MEMBERS -->
         </div>
       </div>
       <!--END: Finisher More Content -->
@@ -32,57 +37,50 @@
 </template>
 
 <script>
-import FinisherGroup from "../components/FinishersViewMore-Components/Finisher-More-Member.vue";
+import FinisherMoreMember from "../components/FinishersViewMore-Components/Finisher-More-Member.vue";
 export default {
-  name: "Finishers",
+  name: "FinishersViewMore",
   components: {
-    FinisherGroup,
+    FinisherMoreMember,
   },
   data() {
     return {
-      finisherGroups: [
+      finishers: [
         {
-          finisherGroupId: 1,
-          finisherGroupImage: "logo1.png",
-          finisherGroupName: "Baseline Infrastructure",
-          finisherGroupMembers: [
-            {
-              finisherId: 1,
-              finisherImage: "Renzo.png",
-              finisherName: "Name1",
-              finisherDate: "date1",
-            },
-            {
-              finisherId: 2,
-              finisherImage: "logo1.png",
-              finisherName: "Name2",
-              finisherDate: "date2",
-            },
-            {
-              finisherId: 3,
-              finisherImage: "Renzo.png",
-              finisherName: "Name3",
-              finisherDate: "date3",
-            },
-            {
-              finisherId: 4,
-              finisherImage: "logo2.png",
-              finisherName: "Name4",
-              finisherDate: "date4",
-            },
-            {
-              finisherId: 5,
-              finisherImage: "Renzo.png",
-              finisherName: "Name5",
-              finisherDate: "date5",
-            },
-            {
-              finisherId: 6,
-              finisherImage: "Renzo.png",
-              finisherName: "Name6",
-              finisherDate: "date6",
-            },
-          ],
+          id: 1,
+          image: "Renzo.png",
+          name: "Name1",
+          date: "date1",
+        },
+        {
+          id: 2,
+          image: "logo1.png",
+          name: "Name2",
+          date: "date2",
+        },
+        {
+          id: 3,
+          image: "Renzo.png",
+          name: "Name3",
+          date: "date3",
+        },
+        {
+          id: 4,
+          image: "logo2.png",
+          name: "Name4",
+          date: "date4",
+        },
+        {
+          id: 5,
+          image: "Renzo.png",
+          name: "Name5",
+          date: "date5",
+        },
+        {
+          id: 6,
+          image: "logo2.png",
+          name: "Name6",
+          date: "date6",
         },
       ],
     };
@@ -108,7 +106,6 @@ export default {
   align-items: center;
 }
 .finisher-more-page-header h1 {
-  font-family: "Open Sans", sans-serif;
   font-style: normal;
   font-weight: bold;
   font-size: 30px;
@@ -178,6 +175,74 @@ export default {
   }
   .finisher-more-page-header span {
     font-size: 20px;
+  }
+}
+
+/* Styles */
+.finisher-group {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0px;
+  background-color: white;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+}
+
+.finisher-more-group-body {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  padding-top: 20px;
+  margin: 20px 0;
+  background-color: white;
+}
+
+.finisher-member {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 18%;
+  margin: 0 1% 20px;
+  padding: 5%;
+}
+.finisher-member img {
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  overflow: hidden;
+}
+.finisher-member h5 {
+  font-family: "Open Sans", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 18px;
+  text-align: center;
+  letter-spacing: 0.02em;
+  color: #222222;
+  margin-top: 7px;
+}
+.finisher-member p {
+  font-family: "Open Sans", sans-serif;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 18px;
+  text-align: center;
+  letter-spacing: 0.02em;
+  color: #222222;
+}
+@media screen and (max-width: 850px) {
+  .finisher-member {
+    width: 23%;
+  }
+}
+@media screen and (max-width: 730px) {
+  .finisher-member {
+    width: 30%;
+  }
+}
+@media screen and (max-width: 620px) {
+  .finisher-member {
+    width: 48%;
   }
 }
 </style>

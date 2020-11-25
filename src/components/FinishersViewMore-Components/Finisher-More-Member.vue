@@ -1,51 +1,22 @@
 <template>
   <div>
-    <!-- START: FINISHER GROUP BODY -->
-    <div class="finisher-more-group-body">
-      <div
-        class="finisher-member"
-        v-for="finisher in finisherGroup.finisherGroupMembers"
-        v-bind:key="finisher.finisherId"
-      >
-        <div>
-          <img
-            :src="require('@/assets/images/' + finisher.finisherImage + '')"
-            alt="finishermage"
-          />
-          <h5>{{ finisher.finisherName }}</h5>
-          <p>{{ finisher.finisherDate }}</p>
-        </div>
-      </div>
-    </div>
-    <!-- END: FINISHER GROUP BODY -->
+    <img
+      :src="require('@/assets/images/' + finisher.image + '')"
+      alt="finishermage"
+    />
+    <h5>{{ finisher.name }}</h5>
+    <p>{{ finisher.date }}</p>
   </div>
 </template>
 
 <script>
 export default {
-  name: "FinisherGroup",
-  props: ["finisherGroup"],
+  name: "FinisherMoreMember",
+  props: ["finisher"],
 };
 </script>
 
-<style >
-.finisher-group {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 20px;
-  background-color: white;
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
-}
-
-.finisher-more-group-body {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  padding-top: 20px;
-  margin: 20px 0;
-  background-color: white;
-}
-
+<style scoped>
 .finisher-member {
   display: flex;
   align-items: center;
