@@ -46,7 +46,7 @@ export default {
 };
 </script>
 
-<style >
+<style scoped>
 .finisher-group {
   display: flex;
   flex-direction: column;
@@ -74,7 +74,6 @@ export default {
 }
 
 .finisher-group-header-title h3 {
-  font-family: "Open Sans", sans-serif;
   font-style: normal;
   font-weight: bold;
   font-size: 25px;
@@ -101,7 +100,6 @@ export default {
   border: 1.5px solid #222222;
   box-sizing: border-box;
   padding: 11px 20px;
-  font-family: "Open Sans", sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
@@ -122,7 +120,6 @@ export default {
   border: 1.5px solid #222222;
   box-sizing: border-box;
   padding: 11px 20px;
-  font-family: "Open Sans", sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
@@ -154,40 +151,7 @@ export default {
   padding: 5%;
 }
 
-.finisher-member img {
-  width: 100px;
-  height: 100px;
-  border-radius: 100%;
-  overflow: hidden;
-}
-
-.finisher-member h5 {
-  font-family: "Open Sans", sans-serif;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 14px;
-  line-height: 18px;
-  text-align: center;
-  letter-spacing: 0.02em;
-  color: #222222;
-  margin-top: 7px;
-}
-
-.finisher-member p {
-  font-family: "Open Sans", sans-serif;
-  font-style: normal;
-  font-size: 14px;
-  line-height: 18px;
-  text-align: center;
-  letter-spacing: 0.02em;
-  color: #222222;
-}
-
 @media screen and (max-width: 850px) {
-  .finisher-member {
-    width: 23%;
-  }
-
   .finisher-group-header-upperbtn {
     display: none;
   }
@@ -197,12 +161,6 @@ export default {
   }
   .header-container {
     padding-top: 10%;
-  }
-}
-
-@media screen and (max-width: 730px) {
-  .finisher-member {
-    width: 30%;
   }
 }
 
@@ -218,10 +176,6 @@ export default {
   .finisher-group-header img {
     width: 40px;
     margin: 10px;
-  }
-
-  .finisher-member {
-    width: 48%;
   }
 }
 

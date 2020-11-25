@@ -157,14 +157,12 @@ export default {
 .finisher-page-search input {
   width: 400px;
   height: 25px;
-  font-family: "Open Sans", sans-serif;
   font-size: 16px;
   background-color: #fbfbfb;
   border: none;
 }
 
 .finisher-quest-mobile {
-  font-family: "Open Sans", sans-serif;
   font-size: 16px;
   letter-spacing: 0.02em;
   border: 1px solid #c4c4c4;
@@ -199,7 +197,6 @@ export default {
 }
 
 .finisher-filter h5 {
-  font-family: "Open Sans", sans-serif;
   font-style: normal;
   font-weight: bold;
   font-size: 20px;
@@ -212,7 +209,6 @@ export default {
 
 .finisher-filter label {
   align-self: start;
-  font-family: "Open Sans", sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -225,7 +221,6 @@ export default {
 .finisher-filter input,
 .finisher-filter select,
 .finisher-filter option {
-  font-family: "Open Sans", sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
