@@ -131,7 +131,6 @@ export default {
 .finisher-more-page-search input {
   width: 400px;
   height: 25px;
-  font-family: "Open Sans", sans-serif;
   font-size: 16px;
   background-color: #fbfbfb;
   border: none;
@@ -211,7 +210,6 @@ export default {
   overflow: hidden;
 }
 .finisher-member h5 {
-  font-family: "Open Sans", sans-serif;
   font-style: normal;
   font-weight: bold;
   font-size: 14px;
@@ -222,7 +220,6 @@ export default {
   margin-top: 7px;
 }
 .finisher-member p {
-  font-family: "Open Sans", sans-serif;
   font-style: normal;
   font-size: 14px;
   line-height: 18px;
