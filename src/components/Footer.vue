@@ -46,8 +46,9 @@ footer {
     height: 400px;
     display: flex;
     flex-direction: column;
-    position: relative;
+    position:relative;
     padding: 3% 5%;
+    bottom:0 !important;
 }
 
 footer .footer-container {
