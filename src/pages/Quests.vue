@@ -11,15 +11,14 @@
             </div>
         </div>
         <div class="cards">
-          <Card title="Stackdriver Logging" level="Fundamental" hours="5" credits="23" steps="5"/>
-          <Card title="Stackdriver Logging" level="Fundamental" hours="5" credits="23" steps="5"/>
-          <Card title="Stackdriver Logging" level="Fundamental" hours="5" credits="23" steps="5"/>
-          <Card title="Stackdriver Logging" level="Fundamental" hours="5" credits="23" steps="5"/>
-          <Card title="Stackdriver Logging" level="Fundamental" hours="5" credits="23" steps="5"/>
-          <Card title="Stackdriver Logging" level="Fundamental" hours="5" credits="23" steps="5"/>
-          <Card title="Stackdriver Logging" level="Fundamental" hours="5" credits="23" steps="5"/>
-          <Card title="Stackdriver Logging" level="Fundamental" hours="5" credits="23" steps="5"/>
-          <Card title="Stackdriver Logging" level="Fundamental" hours="5" credits="23" steps="5"/>
+          <Card title="Stackdriver Logging" level="Fundamental" :hours="5" :credits="23" :steps="5"/>
+          <Card title="Stackdriver Logging" level="Fundamental" :hours="5" :credits="23" :steps="5"/>
+          <Card title="Stackdriver Logging" level="Fundamental" :hours="5" :credits="23" :steps="5"/>
+          <Card title="Stackdriver Logging" level="Fundamental" :hours="5" :credits="23" :steps="5"/>
+          <Card title="Stackdriver Logging" level="Fundamental" :hours="5" :credits="23" :steps="5"/>
+          <Card title="Stackdriver Logging" level="Fundamental" :hours="5" :credits="23" :steps="5"/>
+          <Card title="Stackdriver Logging" level="Fundamental" :hours="5" :credits="23" :steps="5"/>
+          <Card title="Stackdriver Logging" level="Fundamental" :hours="5" :credits="23" :steps="5"/>
         </div>
       </div>
     </section>

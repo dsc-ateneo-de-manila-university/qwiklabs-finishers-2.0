@@ -23,10 +23,10 @@
     <h1>What are the latest quests?</h1>
     <p>Check out what’s new with Qwiklabs.</p>
     <div class="cards">
-        <Card title="Stackdriver Logging" level="Fundamental" hours="5" credits="23" steps="5"/>
-        <Card title="Stackdriver Logging" level="Fundamental" hours="5" credits="23" steps="5"/>
-        <Card title="Stackdriver Logging" level="Fundamental" hours="5" credits="23" steps="5"/>
-        <Card title="Stackdriver Logging" level="Fundamental" hours="5" credits="23" steps="5"/>
+        <Card title="Stackdriver Logging" level="Fundamental" :hours="5" :credits="23" :steps="5"/>
+        <Card title="Stackdriver Logging" level="Fundamental" :hours="5" :credits="23" :steps="5"/>
+        <Card title="Stackdriver Logging" level="Fundamental" :hours="5" :credits="23" :steps="5"/>
+        <Card title="Stackdriver Logging" level="Fundamental" :hours="5" :credits="23" :steps="5"/>
     </div>
     <a href="quests.html" class="linkBtn">View more</a>
   </section>
