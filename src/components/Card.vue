@@ -1,5 +1,5 @@
 <template>
-<li class="home-cards-item">
+<div class="home-cards-item">
   <div class="home-card">
       <header class="home-card-topbar"></header>
       <div class="home-card-image">
@@ -28,12 +28,12 @@
         </table>
         <div class="home-card-btn-holder">
             <form target="_blank" action="https://www.qwiklabs.com/quests/34">
-            <button class="regBtn2" type="submit">Learn More</button>
+            <button class="btn" type="submit">Learn More</button>
             </form>
         </div>
      </div>
  </div>
-</li>
+</div>
 </template>
 
 <script>
@@ -73,7 +73,6 @@ export default {
     flex: 1 1 auto;
     flex-direction: column;
     padding: 25px;
-    padding-left: 25px;
   }
   
 .home-card-image {
@@ -92,10 +91,7 @@ export default {
     font-weight: 700;
     font-size: 20px;
   }
-  
-.home-cards-item {
-    padding: 1rem;
-  }
+
 
 .home-card-icon {
     vertical-align: text-bottom;
@@ -128,7 +124,7 @@ export default {
     background-color: #222222;
 }
 
-.regBtn2 {
+.btn {
     font-size: 13px;
     border: 2px solid #222222;
 }

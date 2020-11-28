@@ -12,7 +12,7 @@
           have finished with Qwiklabs.
         </p>
         <a href="register.html" class="link-holder">
-          <button class="regBtn2">Register</button>
+          <button class="btn">Register</button>
         </a>
       </div>
     </div>
@@ -22,12 +22,12 @@
   <section class="home-quest">
     <h1>What are the latest quests?</h1>
     <p>Check out what’s new with Qwiklabs.</p>
-    <ul class="home-cards">
-        <Card title="Stackdriver Logging" level="Fundamental" hours="5" credits="23" steps="5"/>
-        <Card title="Stackdriver Logging" level="Fundamental" hours="5" credits="23" steps="5"/>
-        <Card title="Stackdriver Logging" level="Fundamental" hours="5" credits="23" steps="5"/>
-        <Card title="Stackdriver Logging" level="Fundamental" hours="5" credits="23" steps="5"/>
-    </ul>
+    <div class="cards">
+        <Card title="Stackdriver Logging" level="Fundamental" :hours="5" :credits="23" :steps="5"/>
+        <Card title="Stackdriver Logging" level="Fundamental" :hours="5" :credits="23" :steps="5"/>
+        <Card title="Stackdriver Logging" level="Fundamental" :hours="5" :credits="23" :steps="5"/>
+        <Card title="Stackdriver Logging" level="Fundamental" :hours="5" :credits="23" :steps="5"/>
+    </div>
     <a href="quests.html" class="linkBtn">View more</a>
   </section>
 
@@ -131,19 +131,10 @@ p {
     text-align: center;
 }
    
-.home-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 2fr));
-    grid-gap: 5px;
-    margin: 25px 0;
-    list-style: none;
-    width: 90%;
-  }
-
-.home-card {
-  width: 100%;
+.cards {
+  width: 90%;
 }
-  
+
 /*FOR HOME FINSIHERS*/
 .home-finishers-container {
     background: #FFD457;
