@@ -23,10 +23,38 @@
     <h1>What are the latest quests?</h1>
     <p>Check out what’s new with Qwiklabs.</p>
     <div class="cards">
-        <Card title="Stackdriver Logging" level="Fundamental" :hours="5" :credits="23" :steps="5"/>
-        <Card title="Stackdriver Logging" level="Fundamental" :hours="5" :credits="23" :steps="5"/>
-        <Card title="Stackdriver Logging" level="Fundamental" :hours="5" :credits="23" :steps="5"/>
-        <Card title="Stackdriver Logging" level="Fundamental" :hours="5" :credits="23" :steps="5"/>
+        <Card 
+        imgSrc="https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00"
+        title="Stackdriver Logging" 
+        level="Fundamental" 
+        :hours="5" 
+        :credits="23" 
+        :steps="5"/>
+
+        <Card 
+        imgSrc="https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00"
+        title="Stackdriver Logging" 
+        level="Fundamental" 
+        :hours="5" 
+        :credits="23" 
+        :steps="5"/>
+
+        <Card 
+        imgSrc="https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00"
+        title="Stackdriver Logging" 
+        level="Fundamental" 
+        :hours="5" 
+        :credits="23" 
+        :steps="5"/>
+        
+        <Card 
+        imgSrc="https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00"
+        title="Stackdriver Logging" 
+        level="Fundamental" 
+        :hours="5" 
+        :credits="23" 
+        :steps="5"/>
+        
     </div>
     <a href="quests.html" class="linkBtn">View more</a>
   </section>

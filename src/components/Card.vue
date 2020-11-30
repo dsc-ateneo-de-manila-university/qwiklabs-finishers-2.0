@@ -3,7 +3,7 @@
   <div class="home-card">
       <header class="home-card-topbar"></header>
       <div class="home-card-image">
-          <img src="https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00">
+          <img src="imgSrc">
       </div>
       <div class="home-card-content">
           <div class="home-card-title">{{ title }}</div>
@@ -25,7 +25,7 @@
                       <img class="home-card-icon" src="../assets/images/vectors/steps.png"><span>{{ steps }}</span><span> steps</span>
                   </td>
               </tr>
-        </table>
+            </table>
         <div class="home-card-btn-holder">
             <form target="_blank" action="https://www.qwiklabs.com/quests/34">
             <button class="btn" type="submit">Learn More</button>
@@ -39,6 +39,7 @@
 <script>
 export default {
     props: {
+        imgSrc: String,
         title: String,
         level: String,
         hours: Number,

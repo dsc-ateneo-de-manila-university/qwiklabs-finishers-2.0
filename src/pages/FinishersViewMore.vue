@@ -144,7 +144,7 @@ export default {
   .finisher-more-page-header {
     display: flex;
     flex-direction: column;
-    align-items: start;
+    align-items: flex-start;
   }
   .finisher-more-page-search {
     width: 100%;

@@ -22,6 +22,11 @@ body {
   text-decoration: none;
 }
 
+.btn-reverse {
+  background-color: #222222;
+  color: white;
+}
+
 .btn:hover, .linkBtn:hover {
   background-color: #333;
   color: #fff;
@@ -33,4 +38,9 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(280px, 2fr));
   grid-gap: 2rem;
   margin: 25px 0;
+}
+
+.container {
+  width: 90%;
+  margin: 0 auto;
 }
