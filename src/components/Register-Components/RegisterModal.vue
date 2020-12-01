@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>Register Modal</div>
-    <!-- <div class="modal">
+    <div class="modal">
       <img
         :src="require('@/assets/images/vectors/reg-confirm.png')"
         alt="green check icon"
@@ -12,8 +12,8 @@
         Our team will review the information you’ve submitted. You’ll receive a
         notification once your submission has been verified.
       </p>
-      <a href="index.html">Go to Home</a>
-    </div> -->
+      <router-link class="modal-btn" to="/">Go to Home</router-link>
+    </div>
   </div>
 </template>
 
