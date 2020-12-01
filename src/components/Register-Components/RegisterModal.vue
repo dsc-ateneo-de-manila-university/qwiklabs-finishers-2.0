@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>Register Modal</div>
-    <div class="modal">
+    <!-- <div class="modal">
       <img
         :src="require('@/assets/images/vectors/reg-confirm.png')"
         alt="green check icon"
@@ -13,7 +13,7 @@
         notification once your submission has been verified.
       </p>
       <a href="index.html">Go to Home</a>
-    </div>
+    </div> -->
   </div>
 </template>
 

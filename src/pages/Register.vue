@@ -57,6 +57,20 @@
       </div>
     </div>
 
+    <div class="modal">
+      <img
+        :src="require('@/assets/images/vectors/reg-confirm.png')"
+        alt="green check icon"
+      />
+
+      <h1>Thank you for registering</h1>
+      <p>
+        Our team will review the information you’ve submitted. You’ll receive a
+        notification once your submission has been verified.
+      </p>
+      <a href="index.html">Go to Home</a>
+    </div>
+
     <RegisterModal></RegisterModal>
   </section>
 </template>
@@ -70,11 +84,19 @@ export default {
     RegisterModal,
   },
 
+  data() {
+    return {};
+  },
+
   methods: {
     login(e) {
       e.preventDefault();
+      const modal = document.querySelector(".modal");
+      const registerContainer = document.querySelector(".register-container");
       if (confirm("Confirm?")) {
         console.log("ok");
+        modal.style.display = "flex";
+        registerContainer.style.filter = "brightness(70%)";
       }
     },
   },
