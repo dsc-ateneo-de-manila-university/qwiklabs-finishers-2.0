@@ -16,8 +16,18 @@
           </div>
           <div class="item">
             <p>Quest Title</p>
-            <select id="quest-title" name="quest-name">
+            <select
+              id="quest-title"
+              name="quest-name"
+              v-bind:questTitles="questTitles"
+            >
               <option disabled selected hidden>Select a quest</option>
+              <option
+                v-for="questTitle in questTitles"
+                v-bind:key="questTitle.id"
+              >
+                {{ questTitle.title }}
+              </option>
             </select>
           </div>
           <div class="item">
@@ -71,7 +81,17 @@ export default {
   },
 
   data() {
-    return {};
+    return {
+      questTitles: [
+        { id: 1, title: "Baseline Data,ML,AI" },
+        { id: 2, title: "Baseline Infrastructure" },
+        { id: 3, title: "BigQuery Basics for Data Analysis " },
+        { id: 4, title: "Cloud Engineering " },
+        { id: 5, title: "DevOps Essentials " },
+        { id: 6, title: "GCP Essentials " },
+        { id: 7, title: "Google Developer Essentials  " },
+      ],
+    };
   },
 
   methods: {
@@ -88,9 +108,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 /*REGISTER*/
-
 .register-container {
   display: flex;
   flex-direction: row;
@@ -109,7 +128,6 @@ export default {
 
 .register-form h1 {
   margin-top: 5%;
-  font-family: Google Sans, sans-serif;
   font-style: normal;
   font-weight: bold;
   font-size: 40px;
@@ -131,7 +149,6 @@ export default {
 
 .register-form p {
   text-align: left;
-  font-family: Google Sans, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
@@ -213,68 +230,13 @@ input {
 
 .register-photo {
   width: 60%;
-  background-image: "../assets/images/register.jpg";
+  background-image: "@/assets/images/register.jpg";
   height: auto;
   background-size: cover;
   background-repeat: no-repeat;
   overflow: hidden;
   display: inline-flex;
   flex-direction: row;
-}
-
-.modal {
-  display: none;
-  justify-content: space-around;
-  align-items: center;
-  flex-direction: column;
-  position: absolute;
-  top: 20vh;
-  left: 17.5vw;
-  width: 65%;
-  padding: 50px 0;
-  background-color: white;
-  border-top: 16px solid #48d08f;
-  z-index: 500;
-}
-
-.modal h1 {
-  font-family: "Open Sans", sans-serif;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 35px;
-  text-align: center;
-  letter-spacing: 0.02em;
-  color: #222222;
-  margin: 20px 0;
-}
-
-.modal p {
-  width: 60%;
-  margin-bottom: 40px;
-  font-family: "Open Sans", sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 15px;
-  text-align: center;
-  letter-spacing: 0.02em;
-  color: #222222;
-}
-
-.modal-btn {
-  text-decoration: none;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 16px;
-  line-height: 2.5vw;
-  letter-spacing: 0.02em;
-  color: #222222;
-  padding: 10px;
-  border: 2px solid #222222;
-}
-
-.modal-btn:hover {
-  color: white;
-  background-color: #222222;
 }
 
 @media screen and (max-width: 1050px) {
@@ -287,15 +249,6 @@ input {
   }
   .register-photo {
     width: 60%;
-  }
-
-  .modal h1 {
-    font-size: 20px;
-  }
-
-  .modal p {
-    width: 80%;
-    font-size: 15px;
   }
 }
 
@@ -350,17 +303,5 @@ input {
     font-size: small;
     color: #fff;
   }
-
-  .modal h1 {
-    font-size: 15px;
-  }
-
-  .modal p {
-    font-size: 12px;
-    margin-bottom: 20px;
-  }
-}
-
-@media screen and (max-width: 411px) {
 }
 </style>
