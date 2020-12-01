@@ -68,7 +68,7 @@
         Our team will review the information you’ve submitted. You’ll receive a
         notification once your submission has been verified.
       </p>
-      <a href="index.html">Go to Home</a>
+      <router-link class="modal-btn" to="/">Go to Home</router-link>
     </div>
 
     <RegisterModal></RegisterModal>
@@ -94,7 +94,6 @@ export default {
       const modal = document.querySelector(".modal");
       const registerContainer = document.querySelector(".register-container");
       if (confirm("Confirm?")) {
-        console.log("ok");
         modal.style.display = "flex";
         registerContainer.style.filter = "brightness(70%)";
       }
@@ -275,9 +274,8 @@ input {
   color: #222222;
 }
 
-.modal a {
+.modal-btn {
   text-decoration: none;
-  font-family: "Open Sans", sans-serif;
   font-style: normal;
   font-weight: bold;
   font-size: 16px;
@@ -288,7 +286,7 @@ input {
   border: 2px solid #222222;
 }
 
-.modal a:hover {
+.modal-btn:hover {
   color: white;
   background-color: #222222;
 }
