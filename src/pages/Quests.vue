@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main class="container">
     <section class="quests">
       <div class="quests-container">
         
@@ -11,14 +11,70 @@
             </div>
         </div>
         <div class="cards">
-          <Card title="Stackdriver Logging" level="Fundamental" :hours="5" :credits="23" :steps="5"/>
-          <Card title="Stackdriver Logging" level="Fundamental" :hours="5" :credits="23" :steps="5"/>
-          <Card title="Stackdriver Logging" level="Fundamental" :hours="5" :credits="23" :steps="5"/>
-          <Card title="Stackdriver Logging" level="Fundamental" :hours="5" :credits="23" :steps="5"/>
-          <Card title="Stackdriver Logging" level="Fundamental" :hours="5" :credits="23" :steps="5"/>
-          <Card title="Stackdriver Logging" level="Fundamental" :hours="5" :credits="23" :steps="5"/>
-          <Card title="Stackdriver Logging" level="Fundamental" :hours="5" :credits="23" :steps="5"/>
-          <Card title="Stackdriver Logging" level="Fundamental" :hours="5" :credits="23" :steps="5"/>
+          
+          <Card 
+          imgSrc="https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00"
+          title="Stackdriver Logging" 
+          level="Fundamental" 
+          :hours="5" 
+          :credits="23" 
+          :steps="5"/>
+
+          <Card 
+          imgSrc="https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00"
+          title="Stackdriver Logging" 
+          level="Fundamental" 
+          :hours="5" 
+          :credits="23" 
+          :steps="5"/>
+
+          <Card 
+          imgSrc="https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00"
+          title="Stackdriver Logging" 
+          level="Fundamental" 
+          :hours="5" 
+          :credits="23" 
+          :steps="5"/>
+
+          <Card 
+          imgSrc="https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00"
+          title="Stackdriver Logging" 
+          level="Fundamental" 
+          :hours="5" 
+          :credits="23" 
+          :steps="5"/>
+
+          <Card 
+          imgSrc="https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00"
+          title="Stackdriver Logging" 
+          level="Fundamental" 
+          :hours="5" 
+          :credits="23" 
+          :steps="5"/>
+
+          <Card 
+          imgSrc="https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00"
+          title="Stackdriver Logging" 
+          level="Fundamental" 
+          :hours="5" 
+          :credits="23" 
+          :steps="5"/>
+
+          <Card 
+          imgSrc="https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00"
+          title="Stackdriver Logging" 
+          level="Fundamental" 
+          :hours="5" 
+          :credits="23" 
+          :steps="5"/>
+
+          <Card 
+          imgSrc="https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00"
+          title="Stackdriver Logging" 
+          level="Fundamental" 
+          :hours="5" 
+          :credits="23" 
+          :steps="5"/>
         </div>
       </div>
     </section>
@@ -38,10 +94,6 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-main {
-  width: 90%;
-  margin: 0 auto;
-}
 
 .quest-header-container {
   margin: 80px 0 50px;
