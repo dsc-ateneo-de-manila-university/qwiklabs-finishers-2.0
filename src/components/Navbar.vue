@@ -112,6 +112,10 @@ nav span {
   text-decoration: none;
 }
 
+.navigation-secondary {
+  padding-left: 10px;
+}
+
 .navigation-secondary a,
 .navigation-secondary div {
   font-family: "Google Sans", sans-serif;
