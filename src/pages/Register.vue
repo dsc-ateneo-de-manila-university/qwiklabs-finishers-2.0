@@ -2,7 +2,7 @@
   <section id="register">
     <div class="register-container">
       <div class="register-form" id="register-form">
-        <form method="POST" id="registrationform">
+        <form method="POST" id="registrationform" @submit="login">
           <h1>Register</h1>
           <div class="alert">Message Sent</div>
           <p>
@@ -12,7 +12,13 @@
           <br />
           <div class="item">
             <p>Full Name</p>
-            <input type="text" id="fullName" placeholder="ex. Juan" value="" />
+            <input
+              type="text"
+              id="fullName"
+              placeholder="ex. Juan"
+              value=""
+              v-model="fullName"
+            />
           </div>
           <div class="item">
             <p>Quest Title</p>
@@ -20,6 +26,7 @@
               id="quest-title"
               name="quest-name"
               v-bind:questTitles="questTitles"
+              v-model="questTitle"
             >
               <option disabled selected hidden>Select a quest</option>
               <option
@@ -37,6 +44,7 @@
               id="date"
               placeholder="Select the date of completion"
               value=""
+              v-model="dateOfCompletion"
             />
           </div>
           <div class="item">
@@ -55,7 +63,7 @@
               class="submit-btn"
               id="submit-btn"
               type="submit"
-              v-on:click="login"
+              :disabled="!isFormComplete"
             >
               Submit
             </button>
@@ -82,6 +90,9 @@ export default {
 
   data() {
     return {
+      fullName: "",
+      questTitle: "",
+      dateOfCompletion: "",
       questTitles: [
         { id: 1, title: "Baseline Data,ML,AI" },
         { id: 2, title: "Baseline Infrastructure" },
@@ -92,6 +103,12 @@ export default {
         { id: 7, title: "Google Developer Essentials  " },
       ],
     };
+  },
+
+  computed: {
+    isFormComplete() {
+      return this.fullName && this.questTitle && this.dateOfCompletion;
+    },
   },
 
   methods: {
