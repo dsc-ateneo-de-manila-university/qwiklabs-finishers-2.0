@@ -234,8 +234,9 @@ input {
 .submit-btn {
   justify-content: center;
   align-items: center;
-  padding: 0 20px;
-  height: 50px;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-top: 10px;
   background: #48d08f;
   border-width: 0px;
 
