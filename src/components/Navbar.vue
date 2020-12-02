@@ -113,7 +113,7 @@ nav span {
 }
 
 .navigation-secondary {
-  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .navigation-secondary a,
