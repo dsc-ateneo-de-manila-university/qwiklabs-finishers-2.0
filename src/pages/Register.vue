@@ -295,10 +295,13 @@ input {
     line-height: 20px;
   }
   .submit-btn {
-    padding: 10px 20px;
-    margin-top: 10px;
+    padding: 10 20px;
+    background: #48d08f;
+    border-width: 0px;
     cursor: pointer;
-    height: 50px;
+    font-size: small;
+    color: #fff;
+    margin-top: 10px;
   }
 }
 </style>
