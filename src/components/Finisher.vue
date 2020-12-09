@@ -6,7 +6,7 @@
     <div class="person-info">
         <p>{{ finisher.name }}</p>
         <p>{{ finisher.quest }}</p>
-        <p>{{ finisher.date }}</p>
+        <p>{{ finisher.completionDate }}</p>
     </div>
 </div>
 
