@@ -82,6 +82,8 @@ export default {
   created() {
     // START OF QUEST
     db.collection("quests")
+      .orderBy("name")
+      .limitToLast(4)
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
@@ -111,6 +113,8 @@ export default {
 
       // START OF FINISHERS
     db.collection("finishers")
+      .orderBy("completionDate")
+      .limitToLast(12)
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {

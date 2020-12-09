@@ -2,7 +2,7 @@
 <div class="people-collection-child">
     
     <div>
-        <img :src="finisher.image" alt="person-image">
+        <img :src="finisher.image" :alt="finisher.name">
     </div>
     <div class="person-info">
         <p>{{ finisher.name }}</p>
