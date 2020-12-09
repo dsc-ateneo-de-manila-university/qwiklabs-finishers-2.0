@@ -23,39 +23,11 @@
     <h1>What are the latest quests?</h1>
     <p>Check out what’s new with Qwiklabs.</p>
     <div class="cards">
-        <Card 
-        imgSrc="https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00"
-        title="Stackdriver Logging" 
-        level="Fundamental" 
-        :hours="5" 
-        :credits="23" 
-        :steps="5"/>
-
-        <Card 
-        imgSrc="https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00"
-        title="Stackdriver Logging" 
-        level="Fundamental" 
-        :hours="5" 
-        :credits="23" 
-        :steps="5"/>
-
-        <Card 
-        imgSrc="https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00"
-        title="Stackdriver Logging" 
-        level="Fundamental" 
-        :hours="5" 
-        :credits="23" 
-        :steps="5"/>
-        
-        <Card 
-        imgSrc="https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00"
-        title="Stackdriver Logging" 
-        level="Fundamental" 
-        :hours="5" 
-        :credits="23" 
-        :steps="5"/>
-        
+      <div v-bind:quests="quests" v-for="quest in quests" v-bind:key="quest.id">
+        <Card v-bind:quest="quest" />
+        </div>
     </div>
+    
     <a href="quests.html" class="linkBtn">View more</a>
   </section>
 
@@ -69,18 +41,10 @@
         </p>
       </div>
       <div class="people-collection">
-        <Finisher imageName="Renzo.png" name="Renzo Tan" quest="GCP Essentials" date="Nov 18, 2020"/>
-        <Finisher imageName="Renzo.png" name="Renzo Tan" quest="GCP Essentials" date="Nov 18, 2020"/>
-        <Finisher imageName="Renzo.png" name="Renzo Tan" quest="GCP Essentials" date="Nov 18, 2020"/>
-        <Finisher imageName="Renzo.png" name="Renzo Tan" quest="GCP Essentials" date="Nov 18, 2020"/>
-        <Finisher imageName="Renzo.png" name="Renzo Tan" quest="GCP Essentials" date="Nov 18, 2020"/>
-        <Finisher imageName="Renzo.png" name="Renzo Tan" quest="GCP Essentials" date="Nov 18, 2020"/>
-        <Finisher imageName="Renzo.png" name="Renzo Tan" quest="GCP Essentials" date="Nov 18, 2020"/>
-        <Finisher imageName="Renzo.png" name="Renzo Tan" quest="GCP Essentials" date="Nov 18, 2020"/>
-        <Finisher imageName="Renzo.png" name="Renzo Tan" quest="GCP Essentials" date="Nov 18, 2020"/>
-        <Finisher imageName="Renzo.png" name="Renzo Tan" quest="GCP Essentials" date="Nov 18, 2020"/>
-        <Finisher imageName="Renzo.png" name="Renzo Tan" quest="GCP Essentials" date="Nov 18, 2020"/>
-        <Finisher imageName="Renzo.png" name="Renzo Tan" quest="GCP Essentials" date="Nov 18, 2020"/>
+        <div v-bind:finishers="finishers" v-for="finisher in finishers" v-bind:key="finisher.id" >
+          
+          <Finisher v-bind:finisher="finisher" />
+        </div>
       </div>
       <a href="#" class="linkBtn view-more-link">View more</a>
   </section>
@@ -89,14 +53,97 @@
 </template>
 
 <script>
-import Card from '../components/Card';
-import Finisher from '../components/Finisher'
+// START: IMPORTS
+  // START: IMPORT COMPONENTS
+  import Card from '../components/Card';
+  import Finisher from '../components/Finisher';
+  // END: IMPORT COMPONENTS
+
+  // START: OTHER IMPORTS
+  import firebase from 'firebase';
+  import moment from 'moment';
+  import db from "../../public/scripts/firebaseInit.js";
+  // END: OTHER IMPORTS
+// END: IMPORTS
+
 
 export default {
   components: {
     Card,
     Finisher
-  }
+  },
+  data(){
+    return{
+      quests:[],
+      finishers:[]
+    }
+  },
+
+  created() {
+    // START OF QUEST
+    db.collection("quests")
+      .orderBy("name")
+      .limitToLast(4)
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          const gsReference = firebase.storage().refFromURL('gs://qwiklabs-finishers-ph-e7667.appspot.com/');
+          let questRef = gsReference.child(String(doc.data().index)+".png");
+
+          questRef.getDownloadURL().then((url)=> {
+            data.image = url;
+          })
+
+          const data = {
+            id: doc.id,
+            index:doc.data().index,
+            image:'',
+            name:doc.data().name,
+            level:doc.data().level,
+            hours:doc.data().hours,
+            credits:doc.data().credits,
+            steps:doc.data().steps
+          };
+          this.quests.push(data);
+        });
+      });
+      // END OF QUEST
+
+
+
+      // START OF FINISHERS
+    db.collection("finishers")
+      .orderBy("completionDate")
+      .limitToLast(12)
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          const gsReference = firebase.storage().refFromURL('gs://qwiklabs-finishers-ph-e7667.appspot.com/finishers_imgs/');
+          let finisherRef = gsReference.child("Waving_GREEN.png");
+          
+          if (doc.data().image !== "finishers-imgs/Waving_GREEN.png") {
+            finisherRef = gsReference.child(doc.data().name);
+          } else {
+            finisherRef = gsReference.child("Waving_GREEN.png");
+          }
+          
+          finisherRef.getDownloadURL().then( function ( url ) {
+              data.image = url;
+          })
+
+          const data = {
+            id: doc.id,
+            index:doc.data().index,
+            image:'',
+            quest:doc.data().quest,
+            name:doc.data().name,
+            completionDate:moment(doc.data().completionDate).format('MMM D, YYYY')
+          };
+          this.finishers.push(data);
+        });
+      });
+      // END OF FINISHERS
+  },
 }
 </script>
 

@@ -11,70 +11,9 @@
             </div>
         </div>
         <div class="cards">
-          
-          <Card 
-          imgSrc="https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00"
-          title="Stackdriver Logging" 
-          level="Fundamental" 
-          :hours="5" 
-          :credits="23" 
-          :steps="5"/>
-
-          <Card 
-          imgSrc="https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00"
-          title="Stackdriver Logging" 
-          level="Fundamental" 
-          :hours="5" 
-          :credits="23" 
-          :steps="5"/>
-
-          <Card 
-          imgSrc="https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00"
-          title="Stackdriver Logging" 
-          level="Fundamental" 
-          :hours="5" 
-          :credits="23" 
-          :steps="5"/>
-
-          <Card 
-          imgSrc="https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00"
-          title="Stackdriver Logging" 
-          level="Fundamental" 
-          :hours="5" 
-          :credits="23" 
-          :steps="5"/>
-
-          <Card 
-          imgSrc="https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00"
-          title="Stackdriver Logging" 
-          level="Fundamental" 
-          :hours="5" 
-          :credits="23" 
-          :steps="5"/>
-
-          <Card 
-          imgSrc="https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00"
-          title="Stackdriver Logging" 
-          level="Fundamental" 
-          :hours="5" 
-          :credits="23" 
-          :steps="5"/>
-
-          <Card 
-          imgSrc="https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00"
-          title="Stackdriver Logging" 
-          level="Fundamental" 
-          :hours="5" 
-          :credits="23" 
-          :steps="5"/>
-
-          <Card 
-          imgSrc="https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00"
-          title="Stackdriver Logging" 
-          level="Fundamental" 
-          :hours="5" 
-          :credits="23" 
-          :steps="5"/>
+          <div v-bind:quests="quests" v-for="quest in quests" v-bind:key="quest.id">
+            <Card v-bind:quest="quest" />
+          </div>
         </div>
       </div>
     </section>
@@ -85,8 +24,87 @@
 import Card from '../components/Card';
 
 export default {
+  name:'quests',
   components: {
     Card
+  },
+  data(){
+    return{
+      quests:[
+        {
+          id:1,
+          image:"https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00",
+          title:"Stackdriver Logging",
+          level:"Fundamental",
+          hours:"5",
+          credits:"23",
+          steps:"5"
+        },
+        {
+          id:2,
+          image:"https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00",
+          title:"Stackdriver Logging",
+          level:"Fundamental",
+          hours:"5",
+          credits:"23",
+          steps:"5"
+        },
+        {
+          id:3,
+          image:"https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00",
+          title:"Stackdriver Logging",
+          level:"Fundamental",
+          hours:"5",
+          credits:"23",
+          steps:"5"
+        },
+        {
+          id:4,
+          image:"https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00",
+          title:"Stackdriver Logging",
+          level:"Fundamental",
+          hours:"5",
+          credits:"23",
+          steps:"5"
+        },
+        {
+          id:5,
+          image:"https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00",
+          title:"Stackdriver Logging",
+          level:"Fundamental",
+          hours:"5",
+          credits:"23",
+          steps:"5"
+        },
+        {
+          id:6,
+          image:"https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00",
+          title:"Stackdriver Logging",
+          level:"Fundamental",
+          hours:"5",
+          credits:"23",
+          steps:"5"
+        },
+        {
+          id:7,
+          image:"https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00",
+          title:"Stackdriver Logging",
+          level:"Fundamental",
+          hours:"5",
+          credits:"23",
+          steps:"5"
+        },
+        {
+          id:8,
+          image:"https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00",
+          title:"Stackdriver Logging",
+          level:"Fundamental",
+          hours:"5",
+          credits:"23",
+          steps:"5"
+        }
+        ],
+    }
   }
 }
 </script>

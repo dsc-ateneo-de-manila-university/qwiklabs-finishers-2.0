@@ -1,24 +1,22 @@
 <template>
-    <div class="people-collection-child">
-        <div>
-            <img :src="require('@/assets/images/' + imageName + '')" alt="person-image">
-        </div>
-        <div class="person-info">
-            <p class="person-name">{{ name }}</p>
-            <p class="quest">{{ quest }}</p>
-            <p class="completionDate">{{ date }}</p>
-        </div>
+<div class="people-collection-child">
+    
+    <div>
+        <img :src="finisher.image" :alt="finisher.name">
     </div>
+    <div class="person-info">
+        <p>{{ finisher.name }}</p>
+        <p>{{ finisher.quest }}</p>
+        <p>{{ finisher.completionDate }}</p>
+    </div>
+</div>
+
 </template>
 
 <script>
 export default {
-    props: {
-        name: String,
-        quest: String,
-        date: String,
-        imageName: String,
-    }
+    name:'finisher',
+    props: ['finisher']
     
 }
 </script>
