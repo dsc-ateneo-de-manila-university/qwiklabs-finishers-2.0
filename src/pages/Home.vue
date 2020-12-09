@@ -23,39 +23,11 @@
     <h1>What are the latest quests?</h1>
     <p>Check out what’s new with Qwiklabs.</p>
     <div class="cards">
-        <Card 
-        imgSrc="https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00"
-        title="Stackdriver Logging" 
-        level="Fundamental" 
-        :hours="5" 
-        :credits="23" 
-        :steps="5"/>
-
-        <Card 
-        imgSrc="https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00"
-        title="Stackdriver Logging" 
-        level="Fundamental" 
-        :hours="5" 
-        :credits="23" 
-        :steps="5"/>
-
-        <Card 
-        imgSrc="https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00"
-        title="Stackdriver Logging" 
-        level="Fundamental" 
-        :hours="5" 
-        :credits="23" 
-        :steps="5"/>
-        
-        <Card 
-        imgSrc="https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00"
-        title="Stackdriver Logging" 
-        level="Fundamental" 
-        :hours="5" 
-        :credits="23" 
-        :steps="5"/>
-        
+      <div v-bind:cards="cards" v-for="card in cards" v-bind:key="card.id">
+        <Card v-bind:card="card" />
+        </div>
     </div>
+    
     <a href="quests.html" class="linkBtn">View more</a>
   </section>
 
@@ -69,18 +41,9 @@
         </p>
       </div>
       <div class="people-collection">
-        <Finisher imageName="Renzo.png" name="Renzo Tan" quest="GCP Essentials" date="Nov 18, 2020"/>
-        <Finisher imageName="Renzo.png" name="Renzo Tan" quest="GCP Essentials" date="Nov 18, 2020"/>
-        <Finisher imageName="Renzo.png" name="Renzo Tan" quest="GCP Essentials" date="Nov 18, 2020"/>
-        <Finisher imageName="Renzo.png" name="Renzo Tan" quest="GCP Essentials" date="Nov 18, 2020"/>
-        <Finisher imageName="Renzo.png" name="Renzo Tan" quest="GCP Essentials" date="Nov 18, 2020"/>
-        <Finisher imageName="Renzo.png" name="Renzo Tan" quest="GCP Essentials" date="Nov 18, 2020"/>
-        <Finisher imageName="Renzo.png" name="Renzo Tan" quest="GCP Essentials" date="Nov 18, 2020"/>
-        <Finisher imageName="Renzo.png" name="Renzo Tan" quest="GCP Essentials" date="Nov 18, 2020"/>
-        <Finisher imageName="Renzo.png" name="Renzo Tan" quest="GCP Essentials" date="Nov 18, 2020"/>
-        <Finisher imageName="Renzo.png" name="Renzo Tan" quest="GCP Essentials" date="Nov 18, 2020"/>
-        <Finisher imageName="Renzo.png" name="Renzo Tan" quest="GCP Essentials" date="Nov 18, 2020"/>
-        <Finisher imageName="Renzo.png" name="Renzo Tan" quest="GCP Essentials" date="Nov 18, 2020"/>
+        <div v-bind:finishers="finishers" v-for="finisher in finishers" v-bind:key="finisher.id" >
+          <Finisher v-bind:finisher="finisher" />
+        </div>
       </div>
       <a href="#" class="linkBtn view-more-link">View more</a>
   </section>
@@ -96,6 +59,62 @@ export default {
   components: {
     Card,
     Finisher
+  },
+  data(){
+    return{
+      cards:[
+        {
+          id:1,
+          image:"https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00",
+          title:"Stackdriver Logging",
+          level:"Fundamental",
+          hours:"5",
+          credits:"23",
+          steps:"5"
+        },
+        {
+          id:2,
+          image:"https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00",
+          title:"Stackdriver Logging",
+          level:"Fundamental",
+          hours:"5",
+          credits:"23",
+          steps:"5"
+        },
+        {
+          id:3,
+          image:"https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00",
+          title:"Stackdriver Logging",
+          level:"Fundamental",
+          hours:"5",
+          credits:"23",
+          steps:"5"
+        },
+        {
+          id:4,
+          image:"https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00",
+          title:"Stackdriver Logging",
+          level:"Fundamental",
+          hours:"5",
+          credits:"23",
+          steps:"5"
+        }
+        ],
+      finishers:[
+        {id:1,image:"Renzo.png", name:"Renzo Tan", quest:"GCP Essentials", date:"Nov 18, 2020"},
+        {id:2,image:"Renzo.png", name:"Renzo Tan", quest:"GCP Essentials", date:"Nov 18, 2020"},
+        {id:3,image:"Renzo.png", name:"Renzo Tan", quest:"GCP Essentials", date:"Nov 18, 2020"},
+        {id:4,image:"Renzo.png", name:"Renzo Tan", quest:"GCP Essentials", date:"Nov 18, 2020"},
+        {id:5,image:"Renzo.png", name:"Renzo Tan", quest:"GCP Essentials", date:"Nov 18, 2020"},
+        {id:6,image:"Renzo.png", name:"Renzo Tan", quest:"GCP Essentials", date:"Nov 18, 2020"},
+        {id:7,image:"Renzo.png", name:"Renzo Tan", quest:"GCP Essentials", date:"Nov 18, 2020"},
+        {id:8,image:"Renzo.png", name:"Renzo Tan", quest:"GCP Essentials", date:"Nov 18, 2020"},
+        {id:9,image:"Renzo.png", name:"Renzo Tan", quest:"GCP Essentials", date:"Nov 18, 2020"},
+        {id:10,image:"Renzo.png", name:"Renzo Tan", quest:"GCP Essentials", date:"Nov 18, 2020"},
+        {id:11,image:"Renzo.png", name:"Renzo Tan", quest:"GCP Essentials", date:"Nov 18, 2020"},
+        {id:12,image:"Renzo.png", name:"Renzo Tan", quest:"GCP Essentials", date:"Nov 18, 2020"},
+      ],
+    }
   }
 }
 </script>
