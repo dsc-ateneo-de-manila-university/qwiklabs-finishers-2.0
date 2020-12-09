@@ -53,13 +53,18 @@
 </template>
 
 <script>
-import Card from '../components/Card';
-import Finisher from '../components/Finisher';
+// START: IMPORTS
+  // START: IMPORT COMPONENTS
+  import Card from '../components/Card';
+  import Finisher from '../components/Finisher';
+  // END: IMPORT COMPONENTS
 
-import firebase from 'firebase';
-import moment from 'moment';
-import db from "../../public/scripts/firebaseInit.js";
-
+  // START: OTHER IMPORTS
+  import firebase from 'firebase';
+  import moment from 'moment';
+  import db from "../../public/scripts/firebaseInit.js";
+  // END: OTHER IMPORTS
+// END: IMPORTS
 
 
 export default {
@@ -109,11 +114,21 @@ export default {
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-          // const gsReference = firebase.storage().refFromURL('gs://qwiklabs-finishers-ph-e7667.appspot.com/');
-          // let questRef = gsReference.child(String(doc.data().index)+".png");
+          // const gsReference = firebase.storage().refFromURL('gs://qwiklabs-finishers-ph-e7667.appspot.com/finishers_imgs/');
+          // let finisherRef = gsReference.child(doc.data().name);
+
+          // finisherImg.alt = finisher.name;
 
           // questRef.getDownloadURL().then((url)=> {
           //   data.image = url;
+          // })
+
+          // finisherRef = gsReference.child("Waving_GREEN.png");
+          // if (finisher.image !== "finishers-imgs/Waving_GREEN.png") {
+          //     finisherRef = gsReference.child(finisher.name);
+          // }
+          // finisherRef.getDownloadURL().then( function ( url ) {
+          //     finisherImg.src = url;
           // })
 
           const data = {
