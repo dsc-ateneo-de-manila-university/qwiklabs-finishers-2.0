@@ -57,6 +57,7 @@ import Card from '../components/Card';
 import Finisher from '../components/Finisher';
 
 import firebase from 'firebase';
+import moment from 'moment';
 import db from "../../public/scripts/firebaseInit.js";
 
 
@@ -120,7 +121,7 @@ export default {
             index:doc.data().index,
             image:doc.data().image,
             name:doc.data().name,
-            completionDate:doc.data().completionDate
+            completionDate:moment(doc.data().completionDate).format('MMM D, YYYY')
           };
           this.finishers.push(data);
         });
