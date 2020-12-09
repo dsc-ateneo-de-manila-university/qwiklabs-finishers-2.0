@@ -1,7 +1,8 @@
 <template>
 <div class="people-collection-child">
+    
     <div>
-        <img :src="require('@/assets/images/' + finisher.image + '')" alt="person-image">
+        <img :src="finisher.image" alt="person-image">
     </div>
     <div class="person-info">
         <p>{{ finisher.name }}</p>

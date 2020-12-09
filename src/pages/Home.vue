@@ -42,6 +42,7 @@
       </div>
       <div class="people-collection">
         <div v-bind:finishers="finishers" v-for="finisher in finishers" v-bind:key="finisher.id" >
+          
           <Finisher v-bind:finisher="finisher" />
         </div>
       </div>
@@ -68,24 +69,12 @@ export default {
   data(){
     return{
       quests:[],
-      finishers:[
-        {id:1,image:"Renzo.png", name:"Renzo Tan", quest:"GCP Essentials", completionDate:"Nov 18, 2020"},
-        {id:2,image:"Renzo.png", name:"Renzo Tan", quest:"GCP Essentials", completionDate:"Nov 18, 2020"},
-        {id:3,image:"Renzo.png", name:"Renzo Tan", quest:"GCP Essentials", completionDate:"Nov 18, 2020"},
-        {id:4,image:"Renzo.png", name:"Renzo Tan", quest:"GCP Essentials", completionDate:"Nov 18, 2020"},
-        {id:5,image:"Renzo.png", name:"Renzo Tan", quest:"GCP Essentials", completionDate:"Nov 18, 2020"},
-        {id:6,image:"Renzo.png", name:"Renzo Tan", quest:"GCP Essentials", completionDate:"Nov 18, 2020"},
-        {id:7,image:"Renzo.png", name:"Renzo Tan", quest:"GCP Essentials", completionDate:"Nov 18, 2020"},
-        {id:8,image:"Renzo.png", name:"Renzo Tan", quest:"GCP Essentials", completionDate:"Nov 18, 2020"},
-        {id:9,image:"Renzo.png", name:"Renzo Tan", quest:"GCP Essentials", completionDate:"Nov 18, 2020"},
-        {id:10,image:"Renzo.png", name:"Renzo Tan", quest:"GCP Essentials", completionDate:"Nov 18, 2020"},
-        {id:11,image:"Renzo.png", name:"Renzo Tan", quest:"GCP Essentials", completionDate:"Nov 18, 2020"},
-        {id:12,image:"Renzo.png", name:"Renzo Tan", quest:"GCP Essentials", completionDate:"Nov 18, 2020"},
-      ],
+      finishers:[]
     }
   },
 
   created() {
+    // START OF QUEST
     db.collection("quests")
       .get()
       .then((querySnapshot) => {
@@ -107,10 +96,36 @@ export default {
             credits:doc.data().credits,
             steps:doc.data().steps
           };
-          console.log(this.quests);
           this.quests.push(data);
         });
       });
+      // END OF QUEST
+
+
+
+      // START OF FINISHERS
+    db.collection("finishers")
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          // const gsReference = firebase.storage().refFromURL('gs://qwiklabs-finishers-ph-e7667.appspot.com/');
+          // let questRef = gsReference.child(String(doc.data().index)+".png");
+
+          // questRef.getDownloadURL().then((url)=> {
+          //   data.image = url;
+          // })
+
+          const data = {
+            id: doc.id,
+            index:doc.data().index,
+            image:doc.data().image,
+            name:doc.data().name,
+            completionDate:doc.data().completionDate
+          };
+          this.finishers.push(data);
+        });
+      });
+      // END OF FINISHERS
   },
 }
 </script>
