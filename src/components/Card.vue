@@ -6,7 +6,7 @@
           <img :src="quest.image" alt="quest_image">
       </div>
       <div class="home-card-content">
-          <div class="home-card-title">{{quest.title}}</div>
+          <div class="home-card-title">{{quest.name}}</div>
           <table class="home-card-text">
               <tr>
                   <td>

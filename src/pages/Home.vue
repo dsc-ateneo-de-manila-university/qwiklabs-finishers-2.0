@@ -93,11 +93,15 @@ export default {
           const gsReference = firebase.storage().refFromURL('gs://qwiklabs-finishers-ph-e7667.appspot.com/');
           let questRef = gsReference.child(String(doc.data().index)+".png");
 
+        questRef.getDownloadURL().then((url)=> {
+          data.image = url;
+        })
+
           const data = {
             id: doc.id,
             index:doc.data().index,
-            image:questRef.getDownloadURL(),
-            title:doc.data().title,
+            image:'',
+            name:doc.data().name,
             level:doc.data().level,
             hours:doc.data().hours,
             credits:doc.data().credits,
