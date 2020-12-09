@@ -8,6 +8,7 @@ html,
 body {
   font-family: "Google Sans", sans-serif;
   letter-spacing: 0.02em;
+  background: #FBFBFB;
 }
 
 .btn, .linkBtn {
