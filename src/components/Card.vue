@@ -3,7 +3,7 @@
   <div class="home-card">
       <header class="home-card-topbar"></header>
       <div class="home-card-image">
-          <img :src="quest.image">
+          <img :src="quest.image" alt="quest_image">
       </div>
       <div class="home-card-content">
           <div class="home-card-title">{{quest.title}}</div>

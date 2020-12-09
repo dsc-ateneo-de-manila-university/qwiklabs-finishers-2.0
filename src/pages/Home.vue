@@ -53,7 +53,12 @@
 
 <script>
 import Card from '../components/Card';
-import Finisher from '../components/Finisher'
+import Finisher from '../components/Finisher';
+
+import firebase from 'firebase';
+import db from "../../public/scripts/firebaseInit.js";
+
+
 
 export default {
   components: {
@@ -62,44 +67,7 @@ export default {
   },
   data(){
     return{
-      quests:[
-        {
-          id:1,
-          image:"https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00",
-          title:"Stackdriver Logging",
-          level:"Fundamental",
-          hours:"5",
-          credits:"23",
-          steps:"5"
-        },
-        {
-          id:2,
-          image:"https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00",
-          title:"Stackdriver Logging",
-          level:"Fundamental",
-          hours:"5",
-          credits:"23",
-          steps:"5"
-        },
-        {
-          id:3,
-          image:"https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00",
-          title:"Stackdriver Logging",
-          level:"Fundamental",
-          hours:"5",
-          credits:"23",
-          steps:"5"
-        },
-        {
-          id:4,
-          image:"https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00",
-          title:"Stackdriver Logging",
-          level:"Fundamental",
-          hours:"5",
-          credits:"23",
-          steps:"5"
-        }
-        ],
+      quests:[],
       finishers:[
         {id:1,image:"Renzo.png", name:"Renzo Tan", quest:"GCP Essentials", completionDate:"Nov 18, 2020"},
         {id:2,image:"Renzo.png", name:"Renzo Tan", quest:"GCP Essentials", completionDate:"Nov 18, 2020"},
@@ -115,7 +83,31 @@ export default {
         {id:12,image:"Renzo.png", name:"Renzo Tan", quest:"GCP Essentials", completionDate:"Nov 18, 2020"},
       ],
     }
-  }
+  },
+
+  created() {
+    db.collection("quests")
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          const gsReference = firebase.storage().refFromURL('gs://qwiklabs-finishers-ph-e7667.appspot.com/');
+          let questRef = gsReference.child(String(doc.data().index)+".png");
+
+          const data = {
+            id: doc.id,
+            index:doc.data().index,
+            image:questRef.getDownloadURL(),
+            title:doc.data().title,
+            level:doc.data().level,
+            hours:doc.data().hours,
+            credits:doc.data().credits,
+            steps:doc.data().steps
+          };
+          console.log(this.quests);
+          this.quests.push(data);
+        });
+      });
+  },
 }
 </script>
 
