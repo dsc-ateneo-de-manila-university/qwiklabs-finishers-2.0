@@ -88,9 +88,9 @@ export default {
           const gsReference = firebase.storage().refFromURL('gs://qwiklabs-finishers-ph-e7667.appspot.com/');
           let questRef = gsReference.child(String(doc.data().index)+".png");
 
-        questRef.getDownloadURL().then((url)=> {
-          data.image = url;
-        })
+          questRef.getDownloadURL().then((url)=> {
+            data.image = url;
+          })
 
           const data = {
             id: doc.id,
@@ -114,27 +114,24 @@ export default {
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-          // const gsReference = firebase.storage().refFromURL('gs://qwiklabs-finishers-ph-e7667.appspot.com/finishers_imgs/');
-          // let finisherRef = gsReference.child(doc.data().name);
-
-          // finisherImg.alt = finisher.name;
-
-          // questRef.getDownloadURL().then((url)=> {
-          //   data.image = url;
-          // })
-
-          // finisherRef = gsReference.child("Waving_GREEN.png");
-          // if (finisher.image !== "finishers-imgs/Waving_GREEN.png") {
-          //     finisherRef = gsReference.child(finisher.name);
-          // }
-          // finisherRef.getDownloadURL().then( function ( url ) {
-          //     finisherImg.src = url;
-          // })
+          const gsReference = firebase.storage().refFromURL('gs://qwiklabs-finishers-ph-e7667.appspot.com/finishers_imgs/');
+          let finisherRef = gsReference.child("Waving_GREEN.png");
+          
+          if (doc.data().image !== "finishers-imgs/Waving_GREEN.png") {
+            finisherRef = gsReference.child(doc.data().name);
+          } else {
+            finisherRef = gsReference.child("Waving_GREEN.png");
+          }
+          
+          finisherRef.getDownloadURL().then( function ( url ) {
+              data.image = url;
+          })
 
           const data = {
             id: doc.id,
             index:doc.data().index,
-            image:doc.data().image,
+            image:'',
+            quest:doc.data().quest,
             name:doc.data().name,
             completionDate:moment(doc.data().completionDate).format('MMM D, YYYY')
           };
