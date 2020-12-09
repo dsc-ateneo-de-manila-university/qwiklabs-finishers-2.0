@@ -3,26 +3,26 @@
   <div class="home-card">
       <header class="home-card-topbar"></header>
       <div class="home-card-image">
-          <img :src="card.image">
+          <img :src="quest.image">
       </div>
       <div class="home-card-content">
-          <div class="home-card-title">{{card.title}}</div>
+          <div class="home-card-title">{{quest.title}}</div>
           <table class="home-card-text">
               <tr>
                   <td>
-                      <img class="home-card-icon" src="../assets/images/vectors/level.png"><span>{{card.level}}</span>
+                      <img class="home-card-icon" src="../assets/images/vectors/level.png"><span>{{quest.level}}</span>
                  </td>
 
                   <td>
-                      <img class="home-card-icon" src="../assets/images/vectors/hours.png"><span>{{card.hours}}</span><span> hours</span>
+                      <img class="home-card-icon" src="../assets/images/vectors/hours.png"><span>{{quest.hours}}</span><span> hours</span>
                  </td>
              </tr>
               <tr>
                   <td>
-                      <img class="home-card-icon" src="../assets/images/vectors/credits.png"><span>{{card.credits}}</span><span> credits</span>
+                      <img class="home-card-icon" src="../assets/images/vectors/credits.png"><span>{{quest.credits}}</span><span> credits</span>
                   </td>
                   <td>
-                      <img class="home-card-icon" src="../assets/images/vectors/steps.png"><span>{{card.steps}}</span><span> steps</span>
+                      <img class="home-card-icon" src="../assets/images/vectors/steps.png"><span>{{quest.steps}}</span><span> steps</span>
                   </td>
               </tr>
             </table>
@@ -39,7 +39,7 @@
 <script>
 export default {
     name:'card',
-    props: ['card'],
+    props: ['quest'],
 }
 </script>
 

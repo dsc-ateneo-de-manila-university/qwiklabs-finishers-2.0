@@ -23,8 +23,8 @@
     <h1>What are the latest quests?</h1>
     <p>Check out what’s new with Qwiklabs.</p>
     <div class="cards">
-      <div v-bind:cards="cards" v-for="card in cards" v-bind:key="card.id">
-        <Card v-bind:card="card" />
+      <div v-bind:quests="quests" v-for="quest in quests" v-bind:key="quest.id">
+        <Card v-bind:quest="quest" />
         </div>
     </div>
     
@@ -62,7 +62,7 @@ export default {
   },
   data(){
     return{
-      cards:[
+      quests:[
         {
           id:1,
           image:"https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00",
