@@ -3,7 +3,7 @@
   <div class="home-card">
       <header class="home-card-topbar"></header>
       <div class="home-card-image">
-          <img src="imgSrc">
+          <img :src="imgSrc">
       </div>
       <div class="home-card-content">
           <div class="home-card-title">{{ title }}</div>
