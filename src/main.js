@@ -4,6 +4,8 @@ import router from "./router";
 import './assets/css/main.css'
 import './assets/css/normalize.css'
 
+export const bus = new Vue();
+
 Vue.config.productionTip = false
 
 new Vue({
