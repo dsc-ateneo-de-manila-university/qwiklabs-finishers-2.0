@@ -3,11 +3,8 @@
     <!-- START: FINISHER GROUP HEADER -->
     <div class="finisher-group-header">
       <div class="finisher-group-header-title">
-        <img
-          :src="require('@/assets/images/' + finisherGroup.image + '')"
-          alt="finisherGroupImage"
-        />
-        <h3>{{ finisherGroup.name }}</h3>
+        <img :src="finisherGroup[0].questImage" :alt="finisherGroup[0].quest" />
+        <h3>{{ finisherGroup[0].quest }}</h3>
       </div>
       <div class="finisher-group-header-upperbtn">
         <a class="finisher-btn-1" href="#">View More</a>
@@ -20,8 +17,8 @@
     <div class="finisher-group-body">
       <div
         class="finisher-member"
-        v-for="finisher in finisherGroup.finisherGroupMembers"
-        v-bind:key="finisher.finisherId"
+        v-for="finisher in finisherGroup"
+        v-bind:key="finisher.id"
       >
         <FinisherMember v-bind:finisher="finisher"></FinisherMember>
       </div>

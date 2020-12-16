@@ -1,11 +1,9 @@
 <template>
   <div>
-    <img
-      :src="require('@/assets/images/' + finisher.image + '')"
-      alt="finishermage"
-    />
+    <img :src="finisher.finisherImage" :alt="finisher.name" />
     <h5>{{ finisher.name }}</h5>
-    <p>{{ finisher.date }}</p>
+    <p>{{ finisher.completionDate }}</p>
+    <br />
   </div>
 </template>
 
