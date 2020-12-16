@@ -16,6 +16,9 @@
         </div>
         <!-- END: SEARCH -->
       </div>
+
+      {{ finisherSearch }}
+
       <div class="finisher-content">
         <!-- START: Finisher Groups -->
 
@@ -138,6 +141,11 @@ export default {
   },
 
   computed: {
+    // START: Search Filter Feature
+    // mobilefinisherSearch() {},
+    // END: Search Filter Feature
+
+    // START: For Rearranging the Data Structure from Database
     finisherGroups() {
       const map = {};
       this.finishers.forEach((obj) => {
@@ -149,14 +157,8 @@ export default {
         }
       });
       return map;
-
-      // let finisherGroups = this.finishers.reduce((obj, v) => {
-      //   obj[v.quest] = obj[v.quest] || [];
-      //   obj[v.quest].push(v);
-      //   return obj;
-      // }, {});
-      // return finisherGroups;
     },
+    // END: For Rearranging the Data Structure from Database
   },
 };
 </script>
