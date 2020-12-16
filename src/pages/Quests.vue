@@ -3,7 +3,7 @@
     <section class="quests">
       <div class="quests-container">
         <div class="quest-header-container">
-          <h1 class="quests-title">Quests {{ filteredResults }}</h1>
+          <h1 class="quests-title">Quests</h1>
 
           <!-- START: SEARCH -->
           <div class="search-box">
