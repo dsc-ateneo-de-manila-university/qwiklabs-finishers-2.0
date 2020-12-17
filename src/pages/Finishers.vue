@@ -9,7 +9,7 @@
             type="text"
             id="mobileSearch"
             name="name"
-            v-model="search"
+            v-model="searchFinisher"
             placeholder="Search for a finisher"
           />
           <img src="@/assets/images/vectors/search.png" />
@@ -17,7 +17,7 @@
         <!-- END: SEARCH -->
       </div>
 
-      {{ finisherSearch }}
+      <!-- {{ filteredFinishers }} -->
 
       <div class="finisher-content">
         <!-- START: Finisher Groups -->
@@ -41,6 +41,7 @@
             name="name"
             onkeyup="finisherSearch()"
             placeholder="ex. Juan Dela Cruz"
+            v-model="searchFinisher"
           />
           <label for="quest">Quest Title</label>
           <select id="quest-title" name="quest-name" onchange="questSearch()">
@@ -80,7 +81,7 @@ export default {
   },
   data() {
     return {
-      search: "",
+      searchFinisher: "",
       finishers: [],
     };
   },
@@ -142,13 +143,19 @@ export default {
 
   computed: {
     // START: Search Filter Feature
-    // mobilefinisherSearch() {},
+    filteredFinishers() {
+      return this.finishers.filter((finisher) => {
+        return finisher.name
+          .toLowerCase()
+          .includes(this.searchFinisher.toLowerCase());
+      });
+    },
     // END: Search Filter Feature
 
     // START: For Rearranging the Data Structure from Database
     finisherGroups() {
       const map = {};
-      this.finishers.forEach((obj) => {
+      this.filteredFinishers.forEach((obj) => {
         const { quest } = obj;
         if (map[quest]) {
           map[quest].push(obj);
