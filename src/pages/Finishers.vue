@@ -47,6 +47,13 @@
           <select id="quest-title" name="quest-name" onchange="questSearch()">
             <option disabled selected hidden>Select a quest</option>
             <option>View All</option>
+            <option
+              v-for="finisherGroup in finisherGroups"
+              v-bind:key="finisherGroup.quest"
+              v-bind:quest="finisherGroup.quest"
+            >
+              {{ finisherGroup.quest }}
+            </option>
           </select>
           <label for="date">Date of Completion</label>
           <input
