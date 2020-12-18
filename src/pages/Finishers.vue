@@ -17,8 +17,6 @@
         <!-- END: SEARCH -->
       </div>
 
-      <!-- {{ filteredFinishers }} -->
-
       <div class="finisher-content">
         <!-- START: Finisher Groups -->
 
@@ -39,28 +37,28 @@
             type="text"
             id="filterSearch"
             name="name"
-            onkeyup="finisherSearch()"
             placeholder="ex. Juan Dela Cruz"
             v-model="searchFinisher"
           />
           <label for="quest">Quest Title</label>
-          <select id="quest-title" name="quest-name" onchange="questSearch()">
+          <select id="quest-title" name="quest-name" v-model="searchQuest">
             <option disabled selected hidden>Select a quest</option>
             <option>View All</option>
+
             <option
-              v-for="finisherGroup in finisherGroups"
+              v-for="finisherGroup in organisedData"
               v-bind:key="finisherGroup.quest"
-              v-bind:quest="finisherGroup.quest"
             >
-              {{ finisherGroup.quest }}
+              {{ finisherGroup[0].quest }}
             </option>
           </select>
+
           <label for="date">Date of Completion</label>
           <input
             type="date"
             id="completionDate"
             name="date"
-            onchange="dateSearch()"
+            v-model="searchCompletionDate"
           />
         </div>
       </div>
@@ -89,6 +87,8 @@ export default {
   data() {
     return {
       searchFinisher: "",
+      searchCompletionDate: null,
+      searchQuest: "",
       finishers: [],
     };
   },
@@ -149,12 +149,40 @@ export default {
   },
 
   computed: {
+    temporaryData() {
+      return this.finishers;
+    },
+    formattedSearchCompletionDate() {
+      return this.searchCompletionDate
+        ? moment(this.searchCompletionDate).format("MMM D, YYYY")
+        : null;
+    },
     // START: Search Filter Feature
     filteredFinishers() {
-      return this.finishers.filter((finisher) => {
-        return finisher.name
-          .toLowerCase()
-          .includes(this.searchFinisher.toLowerCase());
+      return this.temporaryData.filter((finisher) => {
+        if (this.searchFinisher) {
+          return finisher.name
+            .toLowerCase()
+            .includes(this.searchFinisher.toLowerCase());
+        } else if (this.searchQuest) {
+          return this.searchQuest !== "View All"
+            ? finisher.quest.includes(this.searchQuest)
+            : finisher;
+        } else if (this.formattedSearchCompletionDate) {
+          return finisher.completionDate.includes(
+            this.formattedSearchCompletionDate
+          )
+            ? finisher
+            : finisher.completionDate.includes(this.formattedSearchCompletion);
+
+          // if (this.formattedSearchCompletionDate) {
+          //   return true;
+          // } else {
+          //   return finisher.completionDate === this.formattedSearchCompletion;
+          // }
+        } else {
+          return finisher;
+        }
       });
     },
     // END: Search Filter Feature
@@ -163,6 +191,20 @@ export default {
     finisherGroups() {
       const map = {};
       this.filteredFinishers.forEach((obj) => {
+        const { quest } = obj;
+        if (map[quest]) {
+          map[quest].push(obj);
+        } else {
+          map[quest] = [obj];
+        }
+      });
+      return map;
+    },
+
+    // START: For Rearranging the Data Structure from Database
+    organisedData() {
+      const map = {};
+      this.finishers.forEach((obj) => {
         const { quest } = obj;
         if (map[quest]) {
           map[quest].push(obj);
