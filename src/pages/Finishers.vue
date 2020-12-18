@@ -42,7 +42,7 @@
           />
           <label for="quest">Quest Title</label>
           <select id="quest-title" name="quest-name" v-model="searchQuest">
-            <option disabled selected hidden>Select a quest</option>
+            <option disabled hidden value="">Select a quest</option>
             <option>View All</option>
 
             <option
