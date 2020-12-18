@@ -42,9 +42,9 @@
           </tr>
         </table>
         <div class="home-card-btn-holder">
-          <form target="_blank" action="https://www.qwiklabs.com/quests/34">
-            <button class="btn" type="submit">Learn More</button>
-          </form>
+          <a class="btn" href="https://www.qwiklabs.com/quests/34"
+            >Learn More</a
+          >
         </div>
       </div>
     </div>
