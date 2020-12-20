@@ -3,24 +3,27 @@
     <div class="finisher-page">
       <div class="finisher-page-header">
         <h1>Finishers</h1>
+        <!-- START: SEARCH -->
         <div class="finisher-page-search">
           <input
             type="text"
             id="mobileSearch"
             name="name"
-            onkeyup="mobileSearch()"
+            v-model="searchFinisher"
             placeholder="Search for a finisher"
           />
-          <img src="assets/images/vectors/search.png" />
+          <img src="@/assets/images/vectors/search.png" />
         </div>
+        <!-- END: SEARCH -->
       </div>
+
       <div class="finisher-content">
         <!-- START: Finisher Groups -->
+
         <div class="finisher-groups">
           <div
-            v-bind:finisherGroups="finisherGroups"
             v-for="finisherGroup in finisherGroups"
-            v-bind:key="finisherGroup.id"
+            v-bind:key="finisherGroup.quest"
           >
             <FinisherGroup v-bind:finisherGroup="finisherGroup"></FinisherGroup>
           </div>
@@ -34,20 +37,28 @@
             type="text"
             id="filterSearch"
             name="name"
-            onkeyup="finisherSearch()"
             placeholder="ex. Juan Dela Cruz"
+            v-model="searchFinisher"
           />
           <label for="quest">Quest Title</label>
-          <select id="quest-title" name="quest-name" onchange="questSearch()">
-            <option disabled selected hidden>Select a quest</option>
+          <select id="quest-title" name="quest-name" v-model="searchQuest">
+            <option disabled hidden value="">Select a quest</option>
             <option>View All</option>
+
+            <option
+              v-for="finisherGroup in organisedData"
+              v-bind:key="finisherGroup.quest"
+            >
+              {{ finisherGroup[0].quest }}
+            </option>
           </select>
+
           <label for="date">Date of Completion</label>
           <input
             type="date"
             id="completionDate"
             name="date"
-            onchange="dateSearch()"
+            v-model="searchCompletionDate"
           />
         </div>
       </div>
@@ -56,7 +67,18 @@
 </template>
 
 <script>
+// START: IMPORTS
+// START: IMPORT COMPONENTS
 import FinisherGroup from "../components/Finishers-Components/Finisher-Group.vue";
+// END: IMPORT COMPONENTS
+
+// START: OTHER IMPORTS
+import firebase from "firebase";
+import moment from "moment";
+import db from "../../public/scripts/firebaseInit.js";
+// END: OTHER IMPORTS
+// END: IMPORTS
+
 export default {
   name: "Finishers",
   components: {
@@ -64,53 +86,135 @@ export default {
   },
   data() {
     return {
-      finisherGroups: [
-        {
-          id: 1,
-          image: "logo1.png",
-          name: "Baseline Infrastructure",
-          finisherGroupMembers: [
-            {
-              id: 1,
-              image: "Renzo.png",
-              name: "Christian Dominic",
-              date: "Nov 21, 2019",
-            },
-            {
-              id: 2,
-              image: "logo1.png",
-              name: "Harvey Sison",
-              date: "Dec 18, 2019",
-            },
-          ],
-        },
-        {
-          id: 2,
-          image: "logo2.png",
-          name: "BigQuery Basics for Data Analysts",
-          finisherGroupMembers: [
-            {
-              id: 1,
-              image: "logo2.png",
-              name: "Harvey Sison",
-              date: "Oct 27, 2019",
-            },
-            {
-              id: 2,
-              image: "Renzo.png",
-              name: "Jethro Cullen Sia",
-              date: "Apr 26, 2020",
-            },
-            {
-              id: 3,
-              image: "logo1.png",
-              name: "Andy",
-              date: "Aug 24, 2020",
-            },
-          ],
-        },
-      ],
+      searchFinisher: "",
+      searchCompletionDate: null,
+      searchQuest: "",
+      finishers: [],
     };
+  },
+  created() {
+    // START OF FINISHERS
+    db.collection("finishers")
+      .orderBy("quest")
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          // START: Get Images for Each Finisher
+          const gsReferenceFinisher = firebase
+            .storage()
+            .refFromURL(
+              "gs://qwiklabs-finishers-ph-e7667.appspot.com/finishers_imgs/"
+            );
+          let finisherRef = gsReferenceFinisher.child("Waving_GREEN.png");
+
+          if (doc.data().image !== "finishers-imgs/Waving_GREEN.png") {
+            finisherRef = gsReferenceFinisher.child(doc.data().name);
+          } else {
+            finisherRef = gsReferenceFinisher.child("Waving_GREEN.png");
+          }
+
+          finisherRef.getDownloadURL().then(function (url) {
+            data.finisherImage = url;
+          });
+          // END: Get Images for Each Finisher
+
+          // START: Get Images for Each Quest
+          const gsReferenceQuest = firebase
+            .storage()
+            .refFromURL("gs://qwiklabs-finishers-ph-e7667.appspot.com/");
+          let questRef = gsReferenceQuest.child(
+            String(doc.data().index) + ".png"
+          );
+
+          questRef.getDownloadURL().then((url) => {
+            data.questImage = url;
+          });
+          // END: Get Images for Each Quest
+
+          const data = {
+            id: doc.id,
+            index: doc.data().index,
+            finisherImage: "",
+            questImage: "",
+            quest: doc.data().quest,
+            name: doc.data().name,
+            completionDate: moment(doc.data().completionDate).format(
+              "MMM D, YYYY"
+            ),
+          };
+          this.finishers.push(data);
+        });
+      });
+    // END OF FINISHERS
+  },
+
+  computed: {
+    temporaryData() {
+      return this.finishers;
+    },
+    formattedSearchCompletionDate() {
+      return this.searchCompletionDate
+        ? moment(this.searchCompletionDate).format("MMM D, YYYY")
+        : null;
+    },
+    // START: Search Filter Feature
+    filteredFinishers() {
+      return this.temporaryData.filter((finisher) => {
+        if (this.searchFinisher) {
+          return finisher.name
+            .toLowerCase()
+            .includes(this.searchFinisher.toLowerCase());
+        } else if (this.searchQuest) {
+          return this.searchQuest !== "View All"
+            ? finisher.quest.includes(this.searchQuest)
+            : finisher;
+        } else if (this.formattedSearchCompletionDate) {
+          return finisher.completionDate.includes(
+            this.formattedSearchCompletionDate
+          )
+            ? finisher
+            : finisher.completionDate.includes(this.formattedSearchCompletion);
+
+          // if (this.formattedSearchCompletionDate) {
+          //   return true;
+          // } else {
+          //   return finisher.completionDate === this.formattedSearchCompletion;
+          // }
+        } else {
+          return finisher;
+        }
+      });
+    },
+    // END: Search Filter Feature
+
+    // START: For Rearranging the Data Structure from Database
+    finisherGroups() {
+      const map = {};
+      this.filteredFinishers.forEach((obj) => {
+        const { quest } = obj;
+        if (map[quest]) {
+          map[quest].push(obj);
+        } else {
+          map[quest] = [obj];
+        }
+      });
+      return map;
+    },
+
+    // START: For Rearranging the Data Structure from Database
+    organisedData() {
+      const map = {};
+      this.finishers.forEach((obj) => {
+        const { quest } = obj;
+        if (map[quest]) {
+          map[quest].push(obj);
+        } else {
+          map[quest] = [obj];
+        }
+      });
+      return map;
+    },
+    // END: For Rearranging the Data Structure from Database
   },
 };
 </script>
