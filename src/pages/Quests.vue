@@ -2,117 +2,123 @@
   <main class="container">
     <section class="quests">
       <div class="quests-container">
-        
         <div class="quest-header-container">
-            <h1 class="quests-title">Quests</h1>
-            <div class="search-box">
-              <input type="text" id="questSearch" placeholder="Search for a quest" onkeyup="questSearch()" required>
-              <img src="@/assets/images/vectors/search.png">
-            </div>
-        </div>
-        <div class="cards">
-          <div v-bind:quests="quests" v-for="quest in quests" v-bind:key="quest.id">
-            <Card v-bind:quest="quest" />
+          <h1 class="quests-title">Quests</h1>
+
+          <!-- START: SEARCH -->
+          <div class="search-box">
+            <input
+              type="text"
+              id="questSearch"
+              placeholder="Search for a quest"
+              v-model="search"
+              required
+            />
+            <img src="@/assets/images/vectors/search.png" />
           </div>
         </div>
+        <!-- END: SEARCH -->
+
+        <!-- START: CARDS -->
+        <div class="cards">
+          <div
+            v-bind:quests="quests"
+            v-for="quest in questSearch"
+            v-bind:key="quest.id"
+          >
+            <Card class="cards-item" :quest="quest" :search="search" />
+          </div>
+        </div>
+        <!-- END: CARDS -->
       </div>
     </section>
   </main>
 </template>
 
 <script>
-import Card from '../components/Card';
+// START: IMPORTS
+// START: IMPORT COMPONENTS
+import Card from "../components/Card";
+// END: IMPORT COMPONENTS
+
+// START: OTHER IMPORTS
+import firebase from "firebase";
+import db from "../../public/scripts/firebaseInit.js";
+// END: OTHER IMPORTS
+// END: IMPORTS
 
 export default {
-  name:'quests',
+  name: "quests",
   components: {
-    Card
+    Card,
   },
-  data(){
-    return{
-      quests:[
-        {
-          id:1,
-          image:"https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00",
-          title:"Stackdriver Logging",
-          level:"Fundamental",
-          hours:"5",
-          credits:"23",
-          steps:"5"
-        },
-        {
-          id:2,
-          image:"https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00",
-          title:"Stackdriver Logging",
-          level:"Fundamental",
-          hours:"5",
-          credits:"23",
-          steps:"5"
-        },
-        {
-          id:3,
-          image:"https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00",
-          title:"Stackdriver Logging",
-          level:"Fundamental",
-          hours:"5",
-          credits:"23",
-          steps:"5"
-        },
-        {
-          id:4,
-          image:"https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00",
-          title:"Stackdriver Logging",
-          level:"Fundamental",
-          hours:"5",
-          credits:"23",
-          steps:"5"
-        },
-        {
-          id:5,
-          image:"https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00",
-          title:"Stackdriver Logging",
-          level:"Fundamental",
-          hours:"5",
-          credits:"23",
-          steps:"5"
-        },
-        {
-          id:6,
-          image:"https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00",
-          title:"Stackdriver Logging",
-          level:"Fundamental",
-          hours:"5",
-          credits:"23",
-          steps:"5"
-        },
-        {
-          id:7,
-          image:"https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00",
-          title:"Stackdriver Logging",
-          level:"Fundamental",
-          hours:"5",
-          credits:"23",
-          steps:"5"
-        },
-        {
-          id:8,
-          image:"https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00",
-          title:"Stackdriver Logging",
-          level:"Fundamental",
-          hours:"5",
-          credits:"23",
-          steps:"5"
-        }
-        ],
-    }
-  }
-}
+  data() {
+    return {
+      quests: [],
+      search: "",
+    };
+  },
+
+  created() {
+    // START OF QUEST
+    db.collection("quests")
+      .orderBy("name")
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          const gsReference = firebase
+            .storage()
+            .refFromURL("gs://qwiklabs-finishers-ph-e7667.appspot.com/");
+          let questRef = gsReference.child(String(doc.data().index) + ".png");
+
+          questRef.getDownloadURL().then((url) => {
+            data.image = url;
+          });
+
+          const data = {
+            id: doc.id,
+            index: doc.data().index,
+            image: "",
+            name: doc.data().name,
+            level: doc.data().level,
+            hours: doc.data().hours,
+            credits: doc.data().credits,
+            steps: doc.data().steps,
+          };
+          this.quests.push(data);
+        });
+      });
+    // END OF QUEST
+  },
+
+  // methods: {
+  //   questSearch() {
+  //     let filter, name;
+  //     let quests = this.quests;
+  //     filter = this.search;
+  //     for (let i = 0; i < quests.length; i++) {
+  //       name = quests[i].name;
+  //       if (name.search(new RegExp(filter, "i")) > -1) {
+  //         quests[i].style.display = "";
+  //       } else {
+  //         quests[i].style.display = "none";
+  //       }
+  //     }
+  //   },
+  // },
+
+  computed: {
+    questSearch() {
+      return this.quests.filter((quest) => {
+        return quest.name.toLowerCase().includes(this.search.toLowerCase());
+      });
+    },
+  },
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
-
 .quest-header-container {
   margin: 80px 0 50px;
   display: flex;
@@ -121,46 +127,42 @@ export default {
 }
 
 .quests-title {
-    font-weight: bold;
-    font-size: 30px;
-    letter-spacing: 0.02em;
-    color: #222222;
-    margin: 0;
-    padding-top: 30px;
+  font-weight: bold;
+  font-size: 30px;
+  letter-spacing: 0.02em;
+  color: #222222;
+  margin: 0;
+  padding-top: 30px;
 }
 
 .search-box {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 5px;
-    border: 1px solid #C4C4C4;
-    margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  border: 1px solid #c4c4c4;
+  margin-top: 30px;
 }
 
-.search-box input{
-    width: 400px;
-    height: 25px;
-    border: none;
+.search-box input {
+  width: 400px;
+  height: 25px;
+  border: none;
 }
 
 .search-box input:focus {
   outline: none;
 }
 
-
-
 @media screen and (max-width: 850px) {
+  .quest-header-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
-    .quest-header-container{
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .search-box{
-        width: 100%;
-    }
-
+  .search-box {
+    width: 100%;
+  }
 }
 
 @media screen and (max-width: 500px) {
@@ -168,6 +170,4 @@ export default {
     width: 100%;
   }
 }
-   
-
 </style>
