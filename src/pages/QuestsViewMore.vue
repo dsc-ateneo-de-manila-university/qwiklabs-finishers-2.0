@@ -56,14 +56,13 @@
         <div class="container">
           <h2 class="finisher-header">Who finished this quest?</h2>
           <div class="finisher-list">
-            <Finisher
-              v-for="finisher in finishers"
+            <div
+              :finishers="finishers"
+              v-for="finisher in filteredFinishers"
               :key="finisher.id"
-              :imageName="finisher.imageName"
-              :name="finisher.name"
-              :quest="finisher.quest"
-              :date="finisher.date"
-            />
+            >
+              <Finisher :finisher="finisher" />
+            </div>
           </div>
         </div>
       </article>
@@ -80,6 +79,7 @@ import Finisher from "@/components/Finisher";
 // START: OTHER IMPORTS
 import firebase from "firebase";
 import db from "../../public/scripts/firebaseInit.js";
+import moment from "moment";
 // END: OTHER IMPORTS
 // END: IMPORTS
 
@@ -98,7 +98,57 @@ export default {
       credits: null,
       steps: null,
       description: null,
+      finishers: [],
     };
+  },
+
+  computed: {
+    filteredFinishers() {
+      return this.finishers.filter((finisher) => {
+        return finisher.quest.toLowerCase().includes(this.name.toLowerCase());
+      });
+    },
+  },
+
+  created() {
+    // START OF FINISHERS
+    db.collection("finishers")
+      .orderBy("completionDate")
+      .limitToLast(12)
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          const gsReference = firebase
+            .storage()
+            .refFromURL(
+              "gs://qwiklabs-finishers-ph-e7667.appspot.com/finishers_imgs/"
+            );
+          let finisherRef = gsReference.child("Waving_GREEN.png");
+
+          if (doc.data().image !== "finishers-imgs/Waving_GREEN.png") {
+            finisherRef = gsReference.child(doc.data().name);
+          } else {
+            finisherRef = gsReference.child("Waving_GREEN.png");
+          }
+
+          finisherRef.getDownloadURL().then(function (url) {
+            data.image = url;
+          });
+
+          const data = {
+            id: doc.id,
+            index: doc.data().index,
+            image: "",
+            quest: doc.data().quest,
+            name: doc.data().name,
+            completionDate: moment(doc.data().completionDate).format(
+              "MMM D, YYYY"
+            ),
+          };
+          this.finishers.push(data);
+        });
+      });
+    // END OF FINISHERS
   },
 
   beforeRouteEnter(to, from, next) {
