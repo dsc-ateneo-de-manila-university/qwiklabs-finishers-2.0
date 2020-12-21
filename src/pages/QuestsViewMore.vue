@@ -5,7 +5,7 @@
     <section class="view-more__content">
       <article class="view-more__quest m-top">
         <div class="container">
-          <img class="view-more__img" :src="imgSrc" />
+          <img class="view-more__img" :src="image" :alt="name" />
           <h1>{{ name }}</h1>
 
           <div class="view-more__level">
@@ -78,6 +78,7 @@ import Finisher from "@/components/Finisher";
 // END: IMPORT COMPONENTS
 
 // START: OTHER IMPORTS
+import firebase from "firebase";
 import db from "../../public/scripts/firebaseInit.js";
 // END: OTHER IMPORTS
 // END: IMPORTS
@@ -89,6 +90,7 @@ export default {
   },
   data() {
     return {
+      index: null,
       image: null,
       name: null,
       level: null,
@@ -106,6 +108,17 @@ export default {
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
           next((vm) => {
+            const gsReference = firebase
+              .storage()
+              .refFromURL("gs://qwiklabs-finishers-ph-e7667.appspot.com/");
+
+            let questRef = gsReference.child(String(doc.data().index) + ".png");
+
+            questRef.getDownloadURL().then((url) => {
+              vm.image = url;
+            });
+
+            vm.index = doc.data().index;
             vm.name = doc.data().name;
             vm.level = doc.data().level;
             vm.hours = doc.data().hours;
@@ -128,6 +141,17 @@ export default {
         .get()
         .then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
+            const gsReference = firebase
+              .storage()
+              .refFromURL("gs://qwiklabs-finishers-ph-e7667.appspot.com/");
+
+            let questRef = gsReference.child(String(doc.data().index) + ".png");
+
+            questRef.getDownloadURL().then((url) => {
+              this.image = url;
+            });
+
+            this.index = doc.data().index;
             this.name = doc.data().name;
             this.level = doc.data().level;
             this.hours = doc.data().hours;
@@ -156,6 +180,10 @@ main {
   background: #ffd457;
 }
 
+.view-more {
+  min-height: 100vh;
+}
+
 .view-more__content {
   display: flex;
 }
@@ -163,6 +191,10 @@ main {
 /* First Half */
 .view-more__quest {
   width: 50%;
+}
+
+.view-more__img {
+  width: 88.72px;
 }
 
 .view-card-icon {
