@@ -42,8 +42,12 @@
           </tr>
         </table>
         <div class="home-card-btn-holder">
-          <a class="btn" href="https://www.qwiklabs.com/quests/34"
-            >Learn More</a
+          <router-link
+            :to="{
+              name: 'QuestsViewMore',
+              params: { index: quest.index },
+            }"
+            ><a class="btn">Learn More</a></router-link
           >
         </div>
       </div>

@@ -8,34 +8,42 @@ const router = new Router({
   routes: [
     {
       path: "/",
+      name:'Home',
       component: () => import("./pages/Home.vue")
     },
     {
       path: "/quests",
+      name:'Quests',
       component: () => import("./pages/Quests.vue")
     },
     {
-      path: "/quests/:id",
+      path: "/quests/:index",
+      name:'QuestsViewMore',
       component: () => import("./pages/QuestsViewMore.vue")
     },
     {
       path: "/finishers",
+      name:'Finishers',
       component: () => import("./pages/Finishers.vue")
     },
     {
       path: "/finishers/:id",
+      name:'FinishersViewMore',
       component: () => import("./pages/FinishersViewMore.vue")
     },
     {
       path: "/register",
+      name:'Register',
       component: () => import("./pages/Register.vue")
     },
     {
       path: "/admin",
+      name:'Admin',
       component: () => import("./pages/Admin.vue")
     },
     {
       path: "/admin/:id",
+      name:'AdminCourses',
       component: () => import("./pages/AdminCourse.vue")
     },
     {
