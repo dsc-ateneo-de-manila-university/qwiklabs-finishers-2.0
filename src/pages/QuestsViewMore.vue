@@ -188,6 +188,7 @@ export default {
     fetchData() {
       db.collection("quests")
         .where("index", "==", this.$route.to.params.index)
+        .limitToLast(12)
         .get()
         .then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
