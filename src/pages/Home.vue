@@ -1,6 +1,7 @@
 <template>
 
 <main>
+  
 
   <!-- Hero Section -->
   <section class="home-hero-container">
@@ -81,7 +82,7 @@ export default {
 
   created() {
     // START OF QUEST
-    db.collection("quests")
+    db.ollection("quests")
       .orderBy("name")
       .limitToLast(4)
       .get()
