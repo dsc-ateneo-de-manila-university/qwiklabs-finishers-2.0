@@ -82,7 +82,7 @@ export default {
 
   created() {
     // START OF QUEST
-    db.ollection("quests")
+    db.collection("quests")
       .orderBy("name")
       .limitToLast(4)
       .get()

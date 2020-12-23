@@ -35,7 +35,7 @@ const router = new Router({
       component: () => import("./pages/Admin.vue")
     },
     {
-      path: "/admin/:id",
+      path: "/admin/:index",
       component: () => import("./pages/AdminCourse.vue")
     },
     {

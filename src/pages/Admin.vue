@@ -3,31 +3,51 @@
     <div class="admin__content container">
       <h1>Admin > <strong>Courses</strong></h1>
       <div class="courses">
-        <AdminCourse v-for="course in courses" :key="course.id" :imgSrc="course.imgSrc" :title="course.title"/>
+        <AdminCourseCard v-for="course in courses" :key="course.id" :imgSrc="course.imgSrc" :title="course.title" :index="course.index"/>
       </div>
     </div>
   </main>
 </template>
 
 <script>
-import AdminCourse from "../components/Admin-Components/AdminCourse.vue"
+
+// Internal Imports
+import AdminCourseCard from "../components/Admin-Components/AdminCourseCard"
+
+// Other imports
+import firebase from "firebase";
+import db from "../../public/scripts/firebaseInit.js";
+
 export default {
   data() {
     return {
-      courses: [
-      {id: 1, imgSrc:"https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00", title: "Stackdriver Logging"},
-      {id: 2, imgSrc:"https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00", title: "Stackdriver Logging"},
-      {id: 3, imgSrc:"https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00", title: "Stackdriver Logging"},
-      {id: 4, imgSrc:"https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00", title: "Stackdriver Logging"},
-      {id: 5, imgSrc:"https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00", title: "Stackdriver Logging"},
-      {id: 6, imgSrc:"https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00", title: "Stackdriver Logging"},
-      {id: 7, imgSrc:"https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00", title: "Stackdriver Logging"},
-      {id: 8, imgSrc:"https://firebasestorage.googleapis.com/v0/b/qwiklabs-finishers-ph-e7667.appspot.com/o/34.png?alt=media&amp;token=e505b745-798e-4e5f-ab5e-5f57548b1e00", title: "Stackdriver Logging"},
-      ]
+      courses: []
     }
   },
+  created() {
+    db.collection("quests").orderBy('name').get()
+      .then(snapshot => snapshot.forEach(doc => {
+      
+        const gsReference = firebase.storage().refFromURL('gs://qwiklabs-finishers-ph-e7667.appspot.com/');
+        let questRef = gsReference.child(String(doc.data().index) + ".png");
+
+        questRef.getDownloadURL().then((url)=> {
+            data.imgSrc = url
+        })
+
+        const data = {
+              id: doc.id,
+              title: doc.data().name,
+              index: doc.data().index,
+              imgSrc: ''
+            }
+        
+        this.courses.push(data)
+      }))
+
+  },
   components: {
-    AdminCourse
+    AdminCourseCard
   }
 }
 </script>
