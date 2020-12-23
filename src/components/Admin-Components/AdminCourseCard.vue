@@ -1,20 +1,28 @@
 <template>
+<router-link :to="{ path: `admin/${index}`}">
   <div class="course-card">
       <img :src="imgSrc" alt="">
       <p>{{ title }}</p>
   </div>
+</router-link>
 </template>
 
 <script>
 export default {
     props: {
         imgSrc: String,
-        title: String
+        title: String,
+        index: String,
     }
 }
 </script>
 
 <style>
+    a {
+        color: black;
+        text-decoration: none;
+    }
+
     .course-card {
         height: 100px;
         width: 100%;

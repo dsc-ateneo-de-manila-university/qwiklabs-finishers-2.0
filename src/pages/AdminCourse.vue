@@ -18,9 +18,9 @@
                     <th>Date of Completion 
                         <!-- <img src="@/assets/images/vectors/down-arrow.png"> -->
                     </th>
-                    <th>Date of Registration 
+                    <!-- <th>Date of Registration  -->
                         <!-- <img src="@/assets/images/vectors/down-arrow.png"> -->
-                    </th>
+                    <!-- </th> -->
                 </tr>
             </thead>
             <tbody>
@@ -29,7 +29,7 @@
                     <td>{{ finisher.lastName }}</td>
                     <td>{{ finisher.quest }}</td>
                     <td>{{ finisher.completed }}</td>
-                    <td>{{ finisher.registered }}</td>
+                    <!-- <td>{{ finisher.registered }}</td> -->
                 </tr>
             </tbody>
         </table>
@@ -39,19 +39,31 @@
 </template>
 
 <script>
+
+// other imports
+// import firebase from "firebase";
+import db from "../../public/scripts/firebaseInit.js";
+
 export default {
     data() {
         return {
-            finishers: [
-                {id: 1, firstName: "Harvey Jay", lastName: "Sison", quest: "Stackdriver Logging", completed: "2019-12-23", registered: "2019-12-23, 07:35:00"},
-                {id: 2, firstName: "Harvey Jay", lastName: "Sison", quest: "Stackdriver Logging", completed: "2019-12-23", registered: "2019-12-23, 07:35:00"},
-                {id: 3, firstName: "Harvey Jay", lastName: "Sison", quest: "Stackdriver Logging", completed: "2019-12-23", registered: "2019-12-23, 07:35:00"},
-                {id: 4, firstName: "Harvey Jay", lastName: "Sison", quest: "Stackdriver Logging", completed: "2019-12-23", registered: "2019-12-23, 07:35:00"},
-                {id: 5, firstName: "Harvey Jay", lastName: "Sison", quest: "Stackdriver Logging", completed: "2019-12-23", registered: "2019-12-23, 07:35:00"},
-                {id: 6, firstName: "Harvey Jay", lastName: "Sison", quest: "Stackdriver Logging", completed: "2019-12-23", registered: "2019-12-23, 07:35:00"},
-                {id: 7, firstName: "Harvey Jay", lastName: "Sison", quest: "Stackdriver Logging", completed: "2019-12-23", registered: "2019-12-23, 07:35:00"},
-            ]
+            finishers: []
         }
+    },
+    created() {
+        db.collection('finishers').orderBy('completionDate').where('index', '==', this.$route.params.index).get() 
+            .then(snapshot => snapshot.forEach(doc => {
+
+                const data = {
+                    id: doc.id,
+                    firstName: doc.data().firstName, 
+                    lastName: doc.data().lastName,
+                    quest: doc.data().quest, 
+                    completed: doc.data().completionDate,
+                }
+
+                this.finishers.push(data)
+            }))
     }
 }
 </script>
