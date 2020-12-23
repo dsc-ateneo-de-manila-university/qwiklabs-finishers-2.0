@@ -3,12 +3,28 @@
     <!-- START: FINISHER GROUP HEADER -->
     <div class="finisher-group-header">
       <div class="finisher-group-header-title">
-        <img :src="finisherGroup[0].questImage" :alt="finisherGroup[0].quest" />
+        <img
+          :src="finisherGroup[0].questImage"
+          :alt="finisherGroup[0].quest"
+          style="width: 50px"
+        />
         <h3>{{ finisherGroup[0].quest }}</h3>
       </div>
       <div class="finisher-group-header-upperbtn">
-        <a class="finisher-btn-1" href="#">View More</a>
-        <a class="finisher-btn-2" target="_blank" href="#">Check Quest</a>
+        <router-link
+          :to="{
+            name: 'FinishersViewMore',
+            params: { index: finisherGroup[0].index },
+          }"
+          ><button class="finisher-btn-1">View more</button></router-link
+        >
+        <router-link
+          :to="{
+            name: 'QuestsViewMore',
+            params: { index: finisherGroup[0].index },
+          }"
+          ><button class="finisher-btn-2">Check quest</button></router-link
+        >
       </div>
     </div>
     <!-- END: FINISHER GROUP HEADER -->
@@ -26,8 +42,20 @@
     <!-- END: FINISHER GROUP BODY -->
 
     <div class="finisher-group-header-lowerbtn">
-      <a class="finisher-btn-1" href="#">View More</a>
-      <a class="finisher-btn-2" target="_blank" href="#">Check Quest</a>
+      <router-link
+        :to="{
+          name: 'QuestsViewMore',
+          params: { index: finisherGroup[0].index },
+        }"
+        ><a class="finisher-btn-1"
+          >Learn More {{ finisherGroup[0].index }}</a
+        ></router-link
+      >
+      <router-link
+        ><a class="finisher-btn-2" target="_blank" href="#"
+          >Check Quest</a
+        ></router-link
+      >
     </div>
   </div>
 </template>
@@ -92,7 +120,7 @@ export default {
 }
 
 .finisher-btn-1 {
-  display: none;
+  background-color: #ffffff;
   background: #222222;
   border: 1.5px solid #222222;
   box-sizing: border-box;
@@ -105,6 +133,7 @@ export default {
   text-align: center;
   text-decoration: none;
   margin-right: 10px;
+  width: 130px;
 }
 
 .finisher-btn-1:hover {
@@ -113,6 +142,7 @@ export default {
 }
 
 .finisher-btn-2 {
+  width: 130px;
   background: white;
   border: 1.5px solid #222222;
   box-sizing: border-box;

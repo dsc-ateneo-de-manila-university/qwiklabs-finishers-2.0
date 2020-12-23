@@ -1,11 +1,8 @@
 <template>
   <div>
-    <img
-      :src="require('@/assets/images/' + finisher.image + '')"
-      alt="finishermage"
-    />
+    <img :src="finisher.image" :alt="finisher.name" />
     <h5>{{ finisher.name }}</h5>
-    <p>{{ finisher.date }}</p>
+    <p>{{ finisher.completionDate }}</p>
   </div>
 </template>
 
@@ -26,8 +23,8 @@ export default {
   padding: 5%;
 }
 .finisher-member img {
-  width: 100px;
-  height: 100px;
+  width: 140px;
+  height: 140px;
   border-radius: 100%;
   overflow: hidden;
 }
