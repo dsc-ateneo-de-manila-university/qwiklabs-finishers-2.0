@@ -25,23 +25,27 @@
         <p>Copyright © 2020 All rights reserved</p>
       </div>
       <div class="login-container">
-        <!--WIP
-        <a href="#" id="admin-login">Admin Log in</a>-->
+        <a href="#" id="admin-login" @click="openModal" >Admin Log in</a>
       </div>
     </div>
   </footer>
 </template>
 
 <script>
+import { bus } from '../main'
 export default {
-    name: "Footer"
+    name: "Footer",
+    methods: {
+        openModal() {
+            bus.$emit('openModal')
+        }
+    }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 footer {
-    box-sizing: border-box;
     background: #222222;
     height: 400px;
     display: flex;
@@ -174,6 +178,7 @@ footer #footer-finisher {
     line-height: 16px;
     text-align: right;
     color: #8E8E8E;
+    text-decoration: underline;
 }
 
 @media screen and (min-width: 750px) {
