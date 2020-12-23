@@ -11,7 +11,7 @@
           </div>
           <div class="form-input">
             <p>Password</p>
-            <input type="text" placeholder="Enter your password">
+            <input type="password" placeholder="Enter your password">
           </div>
           <button class="btn btn-reverse admin-submit">Log In</button>
         </form>
