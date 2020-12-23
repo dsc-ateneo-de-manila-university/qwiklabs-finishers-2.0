@@ -174,12 +174,6 @@ export default {
           )
             ? finisher
             : finisher.completionDate.includes(this.formattedSearchCompletion);
-
-          // if (this.formattedSearchCompletionDate) {
-          //   return true;
-          // } else {
-          //   return finisher.completionDate === this.formattedSearchCompletion;
-          // }
         } else {
           return finisher;
         }

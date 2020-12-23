@@ -16,8 +16,8 @@ export default {
 
 <style scoped>
 .finisher-member img {
-  width: 100px;
-  height: 100px;
+  width: 140px;
+  height: 140px;
   border-radius: 100%;
   overflow: hidden;
 }

@@ -3,16 +3,13 @@
     <div class="finisher-more-page">
       <!-- START: HEADER -->
       <div class="finisher-more-page-header">
-        <h1>
-          Finishers > <span>{{ name }}</span>
-        </h1>
+        <h1>Finishers > <span>Stackdriver Logging</span></h1>
         <div class="finisher-more-page-search">
           <input
             type="text"
             id="name"
             name="name"
-            placeholder="Search for a finisher"
-            v-model="searchFinisher"
+            placeholder="Search for a quest or finisher"
           />
           <img src="../assets/images/vectors/search.png" />
         </div>
@@ -25,11 +22,11 @@
           <!-- START: FINISHER MORE MEMBERS -->
           <div
             class="finisher-member"
-            :finishers="finishers"
-            v-for="finisher in filteredFinishers"
-            :key="finisher.id"
+            v-bind:finishers="finishers"
+            v-for="finisher in finishers"
+            v-bind:key="finisher.id"
           >
-            <FinisherMoreMember :finisher="finisher"></FinisherMoreMember>
+            <FinisherMoreMember v-bind:finisher="finisher"></FinisherMoreMember>
           </div>
           <!-- END: FINISHER MORE MEMBERS -->
         </div>
@@ -40,18 +37,7 @@
 </template>
 
 <script>
-// START: IMPORTS
-// START: IMPORT COMPONENTS
 import FinisherMoreMember from "../components/FinishersViewMore-Components/Finisher-More-Member.vue";
-// END: IMPORT COMPONENTS
-
-// START: OTHER IMPORTS
-import firebase from "firebase";
-import db from "../../public/scripts/firebaseInit.js";
-import moment from "moment";
-// END: OTHER IMPORTS
-// END: IMPORTS
-
 export default {
   name: "FinishersViewMore",
   components: {
@@ -59,130 +45,48 @@ export default {
   },
   data() {
     return {
-      index: null,
-      name: null,
-      searchFinisher: "",
-      finishers: [],
+      finishers: [
+        {
+          id: 1,
+          image: "Renzo.png",
+          name: "Name1",
+          date: "date1",
+        },
+        {
+          id: 2,
+          image: "logo1.png",
+          name: "Name2",
+          date: "date2",
+        },
+        {
+          id: 3,
+          image: "Renzo.png",
+          name: "Name3",
+          date: "date3",
+        },
+        {
+          id: 4,
+          image: "logo2.png",
+          name: "Name4",
+          date: "date4",
+        },
+        {
+          id: 5,
+          image: "Renzo.png",
+          name: "Name5",
+          date: "date5",
+        },
+        {
+          id: 6,
+          image: "logo2.png",
+          name: "Name6",
+          date: "date6",
+        },
+      ],
     };
-  },
-
-  computed: {
-    filteredFinishersByQuest() {
-      return this.finishers.filter((finisher) => {
-        return finisher.quest.toLowerCase().includes(this.name.toLowerCase());
-      });
-    },
-
-    // START: Search Filter Feature
-    filteredFinishers() {
-      return this.filteredFinishersByQuest.filter((finisher) => {
-        if (this.searchFinisher) {
-          return finisher.name
-            .toLowerCase()
-            .includes(this.searchFinisher.toLowerCase());
-        } else {
-          return finisher;
-        }
-      });
-    },
-    // END: Search Filter Feature
-  },
-
-  created() {
-    // START OF FINISHERS
-    db.collection("finishers")
-      .orderBy("completionDate")
-      .limitToLast(12)
-      .get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          const gsReference = firebase
-            .storage()
-            .refFromURL(
-              "gs://qwiklabs-finishers-ph-e7667.appspot.com/finishers_imgs/"
-            );
-          let finisherRef = gsReference.child("Waving_GREEN.png");
-
-          if (doc.data().image !== "finishers-imgs/Waving_GREEN.png") {
-            finisherRef = gsReference.child(doc.data().name);
-          } else {
-            finisherRef = gsReference.child("Waving_GREEN.png");
-          }
-
-          finisherRef.getDownloadURL().then(function (url) {
-            data.image = url;
-          });
-
-          const data = {
-            id: doc.id,
-            index: doc.data().index,
-            image: "",
-            quest: doc.data().quest,
-            name: doc.data().name,
-            completionDate: moment(doc.data().completionDate).format(
-              "MMM D, YYYY"
-            ),
-          };
-          this.finishers.push(data);
-        });
-      });
-    // END OF FINISHERS
-  },
-
-  beforeRouteEnter(to, from, next) {
-    db.collection("quests")
-      .where("index", "==", to.params.index)
-      .get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          next((vm) => {
-            const gsReference = firebase
-              .storage()
-              .refFromURL("gs://qwiklabs-finishers-ph-e7667.appspot.com/");
-
-            let questRef = gsReference.child(String(doc.data().index) + ".png");
-
-            questRef.getDownloadURL().then((url) => {
-              vm.image = url;
-            });
-            vm.index = doc.data().index;
-            vm.name = doc.data().name;
-          });
-        });
-      });
-  },
-
-  watch: {
-    $route: "fetchData",
-  },
-
-  methods: {
-    fetchData() {
-      db.collection("quests")
-        .where("index", "==", this.$route.to.params.index)
-        .limitToLast(12)
-        .get()
-        .then((querySnapshot) => {
-          querySnapshot.forEach((doc) => {
-            const gsReference = firebase
-              .storage()
-              .refFromURL("gs://qwiklabs-finishers-ph-e7667.appspot.com/");
-
-            let questRef = gsReference.child(String(doc.data().index) + ".png");
-
-            questRef.getDownloadURL().then((url) => {
-              this.image = url;
-            });
-
-            this.index = doc.data().index;
-            this.name = doc.data().name;
-          });
-        });
-    },
   },
 };
 </script>
-
 
 <style scoped>
 /*FOR FINISHERS LEARN MORE PAGE*/
