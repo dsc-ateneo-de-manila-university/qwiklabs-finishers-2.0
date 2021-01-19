@@ -126,7 +126,7 @@ export default {
           let finisherRef = gsReference.child("Waving_GREEN.png");
 
           if (doc.data().image !== "finishers-imgs/Waving_GREEN.png") {
-            finisherRef = gsReference.child(doc.data().name);
+            finisherRef = gsReference.child(doc.data().firstName + " " + doc.data().lastName);
           } else {
             finisherRef = gsReference.child("Waving_GREEN.png");
           }
@@ -140,7 +140,7 @@ export default {
             index: doc.data().index,
             image: "",
             quest: doc.data().quest,
-            name: doc.data().name,
+            name: doc.data().firstName + " " + doc.data().lastName,
             completionDate: moment(doc.data().completionDate).format(
               "MMM D, YYYY"
             ),
@@ -295,6 +295,13 @@ main {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
+
+.people-collection-child {
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 20px;
+}
+
 
 .people-collection-child {
   margin: 15px 0;

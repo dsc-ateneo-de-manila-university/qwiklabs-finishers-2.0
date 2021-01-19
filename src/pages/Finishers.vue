@@ -108,7 +108,7 @@ export default {
           let finisherRef = gsReferenceFinisher.child("Waving_GREEN.png");
 
           if (doc.data().image !== "finishers-imgs/Waving_GREEN.png") {
-            finisherRef = gsReferenceFinisher.child(doc.data().name);
+            finisherRef = gsReferenceFinisher.child(doc.data().firstName + " " + doc.data().lastName);
           } else {
             finisherRef = gsReferenceFinisher.child("Waving_GREEN.png");
           }
@@ -137,7 +137,7 @@ export default {
             finisherImage: "",
             questImage: "",
             quest: doc.data().quest,
-            name: doc.data().name,
+            name: doc.data().firstName + " " + doc.data().lastName,
             completionDate: moment(doc.data().completionDate).format(
               "MMM D, YYYY"
             ),

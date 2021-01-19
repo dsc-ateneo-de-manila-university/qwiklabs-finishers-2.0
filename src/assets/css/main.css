@@ -23,7 +23,6 @@ button:visited {
   background: white;
   padding: 10px 25px;
   font-weight: bold;
-  transition: 300ms all;
   font-family: inherit;
   color: #222222;
   text-decoration: none;
@@ -44,7 +43,7 @@ button:visited {
 
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 2fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   grid-gap: 2rem;
   margin: 25px 0;
 }
