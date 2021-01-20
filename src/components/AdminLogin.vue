@@ -57,12 +57,11 @@ export default {
         .signInWithEmailAndPassword(this.email, this.password)
         .then(
           (user) => {
-            alert(`You are logged in as ${user.email}`);
-            this.$router.go({ path: this.$router.path });
+            this.isHidden = !this.isHidden;
+            bus.$emit("hideOverflow");
+            this.$router.push("/admin");
           },
-          (err) => {
-            alert(err.message);
-          }
+          (err) => alert(err.message)
         );
       e.preventDefault();
     },

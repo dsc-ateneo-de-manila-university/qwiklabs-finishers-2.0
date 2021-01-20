@@ -80,7 +80,10 @@ export default {
       firebase
         .auth()
         .signOut()
-        .then(() => this.$router.go({ path: this.$router.path }));
+        .then(() => {
+          alert(`You are now logged out`);
+          this.$router.go({ path: this.$router.path });
+        });
     },
   },
 };
