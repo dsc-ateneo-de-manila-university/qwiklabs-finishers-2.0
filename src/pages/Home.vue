@@ -9,9 +9,9 @@
             Now is your opportunity to show the world the variety of quests you
             have finished with Qwiklabs.
           </p>
-          <a href="register.html" class="link-holder">
+          <router-link tag="a" to="/register">
             <button class="btn">Register</button>
-          </a>
+          </router-link>
         </div>
       </div>
     </section>
@@ -44,6 +44,7 @@
       </div>
       <div class="people-collection">
         <div
+          class="people-collection-child"
           v-bind:finishers="finishers"
           v-for="finisher in finishers"
           v-bind:key="finisher.id"
@@ -129,7 +130,7 @@ export default {
           let finisherRef = gsReference.child("Waving_GREEN.png");
 
           if (doc.data().image !== "finishers-imgs/Waving_GREEN.png") {
-            finisherRef = gsReference.child(doc.data().name);
+            finisherRef = gsReference.child(doc.data().firstName + " " + doc.data().lastName);
           } else {
             finisherRef = gsReference.child("Waving_GREEN.png");
           }
@@ -143,7 +144,7 @@ export default {
             index: doc.data().index,
             image: "",
             quest: doc.data().quest,
-            name: doc.data().name,
+            name: doc.data().firstName + " " + doc.data().lastName,
             completionDate: moment(doc.data().completionDate).format(
               "MMM D, YYYY"
             ),
@@ -248,6 +249,12 @@ p {
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   width: 90%;
   margin: 20px 0;
+}
+
+.people-collection-child {
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 20px;
 }
 
 .home-finishers-container .link-holder {

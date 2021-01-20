@@ -2,7 +2,7 @@
   <section id="register">
     <div class="register-container">
       <div class="register-form" id="register-form">
-        <form method="POST" id="registrationform" @submit="login">
+        <form method="POST" id="registrationform" @submit="login" >
           <h1>Register</h1>
           <div class="alert">Message Sent</div>
           <p>
@@ -11,13 +11,23 @@
           </p>
           <br />
           <div class="item">
-            <p>Full Name</p>
+            <p>First Name</p>
             <input
               type="text"
               id="fullName"
               placeholder="ex. Juan"
               value=""
-              v-model="fullName"
+              v-model="firstName"
+            />
+          </div>
+          <div class="item">
+            <p>Last Name</p>
+            <input
+              type="text"
+              id="fullName"
+              placeholder="ex. Dela Cruz"
+              value=""
+              v-model="lastName"
             />
           </div>
           <div class="item">
@@ -90,24 +100,26 @@ export default {
 
   data() {
     return {
-      fullName: "",
+      firstName: "",
+      lastName: "",
       questTitle: "",
       dateOfCompletion: "",
       questTitles: [
         { id: 1, title: "Baseline Data,ML,AI" },
         { id: 2, title: "Baseline Infrastructure" },
-        { id: 3, title: "BigQuery Basics for Data Analysis " },
-        { id: 4, title: "Cloud Engineering " },
-        { id: 5, title: "DevOps Essentials " },
-        { id: 6, title: "GCP Essentials " },
-        { id: 7, title: "Google Developer Essentials  " },
+        { id: 3, title: "BigQuery Basics for Data Analysts" },
+        { id: 4, title: "Cloud Engineering" },
+        { id: 5, title: "DevOps Essentials" },
+        { id: 6, title: "GCP Essentials" },
+        { id: 7, title: "Google Developer Essentials" },
+        { id: 8, title: "OK Google: Build Interactive Apps with Google Assistant" },
       ],
     };
   },
 
   computed: {
     isFormComplete() {
-      return this.fullName && this.questTitle && this.dateOfCompletion;
+      return this.firstName && this.lastName && this.questTitle && this.dateOfCompletion;
     },
   },
 

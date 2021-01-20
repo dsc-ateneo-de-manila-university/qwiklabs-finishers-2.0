@@ -2,53 +2,54 @@
   <div class="home-cards-item">
     <div class="home-card">
       <header class="home-card-topbar"></header>
-      <div class="home-card-image">
-        <img :src="quest.image" alt="quest_image" />
-      </div>
-      <div class="home-card-content">
-        <div class="home-card-title">{{ quest.name }}</div>
-        <table class="home-card-text">
-          <tr>
-            <td>
-              <img
-                class="home-card-icon"
-                src="../assets/images/vectors/level.png"
-              /><span>{{ quest.level }}</span>
-            </td>
-
-            <td>
-              <img
-                class="home-card-icon"
-                src="../assets/images/vectors/hours.png"
-              /><span>{{ quest.hours }}</span
-              ><span> hours</span>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <img
-                class="home-card-icon"
-                src="../assets/images/vectors/credits.png"
-              /><span>{{ quest.credits }}</span
-              ><span> credits</span>
-            </td>
-            <td>
-              <img
-                class="home-card-icon"
-                src="../assets/images/vectors/steps.png"
-              /><span>{{ quest.steps }}</span
-              ><span> steps</span>
-            </td>
-          </tr>
-        </table>
-        <div class="home-card-btn-holder">
-          <router-link
-            :to="{
-              name: 'QuestsViewMore',
-              params: { index: quest.index },
-            }"
-            ><a class="btn">Learn More</a></router-link
-          >
+      <div class="below-content">
+        <div class="home-card-image">
+          <img :src="quest.image" alt="quest_image" />
+        </div>
+        <div class="home-card-content">
+          <div class="home-card-title">{{ quest.name }}</div>
+          <table class="home-card-text">
+            <tr>
+              <td>
+                <img
+                  class="home-card-icon"
+                  src="../assets/images/vectors/level.png"
+                /><span>{{ quest.level }}</span>
+              </td>
+              <td>
+                <img
+                  class="home-card-icon"
+                  src="../assets/images/vectors/hours.png"
+                /><span>{{ quest.hours }}</span
+                ><span> hours</span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img
+                  class="home-card-icon"
+                  src="../assets/images/vectors/credits.png"
+                /><span>{{ quest.credits }}</span
+                ><span> credits</span>
+              </td>
+              <td>
+                <img
+                  class="home-card-icon"
+                  src="../assets/images/vectors/steps.png"
+                /><span>{{ quest.steps }}</span
+                ><span> steps</span>
+              </td>
+            </tr>
+          </table>
+          <div class="home-card-btn-holder">
+            <router-link
+              :to="{
+                name: 'QuestsViewMore',
+                params: { index: quest.index },
+              }"
+              ><a class="btn">Learn More</a></router-link
+            >
+          </div>
         </div>
       </div>
     </div>
@@ -64,10 +65,12 @@ export default {
 
 <style scoped>
 .home-card-topbar {
-  justify-content: flex-start;
-  width: inherit;
-  height: 12px;
+  height: 3%;
   background: #222222;
+}
+
+.below-content {
+  height: 97%;
 }
 
 .home-card {
@@ -89,19 +92,21 @@ export default {
 
 .home-card-image {
   display: block;
-  margin-top: 20px;
+  margin-top: 15px;
   margin-bottom: 0;
 }
 
 .home-card-image img {
   width: 89px;
+  height: 96px;
   margin: 0 20px;
 }
 
 .home-card-title {
   margin-top: 0;
   font-weight: 700;
-  font-size: 20px;
+  font-size: 18px;
+  height: 40px;
 }
 
 .home-card-icon {
