@@ -61,7 +61,7 @@
               v-for="finisher in filteredFinishers"
               :key="finisher.id"
             >
-              <Finisher :finisher="finisher" />
+              <FinisherHorizontal :finisher="finisher" />
             </div>
           </div>
         </div>
@@ -73,7 +73,7 @@
 <script>
 // START: IMPORTS
 // START: IMPORT COMPONENTS
-import Finisher from "@/components/Finisher";
+import FinisherHorizontal from "@/components/FinisherHorizontal";
 // END: IMPORT COMPONENTS
 
 // START: OTHER IMPORTS
@@ -86,7 +86,7 @@ import moment from "moment";
 export default {
   name: "QuestsViewMore",
   components: {
-    Finisher,
+    FinisherHorizontal,
   },
   data() {
     return {

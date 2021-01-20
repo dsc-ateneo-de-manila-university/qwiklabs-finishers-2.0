@@ -58,7 +58,7 @@
 
 <script>
 export default {
-  name: "card",
+  name: "CourseCard",
   props: ["quest", "search"],
 };
 </script>

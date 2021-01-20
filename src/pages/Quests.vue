@@ -22,7 +22,7 @@
         <!-- START: CARDS -->
         <div class="cards">
           <div v-for="quest in questSearch" v-bind:key="quest.id">
-            <Card class="cards-item" :quest="quest" :search="search" />
+            <CourseCard class="cards-item" :quest="quest" :search="search" />
           </div>
         </div>
         <!-- END: CARDS -->
@@ -34,7 +34,7 @@
 <script>
 // START: IMPORTS
 // START: IMPORT COMPONENTS
-import Card from "../components/Card";
+import CourseCard from "../components/CourseCard";
 // END: IMPORT COMPONENTS
 
 // START: OTHER IMPORTS
@@ -46,7 +46,7 @@ import db from "../../public/scripts/firebaseInit.js";
 export default {
   name: "quests",
   components: {
-    Card,
+    CourseCard,
   },
   data() {
     return {

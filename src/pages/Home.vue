@@ -26,7 +26,7 @@
           v-for="quest in quests"
           v-bind:key="quest.id"
         >
-          <Card v-bind:quest="quest" />
+          <CourseCard v-bind:quest="quest" />
         </div>
       </div>
 
@@ -49,7 +49,7 @@
           v-for="finisher in finishers"
           v-bind:key="finisher.id"
         >
-          <Finisher v-bind:finisher="finisher" />
+          <FinisherHorizontal v-bind:finisher="finisher" />
         </div>
       </div>
       <a href="#" class="linkBtn view-more-link">View more</a>
@@ -60,8 +60,8 @@
 <script>
 // START: IMPORTS
 // START: IMPORT COMPONENTS
-import Card from "../components/Card";
-import Finisher from "../components/Finisher";
+import CourseCard from "../components/CourseCard";
+import FinisherHorizontal from "../components/FinisherHorizontal";
 // END: IMPORT COMPONENTS
 
 // START: OTHER IMPORTS
@@ -73,8 +73,8 @@ import db from "../../public/scripts/firebaseInit.js";
 
 export default {
   components: {
-    Card,
-    Finisher,
+    CourseCard,
+    FinisherHorizontal,
   },
   data() {
     return {

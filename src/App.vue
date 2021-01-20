@@ -2,7 +2,7 @@
   <div id="app">
     <Navbar />
     <router-view />
-    <AdminLogin />
+    <LoginModal />
     <Footer />
   </div>
 </template>
@@ -10,7 +10,7 @@
 <script>
 import Navbar from './components/Navbar.vue'
 import Footer from './components/Footer.vue'
-import AdminLogin from './components/AdminLogin'
+import LoginModal from './components/LoginModal.vue'
 import { bus } from './main'
 
 export default {
@@ -18,7 +18,7 @@ export default {
   components: {
     Navbar,
     Footer,
-    AdminLogin,
+    LoginModal,
   },
   methods: {
     lockBody() {

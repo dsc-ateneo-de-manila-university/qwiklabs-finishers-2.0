@@ -1,19 +1,21 @@
 <template>
   <div>
-    <img :src="finisher.image" :alt="finisher.name" />
+    <img :src="finisher.finisherImage" :alt="finisher.name" />
     <h5>{{ finisher.name }}</h5>
     <p>{{ finisher.completionDate }}</p>
+    <br />
   </div>
 </template>
 
 <script>
 export default {
-  name: "FinisherMoreMember",
+  name: "FinisherMember",
   props: ["finisher"],
 };
 </script>
 
 <style scoped>
+
 .finisher-member {
   display: flex;
   align-items: center;
@@ -22,12 +24,14 @@ export default {
   margin: 0 1% 20px;
   padding: 5%;
 }
+
 .finisher-member img {
   width: 140px;
   height: 140px;
   border-radius: 100%;
   overflow: hidden;
 }
+
 .finisher-member h5 {
   font-style: normal;
   font-weight: bold;
@@ -38,6 +42,7 @@ export default {
   color: #222222;
   margin-top: 7px;
 }
+
 .finisher-member p {
   font-style: normal;
   font-size: 14px;
@@ -46,16 +51,19 @@ export default {
   letter-spacing: 0.02em;
   color: #222222;
 }
+
 @media screen and (max-width: 850px) {
   .finisher-member {
     width: 23%;
   }
 }
+
 @media screen and (max-width: 730px) {
   .finisher-member {
     width: 30%;
   }
 }
+
 @media screen and (max-width: 620px) {
   .finisher-member {
     width: 48%;

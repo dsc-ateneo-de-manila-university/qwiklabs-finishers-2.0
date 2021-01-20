@@ -12,7 +12,7 @@
 <script>
 
 // Internal Imports
-import AdminCourseCard from "../components/Admin-Components/AdminCourseCard"
+import AdminCourseCard from "../components/AdminCourseCard"
 
 // Other imports
 import firebase from "firebase";

@@ -36,7 +36,7 @@
         v-for="finisher in finisherGroup"
         v-bind:key="finisher.id"
       >
-        <FinisherMember v-bind:finisher="finisher"></FinisherMember>
+        <FinisherVertical v-bind:finisher="finisher"></FinisherVertical>
       </div>
     </div>
     <!-- END: FINISHER GROUP BODY -->
@@ -61,11 +61,11 @@
 </template>
 
 <script>
-import FinisherMember from "./Finisher-Member.vue";
+import FinisherVertical from "./FinisherVertical.vue";
 export default {
   name: "FinisherGroup",
   components: {
-    FinisherMember,
+    FinisherVertical,
   },
   props: ["finisherGroup"],
 };

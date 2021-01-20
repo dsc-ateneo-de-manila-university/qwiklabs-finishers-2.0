@@ -29,7 +29,7 @@
             v-for="finisher in filteredFinishers"
             :key="finisher.id"
           >
-            <FinisherMoreMember :finisher="finisher"></FinisherMoreMember>
+            <FinisherVertical :finisher="finisher"></FinisherVertical>
           </div>
           <!-- END: FINISHER MORE MEMBERS -->
         </div>
@@ -42,7 +42,7 @@
 <script>
 // START: IMPORTS
 // START: IMPORT COMPONENTS
-import FinisherMoreMember from "../components/FinishersViewMore-Components/Finisher-More-Member.vue";
+import FinisherVertical from "../components/FinisherVertical.vue";
 // END: IMPORT COMPONENTS
 
 // START: OTHER IMPORTS
@@ -55,7 +55,7 @@ import moment from "moment";
 export default {
   name: "FinishersViewMore",
   components: {
-    FinisherMoreMember,
+    FinisherVertical,
   },
   data() {
     return {

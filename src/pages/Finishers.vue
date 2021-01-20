@@ -69,7 +69,7 @@
 <script>
 // START: IMPORTS
 // START: IMPORT COMPONENTS
-import FinisherGroup from "../components/Finishers-Components/Finisher-Group.vue";
+import FinisherGroup from "../components/FinisherGroup.vue";
 // END: IMPORT COMPONENTS
 
 // START: OTHER IMPORTS

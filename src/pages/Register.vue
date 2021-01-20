@@ -90,7 +90,7 @@
 </template>
 
 <script>
-import RegisterModal from "../components/Register-Components/RegisterModal.vue";
+import RegisterModal from "../components/RegisterModal.vue";
 
 export default {
   name: "Register",
