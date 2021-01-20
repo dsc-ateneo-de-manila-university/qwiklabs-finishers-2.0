@@ -8,25 +8,9 @@
     <div class="admin-modal" :class="{ 'd-none': isHidden }">
       <div class="admin-modal__content">
         <form action="">
-          <h1>Admin Login</h1>
-          <div class="form-input">
-            <p>Email</p>
-            <input
-              type="text"
-              placeholder="Enter your email address"
-              v-model="email"
-            />
-          </div>
-          <div class="form-input">
-            <p>Password</p>
-            <input
-              type="password"
-              placeholder="Enter your password"
-              v-model="password"
-            />
-          </div>
-          <button class="btn btn-reverse admin-submit" @click="login">
-            Log In
+          <h1>Are you sure you want to Log Out?</h1>
+          <button class="btn btn-reverse admin-submit" @click="logout">
+            Log Out
           </button>
         </form>
       </div>
@@ -51,24 +35,15 @@ export default {
       bus.$emit("hideOverflow");
     },
 
-    login(e) {
-      firebase
-        .auth()
-        .signInWithEmailAndPassword(this.email, this.password)
-        .then(
-          (user) => {
-            alert(`You are logged in as ${user.email}`);
-            this.$router.go({ path: this.$router.path });
-          },
-          (err) => {
-            alert(err.message);
-          }
-        );
-      e.preventDefault();
+    logout() {
+      firebase.auth.signOut().then(() => {
+        alert("You have been logged out");
+        this.$router.go({ path: this.$router.path });
+      });
     },
   },
   created() {
-    bus.$on("openLoginModal", this.toggleModal);
+    bus.$on("openLogOutModal", this.toggleModal);
   },
 };
 </script>

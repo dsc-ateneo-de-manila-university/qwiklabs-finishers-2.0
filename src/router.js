@@ -1,6 +1,8 @@
 import Vue from "vue";
 import Router from "vue-router";
 
+import firebase from "firebase";
+
 Vue.use(Router);
 
 const router = new Router({
@@ -39,11 +41,17 @@ const router = new Router({
     {
       path: "/admin",
       name:'Admin',
-      component: () => import("./pages/Admin.vue")
+      component: () => import("./pages/Admin.vue"),
+      meta:{
+        requiresAuth:true,
+      }
     },
     {
       path: "/admin/:index",
-      component: () => import("./pages/AdminCourse.vue")
+      component: () => import("./pages/AdminCourse.vue"),
+      meta:{
+        requiresAuth:true,
+      }
     },
     {
       path: "*",
@@ -62,5 +70,20 @@ const router = new Router({
   }
 });
 
-
+router.beforeEach((to,from,next)=>{
+  if(to.matched.some(record=>record.meta.requiresAuth)){
+    if(!firebase.auth.currentUser){
+      next({
+        path:'/',
+        query:{
+          redirect:to.fullPath
+        }
+      })
+    }else{
+      next();
+    }
+  }else{
+    next();
+  }
+})
 export default router;
