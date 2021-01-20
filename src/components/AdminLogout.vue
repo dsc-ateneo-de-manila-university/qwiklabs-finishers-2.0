@@ -8,7 +8,8 @@
     <div class="admin-modal" :class="{ 'd-none': isHidden }">
       <div class="admin-modal__content">
         <form action="">
-          <h1>Are you sure you want to Log Out?</h1>
+          <h1>Admin Logout</h1>
+
           <button class="btn btn-reverse admin-submit" @click="logout">
             Log Out
           </button>
@@ -24,8 +25,6 @@ import { bus } from "../main";
 export default {
   data() {
     return {
-      email: "",
-      password: "",
       isHidden: true,
     };
   },
@@ -36,14 +35,14 @@ export default {
     },
 
     logout() {
-      firebase.auth.signOut().then(() => {
-        alert("You have been logged out");
-        this.$router.go({ path: this.$router.path });
-      });
+      firebase
+        .auth()
+        .signOut()
+        .then(() => this.$router.push("/quests"));
     },
   },
   created() {
-    bus.$on("openLogOutModal", this.toggleModal);
+    bus.$on("openLoginModal", this.toggleModal);
   },
 };
 </script>

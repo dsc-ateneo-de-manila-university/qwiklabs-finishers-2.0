@@ -38,9 +38,10 @@
           <a href="#" id="admin-login" @click="openLoginModal">Admin Log in</a>
         </div>
         <div v-if="isLoggedIn">
-          <a href="#" id="admin-logout" @click="openLogoutModal"
+          <a href="#" id="admin-login" @click="logout">Admin Log out</a>
+          <!-- <a href="#" id="admin-login" @click="openLogoutModal"
             >Admin Log out</a
-          >
+          > -->
         </div>
       </div>
     </div>
@@ -48,6 +49,7 @@
 </template>
 
 <script>
+import firebase from "firebase";
 import { bus } from "../main";
 export default {
   name: "Footer",
@@ -70,8 +72,15 @@ export default {
       bus.$emit("openLoginModal");
     },
 
-    openLogOutModal() {
-      bus.$emit("openLogOutModal");
+    openLogoutModal() {
+      bus.$emit("openLogouModal");
+    },
+
+    logout() {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => this.$router.go({ path: this.$router.path }));
     },
   },
 };
