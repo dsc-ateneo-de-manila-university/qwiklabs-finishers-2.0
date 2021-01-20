@@ -1,6 +1,8 @@
 import Vue from "vue";
 import Router from "vue-router";
 
+import firebase from "firebase";
+
 Vue.use(Router);
 
 const router = new Router({
@@ -9,41 +11,65 @@ const router = new Router({
     {
       path: "/",
       name:'Home',
-      component: () => import("./pages/Home.vue")
+      component: () => import("./pages/Home.vue"),
+      meta:{
+        requiresAuth:false,
+      }
     },
     {
       path: "/quests",
       name:'Quests',
-      component: () => import("./pages/Quests.vue")
+      component: () => import("./pages/Quests.vue"),
+      meta:{
+        requiresAuth:false,
+      }
     },
     {
       path: "/quests/:index",
       name:'QuestsViewMore',
-      component: () => import("./pages/QuestsViewMore.vue")
+      component: () => import("./pages/QuestsViewMore.vue"),
+      meta:{
+        requiresAuth:false,
+      }
     },
     {
       path: "/finishers",
       name:'Finishers',
-      component: () => import("./pages/Finishers.vue")
+      component: () => import("./pages/Finishers.vue"),
+      meta:{
+        requiresAuth:false,
+      }
     },
     {
       path: "/finishers/:id",
       name:'FinishersViewMore',
-      component: () => import("./pages/FinishersViewMore.vue")
+      component: () => import("./pages/FinishersViewMore.vue"),
+      meta:{
+        requiresAuth:false,
+      }
     },
     {
       path: "/register",
       name:'Register',
-      component: () => import("./pages/Register.vue")
+      component: () => import("./pages/Register.vue"),
+      meta:{
+        requiresAuth:false,
+      }
     },
     {
       path: "/admin",
       name:'Admin',
-      component: () => import("./pages/Admin.vue")
+      component: () => import("./pages/Admin.vue"),
+      meta:{
+        requiresAuth:true,
+      }
     },
     {
       path: "/admin/:index",
-      component: () => import("./pages/AdminCourse.vue")
+      component: () => import("./pages/AdminCourse.vue"),
+      meta:{
+        requiresAuth:true,
+      }
     },
     {
       path: "*",
@@ -62,5 +88,20 @@ const router = new Router({
   }
 });
 
-
+router.beforeEach((to,from,next)=>{
+  if(to.matched.some(record=>record.meta.requiresAuth)){
+    if(!firebase.auth().currentUser){
+      next({
+        path:'/',
+        query:{
+          redirect:to.fullPath
+        }
+      })
+    }else{
+      next();
+    }
+  }else{
+    next();
+  }
+})
 export default router;

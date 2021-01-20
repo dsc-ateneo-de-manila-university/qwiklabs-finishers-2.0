@@ -8,25 +8,10 @@
     <div class="admin-modal" :class="{ 'd-none': isHidden }">
       <div class="admin-modal__content">
         <form action="">
-          <h1>Admin Login</h1>
-          <div class="form-input">
-            <p>Email</p>
-            <input
-              type="text"
-              placeholder="Enter your email address"
-              v-model="email"
-            />
-          </div>
-          <div class="form-input">
-            <p>Password</p>
-            <input
-              type="password"
-              placeholder="Enter your password"
-              v-model="password"
-            />
-          </div>
-          <button class="btn btn-reverse admin-submit" @click="login">
-            Log In
+          <h1>Admin Logout</h1>
+
+          <button class="btn btn-reverse admin-submit" @click="logout">
+            Log Out
           </button>
         </form>
       </div>
@@ -40,8 +25,6 @@ import { bus } from "../main";
 export default {
   data() {
     return {
-      email: "",
-      password: "",
       isHidden: true,
     };
   },
@@ -51,19 +34,11 @@ export default {
       bus.$emit("hideOverflow");
     },
 
-    login(e) {
+    logout() {
       firebase
         .auth()
-        .signInWithEmailAndPassword(this.email, this.password)
-        .then(
-          (user) => {
-            this.isHidden = !this.isHidden;
-            bus.$emit("hideOverflow");
-            this.$router.push("/admin");
-          },
-          (err) => alert(err.message)
-        );
-      e.preventDefault();
+        .signOut()
+        .then(() => this.$router.push("/quests"));
     },
   },
   created() {
