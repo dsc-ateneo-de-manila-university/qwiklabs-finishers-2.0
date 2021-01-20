@@ -12,7 +12,7 @@ export const bus = new Vue();
 Vue.config.productionTip = false
 
 let app;
-firebase.auth().onAuthStateChanged(user=>{
+firebase.auth().onAuthStateChanged(()=>{
   if(!app){
     app = new Vue({
       render: h => h(App),

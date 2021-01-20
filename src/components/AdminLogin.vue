@@ -56,7 +56,7 @@ export default {
         .auth()
         .signInWithEmailAndPassword(this.email, this.password)
         .then(
-          (user) => {
+          () => {
             this.isHidden = !this.isHidden;
             bus.$emit("hideOverflow");
             this.$router.push("/admin");

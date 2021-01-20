@@ -206,7 +206,7 @@ footer #footer-finisher {
 }
 
 .footer-container-lower div {
-  width: 45%;
+  width: auto;
 }
 
 .footer-container-lower .login-container {
