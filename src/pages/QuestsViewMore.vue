@@ -277,6 +277,7 @@ main {
   color: #8e8e8e;
   font-size: 12px;
   margin-top: 15px;
+  padding-bottom: 50px;
 }
 
 /* Second half */
