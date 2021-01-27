@@ -14,7 +14,7 @@
         <router-link
           :to="{
             name: 'FinishersViewMore',
-            params: { index: finisherGroup[0].index },
+            params: { id: finisherGroup[0].index },
           }"
           ><button class="finisher-btn-1">View more</button></router-link
         >
@@ -31,13 +31,11 @@
 
     <!-- START: FINISHER GROUP BODY -->
     <div class="finisher-group-body">
-      <div
-        class="finisher-member"
+      <FinisherVertical 
         v-for="finisher in finisherGroup"
         v-bind:key="finisher.id"
-      >
-        <FinisherVertical v-bind:finisher="finisher"></FinisherVertical>
-      </div>
+        v-bind:finisher="finisher"
+      />
     </div>
     <!-- END: FINISHER GROUP BODY -->
 
@@ -48,10 +46,14 @@
           params: { index: finisherGroup[0].index },
         }"
         ><a class="finisher-btn-1"
-          >Learn More {{ finisherGroup[0].index }}</a
+          >Learn More</a
         ></router-link
       >
       <router-link
+        :to="{
+          name: 'QuestsViewMore',
+          params: { index: finisherGroup[0].index },
+        }"
         ><a class="finisher-btn-2" target="_blank" href="#"
           >Check Quest</a
         ></router-link
@@ -67,17 +69,24 @@ export default {
   components: {
     FinisherVertical,
   },
-  props: ["finisherGroup"],
+  props: ["finisherGroup"]
 };
 </script>
 
 <style scoped>
+
+a {
+  text-decoration: none !important;
+}
+
 .finisher-group {
   display: flex;
   flex-direction: column;
+  padding: 10px;
   margin-bottom: 20px;
   background-color: white;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
 }
 
 .finisher-group-header {
@@ -164,18 +173,9 @@ export default {
 
 .finisher-group-body {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   flex-wrap: wrap;
   margin: 20px 0;
-}
-
-.finisher-member {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  width: 18%;
-  margin: 0 1% 20px;
-  padding: 5%;
 }
 
 @media screen and (max-width: 850px) {
@@ -214,6 +214,12 @@ export default {
 
   .finisher-btn-2 {
     margin-right: 0;
+  }
+}
+
+@media screen and (max-width: 330px) {
+  .finisher-btn-1, .finisher-btn-2 {
+    padding: 11px 15px;
   }
 }
 </style>

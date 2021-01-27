@@ -23,14 +23,11 @@
       <div class="finisher-more-content finisher-group">
         <div class="finisher-more-group-body">
           <!-- START: FINISHER MORE MEMBERS -->
-          <div
-            class="finisher-member"
-            :finishers="finishers"
+          <FinisherVertical 
             v-for="finisher in filteredFinishers"
             :key="finisher.id"
-          >
-            <FinisherVertical :finisher="finisher"></FinisherVertical>
-          </div>
+            :finisher="finisher"
+          />
           <!-- END: FINISHER MORE MEMBERS -->
         </div>
       </div>
@@ -60,14 +57,14 @@ export default {
   data() {
     return {
       index: null,
-      name: null,
+      name: "",
       searchFinisher: "",
       finishers: [],
     };
   },
 
   computed: {
-    filteredFinishersByQuest() {
+    filteredFinishersByQuest() {   
       return this.finishers.filter((finisher) => {
         return finisher.quest.toLowerCase().includes(this.name.toLowerCase());
       });
@@ -77,9 +74,12 @@ export default {
     filteredFinishers() {
       return this.filteredFinishersByQuest.filter((finisher) => {
         if (this.searchFinisher) {
-          return finisher.name
+          return finisher.firstName
             .toLowerCase()
-            .includes(this.searchFinisher.toLowerCase());
+            .includes(this.searchFinisher.toLowerCase()) || 
+            finisher.lastName
+            .toLowerCase()
+            .includes(this.searchFinisher.toLowerCase())
         } else {
           return finisher;
         }
@@ -104,26 +104,31 @@ export default {
           let finisherRef = gsReference.child("Waving_GREEN.png");
 
           if (doc.data().image !== "finishers-imgs/Waving_GREEN.png") {
-            finisherRef = gsReference.child(doc.data().name);
+            finisherRef = gsReference.child(`${doc.data().firstName} ${doc.data().lastName}`);
           } else {
             finisherRef = gsReference.child("Waving_GREEN.png");
           }
 
-          finisherRef.getDownloadURL().then(function (url) {
-            data.image = url;
-          });
+          this.name = doc.data().quest
 
           const data = {
             id: doc.id,
             index: doc.data().index,
-            image: "",
+            finisherImage: "",
             quest: doc.data().quest,
-            name: doc.data().name,
+            firstName: doc.data().firstName,
+            lastName: doc.data().lastName,
             completionDate: moment(doc.data().completionDate).format(
               "MMM D, YYYY"
             ),
           };
-          this.finishers.push(data);
+
+          let that = this
+          finisherRef.getDownloadURL().then(function (url) {
+            data.finisherImage = url;
+            that.finishers.push(data);
+          });
+       
         });
       });
     // END OF FINISHERS
@@ -131,7 +136,7 @@ export default {
 
   beforeRouteEnter(to, from, next) {
     db.collection("quests")
-      .where("index", "==", to.params.index)
+      .where("index", "==", to.params.id)
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
@@ -146,7 +151,8 @@ export default {
               vm.image = url;
             });
             vm.index = doc.data().index;
-            vm.name = doc.data().name;
+            vm.firstName = doc.data().firstName;
+            vm.lastName = doc.data().lastName;
           });
         });
       });
@@ -175,7 +181,8 @@ export default {
             });
 
             this.index = doc.data().index;
-            this.name = doc.data().name;
+            this.firstName = doc.data().firstName;
+            this.lastName = doc.data().lastName;
           });
         });
     },
@@ -290,7 +297,7 @@ export default {
   margin: 20px 0;
   background-color: white;
 }
-
+/* 
 .finisher-member {
   display: flex;
   align-items: center;
@@ -337,5 +344,5 @@ export default {
   .finisher-member {
     width: 48%;
   }
-}
+} */
 </style>
