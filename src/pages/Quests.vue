@@ -106,6 +106,10 @@ export default {
   align-items: center;
 }
 
+.quests-container {
+  min-height: calc(100vh - 72px - 300px);
+}
+
 .quests-title {
   font-weight: bold;
   font-size: 30px;
@@ -128,6 +132,7 @@ export default {
   width: 400px;
   height: 25px;
   border: none;
+  background: none;
 }
 
 .search-box input:focus {

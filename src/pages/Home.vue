@@ -30,7 +30,7 @@
         </div>
       </div>
 
-      <a href="quests.html" class="linkBtn">View more</a>
+      <router-link to="/quests" tag="a" class="linkBtn">View more</router-link>
     </section>
 
     <!-- Latest Finishers -->
@@ -52,7 +52,7 @@
           <FinisherHorizontal v-bind:finisher="finisher" />
         </div>
       </div>
-      <a href="#" class="linkBtn view-more-link">View more</a>
+      <router-link to="/finishers" tag="a" class="linkBtn view-more-link">View more</router-link>
     </section>
   </main>
 </template>
@@ -130,12 +130,14 @@ export default {
           let finisherRef = gsReference.child("Waving_GREEN.png");
 
           if (doc.data().image !== "finishers-imgs/Waving_GREEN.png") {
-            finisherRef = gsReference.child(doc.data().firstName + " " + doc.data().lastName);
+            finisherRef = gsReference.child(
+              doc.data().firstName + " " + doc.data().lastName
+            );
           } else {
             finisherRef = gsReference.child("Waving_GREEN.png");
           }
 
-          finisherRef.getDownloadURL().then(function (url) {
+          finisherRef.getDownloadURL().then(function(url) {
             data.image = url;
           });
 
@@ -156,7 +158,6 @@ export default {
   },
 };
 </script>
-
 
 <style scoped>
 p {
