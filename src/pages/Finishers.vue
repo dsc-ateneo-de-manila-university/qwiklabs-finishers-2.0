@@ -137,7 +137,8 @@ export default {
             finisherImage: "",
             questImage: "",
             quest: doc.data().quest,
-            name: doc.data().firstName + " " + doc.data().lastName,
+            firstName: doc.data().firstName,
+            lastName: doc.data().lastName,
             completionDate: moment(doc.data().completionDate).format(
               "MMM D, YYYY"
             ),

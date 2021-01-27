@@ -250,12 +250,17 @@ input {
   cursor: pointer;
   margin-top: 10px;
   background: #48d08f;
-  border-width: 0px;
+  border: 2px solid #48d08f;
 
   font-size: large;
   color: #fff;
   line-height: 1.2;
   letter-spacing: 1px;
+}
+
+.submit-btn:hover {
+  background-color: white;
+  color:#48d08f;
 }
 
 .register-photo {

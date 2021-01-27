@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="finisher-member">
     <img :src="finisher.finisherImage" :alt="finisher.name" />
-    <h5>{{ finisher.name }}</h5>
+    <h5>{{ finisher.firstName }} {{ finisher.lastName }}</h5>
     <p>{{ finisher.completionDate }}</p>
     <br />
   </div>
@@ -10,7 +10,7 @@
 <script>
 export default {
   name: "FinisherMember",
-  props: ["finisher"],
+  props: ["finisher"]
 };
 </script>
 
@@ -18,16 +18,17 @@ export default {
 
 .finisher-member {
   display: flex;
+  justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 18%;
-  margin: 0 1% 20px;
-  padding: 5%;
+  width: calc(100% / 5);
+  margin: 0 0 20px;
+  box-sizing: border-box;
 }
 
 .finisher-member img {
-  width: 140px;
-  height: 140px;
+  width: 100px;
+  height: 100px;
   border-radius: 100%;
   overflow: hidden;
 }
