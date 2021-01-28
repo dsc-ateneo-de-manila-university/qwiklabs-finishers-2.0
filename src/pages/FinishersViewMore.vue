@@ -23,7 +23,7 @@
       <div class="finisher-more-content finisher-group">
         <div class="finisher-more-group-body">
           <!-- START: FINISHER MORE MEMBERS -->
-          <FinisherVertical 
+          <FinisherVertical
             v-for="finisher in filteredFinishers"
             :key="finisher.id"
             :finisher="finisher"
@@ -64,8 +64,16 @@ export default {
   },
 
   computed: {
-    filteredFinishersByQuest() {   
+    filteredFinishersByVerification() {
       return this.finishers.filter((finisher) => {
+        if (finisher.isVerified) {
+          return finisher;
+        }
+      });
+    },
+
+    filteredFinishersByQuest() {
+      return this.filteredFinishersByVerification.filter((finisher) => {
         return finisher.quest.toLowerCase().includes(this.name.toLowerCase());
       });
     },
@@ -74,12 +82,11 @@ export default {
     filteredFinishers() {
       return this.filteredFinishersByQuest.filter((finisher) => {
         if (this.searchFinisher) {
-          return finisher.firstName
-            .toLowerCase()
-            .includes(this.searchFinisher.toLowerCase()) || 
-            finisher.lastName
-            .toLowerCase()
-            .includes(this.searchFinisher.toLowerCase())
+          return (
+            finisher.firstName
+              .toLowerCase()
+              .includes(this.searchFinisher.toLowerCase()) || finisher.lastName
+          );
         } else {
           return finisher;
         }
@@ -104,12 +111,14 @@ export default {
           let finisherRef = gsReference.child("Waving_GREEN.png");
 
           if (doc.data().image !== "finishers-imgs/Waving_GREEN.png") {
-            finisherRef = gsReference.child(`${doc.data().firstName} ${doc.data().lastName}`);
+            finisherRef = gsReference.child(
+              `${doc.data().firstName} ${doc.data().lastName}`
+            );
           } else {
             finisherRef = gsReference.child("Waving_GREEN.png");
           }
 
-          this.name = doc.data().quest
+          this.name = doc.data().quest;
 
           const data = {
             id: doc.id,
@@ -121,14 +130,14 @@ export default {
             completionDate: moment(doc.data().completionDate).format(
               "MMM D, YYYY"
             ),
+            isVerified: doc.data().isVerified,
           };
 
-          let that = this
+          let that = this;
           finisherRef.getDownloadURL().then(function (url) {
             data.finisherImage = url;
             that.finishers.push(data);
           });
-       
         });
       });
     // END OF FINISHERS

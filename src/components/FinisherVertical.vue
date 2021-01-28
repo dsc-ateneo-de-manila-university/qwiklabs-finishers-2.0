@@ -15,7 +15,6 @@ export default {
 </script>
 
 <style scoped>
-
 .finisher-member {
   display: flex;
   justify-content: center;

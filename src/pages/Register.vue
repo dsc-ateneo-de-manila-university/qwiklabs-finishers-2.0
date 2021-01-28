@@ -95,7 +95,7 @@ import RegisterModal from "../components/RegisterModal.vue";
 // END: IMPORT COMPONENTS
 
 // START: OTHER IMPORTS
-import firebase from "firebase";
+// import firebase from "firebase";
 import db from "../../public/scripts/firebaseInit.js";
 // END: OTHER IMPORTS
 // END: IMPORTS
@@ -125,24 +125,10 @@ export default {
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-          const gsReference = firebase
-            .storage()
-            .refFromURL("gs://qwiklabs-finishers-ph-e7667.appspot.com/");
-          let questRef = gsReference.child(String(doc.data().index) + ".png");
-
-          questRef.getDownloadURL().then((url) => {
-            data.image = url;
-          });
-
           const data = {
             id: doc.id,
             index: doc.data().index,
-            image: "",
             name: doc.data().name,
-            level: doc.data().level,
-            hours: doc.data().hours,
-            credits: doc.data().credits,
-            steps: doc.data().steps,
           };
           this.quests.push(data);
         });

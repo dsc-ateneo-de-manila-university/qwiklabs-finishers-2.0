@@ -58,7 +58,7 @@
           <div class="finisher-list">
             <div
               :finishers="finishers"
-              v-for="finisher in filteredFinishers"
+              v-for="finisher in filteredFinishersByQuest"
               :key="finisher.id"
             >
               <FinisherHorizontal :finisher="finisher" />
@@ -103,8 +103,16 @@ export default {
   },
 
   computed: {
-    filteredFinishers() {
+    filteredFinishersByVerification() {
       return this.finishers.filter((finisher) => {
+        if (finisher.isVerified) {
+          return finisher;
+        }
+      });
+    },
+
+    filteredFinishersByQuest() {
+      return this.filteredFinishersByVerification.filter((finisher) => {
         return finisher.quest.toLowerCase().includes(this.name.toLowerCase());
       });
     },
@@ -126,7 +134,9 @@ export default {
           let finisherRef = gsReference.child("Waving_GREEN.png");
 
           if (doc.data().image !== "finishers-imgs/Waving_GREEN.png") {
-            finisherRef = gsReference.child(doc.data().firstName + " " + doc.data().lastName);
+            finisherRef = gsReference.child(
+              doc.data().firstName + " " + doc.data().lastName
+            );
           } else {
             finisherRef = gsReference.child("Waving_GREEN.png");
           }
@@ -144,6 +154,7 @@ export default {
             completionDate: moment(doc.data().completionDate).format(
               "MMM D, YYYY"
             ),
+            isVerified: doc.data().isVerified,
           };
           this.finishers.push(data);
         });
@@ -302,7 +313,6 @@ main {
   align-items: center;
   margin-left: 20px;
 }
-
 
 .people-collection-child {
   margin: 15px 0;

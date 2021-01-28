@@ -108,7 +108,9 @@ export default {
           let finisherRef = gsReferenceFinisher.child("Waving_GREEN.png");
 
           if (doc.data().image !== "finishers-imgs/Waving_GREEN.png") {
-            finisherRef = gsReferenceFinisher.child(doc.data().firstName + " " + doc.data().lastName);
+            finisherRef = gsReferenceFinisher.child(
+              doc.data().firstName + " " + doc.data().lastName
+            );
           } else {
             finisherRef = gsReferenceFinisher.child("Waving_GREEN.png");
           }
@@ -142,7 +144,9 @@ export default {
             completionDate: moment(doc.data().completionDate).format(
               "MMM D, YYYY"
             ),
+            isVerified: doc.data().isVerified,
           };
+          console.log(data);
           this.finishers.push(data);
         });
       });
@@ -151,7 +155,11 @@ export default {
 
   computed: {
     temporaryData() {
-      return this.finishers;
+      return this.finishers.filter((finisher) => {
+        if (finisher.isVerified) {
+          return finisher;
+        }
+      });
     },
     formattedSearchCompletionDate() {
       return this.searchCompletionDate

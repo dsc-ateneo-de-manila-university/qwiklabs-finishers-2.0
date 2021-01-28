@@ -41,7 +41,7 @@ const router = new Router({
       }
     },
     {
-      path: "/finishers/:id",
+      path: "/finishers/:index",
       name:'FinishersViewMore',
       component: () => import("./pages/FinishersViewMore.vue"),
       meta:{
