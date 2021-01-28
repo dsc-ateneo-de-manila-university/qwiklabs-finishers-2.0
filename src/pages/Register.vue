@@ -300,7 +300,7 @@ input {
 
 .submit-btn:hover {
   background-color: white;
-  color:#48d08f;
+  color: #48d08f;
 }
 
 .register-photo {

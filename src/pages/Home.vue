@@ -45,8 +45,7 @@
       <div class="people-collection">
         <div
           class="people-collection-child"
-          v-bind:finishers="filteredFinishers"
-          v-for="finisher in finishers"
+          v-for="finisher in filteredFinishers"
           v-bind:key="finisher.id"
         >
           <FinisherHorizontal v-bind:finisher="finisher" />
@@ -86,12 +85,15 @@ export default {
   },
 
   computed: {
-    filteredFinishers() {
+    filteredFinishersByVerification() {
       return this.finishers.filter((finisher) => {
-        if (finisher.isVerified) {
+        if (finisher.isVerified == true) {
           return finisher;
         }
       });
+    },
+    filteredFinishers() {
+      return this.filteredFinishersByVerification.slice(0, 12);
     },
   },
 
@@ -130,7 +132,6 @@ export default {
     // START OF FINISHERS
     db.collection("finishers")
       .orderBy("completionDate")
-      .limitToLast(12)
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
