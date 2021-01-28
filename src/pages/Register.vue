@@ -2,7 +2,7 @@
   <section id="register">
     <div class="register-container">
       <div class="register-form" id="register-form">
-        <form method="POST" id="registrationform" @submit="login" >
+        <form method="POST" id="registrationform" @submit="register">
           <h1>Register</h1>
           <div class="alert">Message Sent</div>
           <p>
@@ -43,7 +43,7 @@
                 v-for="questTitle in questTitles"
                 v-bind:key="questTitle.id"
               >
-                {{ questTitle.title }}
+                {{ questTitle.name }}
               </option>
             </select>
           </div>
@@ -90,7 +90,16 @@
 </template>
 
 <script>
+// START: IMPORTS
+// START: IMPORT COMPONENTS
 import RegisterModal from "../components/RegisterModal.vue";
+// END: IMPORT COMPONENTS
+
+// START: OTHER IMPORTS
+import firebase from "firebase";
+import db from "../../public/scripts/firebaseInit.js";
+// END: OTHER IMPORTS
+// END: IMPORTS
 
 export default {
   name: "Register",
@@ -100,31 +109,59 @@ export default {
 
   data() {
     return {
-      firstName: "",
-      lastName: "",
-      questTitle: "",
-      dateOfCompletion: "",
-      questTitles: [
-        { id: 1, title: "Baseline Data,ML,AI" },
-        { id: 2, title: "Baseline Infrastructure" },
-        { id: 3, title: "BigQuery Basics for Data Analysts" },
-        { id: 4, title: "Cloud Engineering" },
-        { id: 5, title: "DevOps Essentials" },
-        { id: 6, title: "GCP Essentials" },
-        { id: 7, title: "Google Developer Essentials" },
-        { id: 8, title: "OK Google: Build Interactive Apps with Google Assistant" },
-      ],
+      firstName: null,
+      lastName: null,
+      questTitle: null,
+      dateOfCompletion: null,
+      questTitles: [],
     };
+  },
+
+  created() {
+    // START OF QUEST
+    db.collection("quests")
+      .orderBy("name")
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          const gsReference = firebase
+            .storage()
+            .refFromURL("gs://qwiklabs-finishers-ph-e7667.appspot.com/");
+          let questRef = gsReference.child(String(doc.data().index) + ".png");
+
+          questRef.getDownloadURL().then((url) => {
+            data.image = url;
+          });
+
+          const data = {
+            id: doc.id,
+            index: doc.data().index,
+            image: "",
+            name: doc.data().name,
+            level: doc.data().level,
+            hours: doc.data().hours,
+            credits: doc.data().credits,
+            steps: doc.data().steps,
+          };
+          this.questTitles.push(data);
+        });
+      });
+    // END OF QUEST
   },
 
   computed: {
     isFormComplete() {
-      return this.firstName && this.lastName && this.questTitle && this.dateOfCompletion;
+      return (
+        this.firstName &&
+        this.lastName &&
+        this.questTitle &&
+        this.dateOfCompletion
+      );
     },
   },
 
   methods: {
-    login(e) {
+    register(e) {
       e.preventDefault();
       const modal = document.querySelector(".modal");
       const registerContainer = document.querySelector(".register-container");
