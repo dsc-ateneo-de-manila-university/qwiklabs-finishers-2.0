@@ -14,7 +14,7 @@
             <p>First Name</p>
             <input
               type="text"
-              id="fullName"
+              id="firstName"
               placeholder="ex. Juan"
               value=""
               v-model="firstName"
@@ -24,26 +24,24 @@
             <p>Last Name</p>
             <input
               type="text"
-              id="fullName"
+              id="lastName"
               placeholder="ex. Dela Cruz"
               value=""
               v-model="lastName"
             />
           </div>
+
           <div class="item">
             <p>Quest Title</p>
             <select
               id="quest-title"
               name="quest-name"
-              v-bind:questTitles="questTitles"
-              v-model="questTitle"
+              v-bind:quests="quests"
+              v-model="selectedQuest"
             >
               <option disabled selected hidden>Select a quest</option>
-              <option
-                v-for="questTitle in questTitles"
-                v-bind:key="questTitle.id"
-              >
-                {{ questTitle.name }}
+              <option v-for="quest in quests" v-bind:key="quest.id">
+                {{ quest.name }}
               </option>
             </select>
           </div>
@@ -54,7 +52,7 @@
               id="date"
               placeholder="Select the date of completion"
               value=""
-              v-model="dateOfCompletion"
+              v-model="completionDate"
             />
           </div>
           <div class="item">
@@ -65,6 +63,7 @@
                 id="finisher-img"
                 name="finisher-img"
                 accept="image/*"
+                v-on:change="uploadImage($event)"
               />
             </div>
           </div>
@@ -111,9 +110,11 @@ export default {
     return {
       firstName: null,
       lastName: null,
-      questTitle: null,
-      dateOfCompletion: null,
-      questTitles: [],
+      quests: [],
+      selectedQuest: null,
+      selectedQuestIndex: null,
+      completionDate: null,
+      // image: null,
     };
   },
 
@@ -143,7 +144,7 @@ export default {
             credits: doc.data().credits,
             steps: doc.data().steps,
           };
-          this.questTitles.push(data);
+          this.quests.push(data);
         });
       });
     // END OF QUEST
@@ -154,8 +155,8 @@ export default {
       return (
         this.firstName &&
         this.lastName &&
-        this.questTitle &&
-        this.dateOfCompletion
+        this.selectedQuest &&
+        this.completionDate
       );
     },
   },
@@ -163,12 +164,28 @@ export default {
   methods: {
     register(e) {
       e.preventDefault();
-      const modal = document.querySelector(".modal");
-      const registerContainer = document.querySelector(".register-container");
-      if (confirm("Confirm?")) {
-        modal.style.display = "flex";
-        registerContainer.style.filter = "brightness(70%)";
-      }
+      db.collection("finishers")
+        .add({
+          firstName: this.firstName,
+          lastName: this.lastName,
+          quest: this.selectedQuest,
+          index: 33,
+          completionDate: this.completionDate,
+          // image: this.image,
+          isVerified: false,
+        })
+        .then(() => {
+          const modal = document.querySelector(".modal");
+          const registerContainer = document.querySelector(
+            ".register-container"
+          );
+          if (confirm("Confirm?")) {
+            modal.style.display = "flex";
+            registerContainer.style.filter = "brightness(70%)";
+          }
+          this.$router.push("/");
+        })
+        .catch((error) => console.log(error));
     },
   },
 };
