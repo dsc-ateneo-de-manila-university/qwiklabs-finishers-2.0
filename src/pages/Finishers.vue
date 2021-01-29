@@ -170,14 +170,27 @@ export default {
     filteredFinishers() {
       return this.temporaryData.filter((finisher) => {
         if (this.searchFinisher) {
-          return finisher.name
-            .toLowerCase()
-            .includes(this.searchFinisher.toLowerCase());
+          this.Quest = "";
+          this.searchCompletionDate = "";
+          this.formattedSearchCompletionDate = "";
+          return (
+            finisher.lastName
+              .toLowerCase()
+              .includes(this.searchFinisher.toLowerCase()) ||
+            finisher.firstName
+              .toLowerCase()
+              .includes(this.searchFinisher.toLowerCase())
+          );
         } else if (this.searchQuest) {
+          this.searchFinisher = "";
+          this.searchCompletionDate = "";
+          this.formattedSearchCompletionDate = "";
           return this.searchQuest !== "View All"
             ? finisher.quest.includes(this.searchQuest)
             : finisher;
         } else if (this.formattedSearchCompletionDate) {
+          this.searchFinisher = "";
+          this.searchQuest = "";
           return finisher.completionDate.includes(
             this.formattedSearchCompletionDate
           )

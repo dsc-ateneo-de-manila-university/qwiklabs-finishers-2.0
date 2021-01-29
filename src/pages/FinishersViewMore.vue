@@ -83,9 +83,12 @@ export default {
       return this.filteredFinishersByQuest.filter((finisher) => {
         if (this.searchFinisher) {
           return (
+            finisher.lastName
+              .toLowerCase()
+              .includes(this.searchFinisher.toLowerCase()) ||
             finisher.firstName
               .toLowerCase()
-              .includes(this.searchFinisher.toLowerCase()) || finisher.lastName
+              .includes(this.searchFinisher.toLowerCase())
           );
         } else {
           return finisher;
