@@ -118,6 +118,7 @@ export default {
       image: null,
       imageUrl: "",
       path: null,
+      questsDict: [],
     };
   },
 
@@ -133,6 +134,7 @@ export default {
             index: doc.data().index,
             name: doc.data().name,
           };
+          this.questsDict[data.name] = data.index;
           this.quests.push(data);
         });
       });
@@ -152,30 +154,13 @@ export default {
 
   methods: {
     onFilePicked(event) {
-      // const files = event.target.files;
-
-      // let filename = files[0].name;
-
-      // console.log(files[0]);
-      // console.log(filename);
-
-      // if (filename.lastIndexOf(".") <= 0) {
-      //   return alert("Please add a valid file!");
-      // }
-
-      // const fileReader = new FileReader();
-      // fileReader.addEventListener("load", () => {
-      //   this.imageUrl = fileReader.result;
-      // });
-      // fileReader.readAsDataUrl(files[0]);
-      // this.image = files[0];
       const storageRef = firebase.storage().ref();
       const storeRef = storageRef.child("finishers_imgs/");
       let imgRef = storeRef.child(this.firstName + this.lastName);
       const firstFile = event.target.files[0];
       let uploadTask = imgRef.put(firstFile);
       uploadTask.on("state_changed", function progress(snapshot) {
-        console.log(snapshot.totalBytesTransferred); // progress of upload
+        console.log(snapshot.totalBytesTransferred);
       });
     },
 
@@ -202,7 +187,7 @@ export default {
             firstName: this.firstName,
             lastName: this.lastName,
             quest: this.selectedQuest,
-            index: "33",
+            index: this.questsDict[this.selectedQuest],
             completionDate: this.completionDate,
             image: this.path,
             isVerified: false,

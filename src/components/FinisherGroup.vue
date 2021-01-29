@@ -31,7 +31,7 @@
 
     <!-- START: FINISHER GROUP BODY -->
     <div class="finisher-group-body">
-      <FinisherVertical 
+      <FinisherVertical
         v-for="finisher in finisherGroup"
         v-bind:key="finisher.id"
         v-bind:finisher="finisher"
@@ -45,9 +45,7 @@
           name: 'QuestsViewMore',
           params: { index: finisherGroup[0].index },
         }"
-        ><a class="finisher-btn-1"
-          >Learn More</a
-        ></router-link
+        ><a class="finisher-btn-1">Learn More</a></router-link
       >
       <router-link
         :to="{
@@ -69,12 +67,11 @@ export default {
   components: {
     FinisherVertical,
   },
-  props: ["finisherGroup"]
+  props: ["finisherGroup"],
 };
 </script>
 
 <style scoped>
-
 a {
   text-decoration: none !important;
 }
@@ -143,6 +140,7 @@ a {
   text-decoration: none;
   margin-right: 10px;
   width: 130px;
+  cursor: pointer;
 }
 
 .finisher-btn-1:hover {
@@ -164,6 +162,7 @@ a {
   text-align: center;
   text-decoration: none;
   margin-right: 20px;
+  cursor: pointer;
 }
 
 .finisher-btn-2:hover {
@@ -218,7 +217,8 @@ a {
 }
 
 @media screen and (max-width: 330px) {
-  .finisher-btn-1, .finisher-btn-2 {
+  .finisher-btn-1,
+  .finisher-btn-2 {
     padding: 11px 15px;
   }
 }
