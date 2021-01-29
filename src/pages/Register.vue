@@ -2,7 +2,7 @@
   <section id="register">
     <div class="register-container">
       <div class="register-form" id="register-form">
-        <form method="POST" id="registrationform" @submit="register">
+        <form id="registrationform" @submit.prevent="onRegister">
           <h1>Register</h1>
           <div class="alert">Message Sent</div>
           <p>
@@ -63,9 +63,10 @@
                 id="finisher-img"
                 name="finisher-img"
                 accept="image/*"
-                v-on:change="uploadImage($event)"
+                @change="onFilePicked"
               />
             </div>
+            <img :src="imageUrl" height="150" />
           </div>
           <div>
             <button
@@ -95,7 +96,7 @@ import RegisterModal from "../components/RegisterModal.vue";
 // END: IMPORT COMPONENTS
 
 // START: OTHER IMPORTS
-// import firebase from "firebase";
+import firebase from "firebase";
 import db from "../../public/scripts/firebaseInit.js";
 // END: OTHER IMPORTS
 // END: IMPORTS
@@ -114,7 +115,9 @@ export default {
       selectedQuest: null,
       selectedQuestIndex: null,
       completionDate: null,
-      // image: null,
+      image: null,
+      imageUrl: "",
+      path: null,
     };
   },
 
@@ -148,30 +151,67 @@ export default {
   },
 
   methods: {
-    register(e) {
+    onFilePicked(event) {
+      // const files = event.target.files;
+
+      // let filename = files[0].name;
+
+      // console.log(files[0]);
+      // console.log(filename);
+
+      // if (filename.lastIndexOf(".") <= 0) {
+      //   return alert("Please add a valid file!");
+      // }
+
+      // const fileReader = new FileReader();
+      // fileReader.addEventListener("load", () => {
+      //   this.imageUrl = fileReader.result;
+      // });
+      // fileReader.readAsDataUrl(files[0]);
+      // this.image = files[0];
+      const storageRef = firebase.storage().ref();
+      const storeRef = storageRef.child("finishers_imgs/");
+      let imgRef = storeRef.child(this.firstName + this.lastName);
+      const firstFile = event.target.files[0];
+      let uploadTask = imgRef.put(firstFile);
+      uploadTask.on("state_changed", function progress(snapshot) {
+        console.log(snapshot.totalBytesTransferred); // progress of upload
+      });
+    },
+
+    onRegister(e) {
       e.preventDefault();
-      db.collection("finishers")
-        .add({
-          firstName: this.firstName,
-          lastName: this.lastName,
-          quest: this.selectedQuest,
-          index: 33,
-          completionDate: this.completionDate,
-          // image: this.image,
-          isVerified: false,
-        })
-        .then(() => {
-          const modal = document.querySelector(".modal");
-          const registerContainer = document.querySelector(
-            ".register-container"
-          );
-          if (confirm("Confirm?")) {
-            modal.style.display = "flex";
-            registerContainer.style.filter = "brightness(70%)";
-          }
-          this.$router.push("/");
-        })
-        .catch((error) => console.log(error));
+      if (confirm("Confirm?")) {
+        const storageRef = firebase.storage().ref();
+        const storeRef = storageRef.child("finishers_imgs/");
+        let imgRef = storeRef.child(this.firstName + " " + this.lastName);
+
+        const modal = document.querySelector(".modal");
+        const registerContainer = document.querySelector(".register-container");
+        modal.style.display = "flex";
+        registerContainer.style.filter = "brightness(70%)";
+
+        if (this.image == "") {
+          this.path = "finishers-imgs/Waving_GREEN.png";
+        } else {
+          this.path = imgRef.fullPath;
+        }
+
+        db.collection("finishers")
+          .add({
+            firstName: this.firstName,
+            lastName: this.lastName,
+            quest: this.selectedQuest,
+            index: "33",
+            completionDate: this.completionDate,
+            image: this.path,
+            isVerified: false,
+          })
+          .then(() => {
+            console.log("Document successfully written!");
+          })
+          .catch((error) => console.error("Error writing document: ", error));
+      }
     },
   },
 };
