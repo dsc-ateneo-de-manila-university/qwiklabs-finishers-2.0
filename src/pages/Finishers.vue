@@ -108,7 +108,9 @@ export default {
           let finisherRef = gsReferenceFinisher.child("Waving_GREEN.png");
 
           if (doc.data().image !== "finishers-imgs/Waving_GREEN.png") {
-            finisherRef = gsReferenceFinisher.child(doc.data().firstName + " " + doc.data().lastName);
+            finisherRef = gsReferenceFinisher.child(
+              doc.data().firstName + " " + doc.data().lastName
+            );
           } else {
             finisherRef = gsReferenceFinisher.child("Waving_GREEN.png");
           }
@@ -142,7 +144,9 @@ export default {
             completionDate: moment(doc.data().completionDate).format(
               "MMM D, YYYY"
             ),
+            isVerified: doc.data().isVerified,
           };
+          console.log(data);
           this.finishers.push(data);
         });
       });
@@ -151,7 +155,11 @@ export default {
 
   computed: {
     temporaryData() {
-      return this.finishers;
+      return this.finishers.filter((finisher) => {
+        if (finisher.isVerified) {
+          return finisher;
+        }
+      });
     },
     formattedSearchCompletionDate() {
       return this.searchCompletionDate
@@ -162,14 +170,27 @@ export default {
     filteredFinishers() {
       return this.temporaryData.filter((finisher) => {
         if (this.searchFinisher) {
-          return finisher.name
-            .toLowerCase()
-            .includes(this.searchFinisher.toLowerCase());
+          this.Quest = "";
+          this.searchCompletionDate = "";
+          this.formattedSearchCompletionDate = "";
+          return (
+            finisher.lastName
+              .toLowerCase()
+              .includes(this.searchFinisher.toLowerCase()) ||
+            finisher.firstName
+              .toLowerCase()
+              .includes(this.searchFinisher.toLowerCase())
+          );
         } else if (this.searchQuest) {
+          this.searchFinisher = "";
+          this.searchCompletionDate = "";
+          this.formattedSearchCompletionDate = "";
           return this.searchQuest !== "View All"
             ? finisher.quest.includes(this.searchQuest)
             : finisher;
         } else if (this.formattedSearchCompletionDate) {
+          this.searchFinisher = "";
+          this.searchQuest = "";
           return finisher.completionDate.includes(
             this.formattedSearchCompletionDate
           )

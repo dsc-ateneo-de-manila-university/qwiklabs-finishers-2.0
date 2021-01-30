@@ -45,14 +45,15 @@
       <div class="people-collection">
         <div
           class="people-collection-child"
-          v-bind:finishers="finishers"
-          v-for="finisher in finishers"
+          v-for="finisher in filteredFinishers"
           v-bind:key="finisher.id"
         >
           <FinisherHorizontal v-bind:finisher="finisher" />
         </div>
       </div>
-      <router-link to="/finishers" tag="a" class="linkBtn view-more-link">View more</router-link>
+      <router-link to="/finishers" tag="a" class="linkBtn view-more-link"
+        >View more</router-link
+      >
     </section>
   </main>
 </template>
@@ -81,6 +82,19 @@ export default {
       quests: [],
       finishers: [],
     };
+  },
+
+  computed: {
+    filteredFinishersByVerification() {
+      return this.finishers.filter((finisher) => {
+        if (finisher.isVerified == true) {
+          return finisher;
+        }
+      });
+    },
+    filteredFinishers() {
+      return this.filteredFinishersByVerification.slice(0, 12);
+    },
   },
 
   created() {
@@ -118,7 +132,6 @@ export default {
     // START OF FINISHERS
     db.collection("finishers")
       .orderBy("completionDate")
-      .limitToLast(12)
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
@@ -137,7 +150,7 @@ export default {
             finisherRef = gsReference.child("Waving_GREEN.png");
           }
 
-          finisherRef.getDownloadURL().then(function(url) {
+          finisherRef.getDownloadURL().then(function (url) {
             data.image = url;
           });
 
@@ -150,6 +163,7 @@ export default {
             completionDate: moment(doc.data().completionDate).format(
               "MMM D, YYYY"
             ),
+            isVerified: doc.data().isVerified,
           };
           this.finishers.push(data);
         });

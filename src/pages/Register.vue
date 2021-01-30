@@ -2,7 +2,7 @@
   <section id="register">
     <div class="register-container">
       <div class="register-form" id="register-form">
-        <form method="POST" id="registrationform" @submit="login" >
+        <form id="registrationform" @submit.prevent="onRegister">
           <h1>Register</h1>
           <div class="alert">Message Sent</div>
           <p>
@@ -14,7 +14,7 @@
             <p>First Name</p>
             <input
               type="text"
-              id="fullName"
+              id="firstName"
               placeholder="ex. Juan"
               value=""
               v-model="firstName"
@@ -24,26 +24,24 @@
             <p>Last Name</p>
             <input
               type="text"
-              id="fullName"
+              id="lastName"
               placeholder="ex. Dela Cruz"
               value=""
               v-model="lastName"
             />
           </div>
+
           <div class="item">
             <p>Quest Title</p>
             <select
               id="quest-title"
               name="quest-name"
-              v-bind:questTitles="questTitles"
-              v-model="questTitle"
+              v-bind:quests="quests"
+              v-model="selectedQuest"
             >
               <option disabled selected hidden>Select a quest</option>
-              <option
-                v-for="questTitle in questTitles"
-                v-bind:key="questTitle.id"
-              >
-                {{ questTitle.title }}
+              <option v-for="quest in quests" v-bind:key="quest.id">
+                {{ quest.name }}
               </option>
             </select>
           </div>
@@ -54,7 +52,7 @@
               id="date"
               placeholder="Select the date of completion"
               value=""
-              v-model="dateOfCompletion"
+              v-model="completionDate"
             />
           </div>
           <div class="item">
@@ -65,8 +63,10 @@
                 id="finisher-img"
                 name="finisher-img"
                 accept="image/*"
+                @change="onFilePicked"
               />
             </div>
+            <img :src="imageUrl" height="150" />
           </div>
           <div>
             <button
@@ -90,7 +90,16 @@
 </template>
 
 <script>
+// START: IMPORTS
+// START: IMPORT COMPONENTS
 import RegisterModal from "../components/RegisterModal.vue";
+// END: IMPORT COMPONENTS
+
+// START: OTHER IMPORTS
+import firebase from "firebase";
+import db from "../../public/scripts/firebaseInit.js";
+// END: OTHER IMPORTS
+// END: IMPORTS
 
 export default {
   name: "Register",
@@ -100,37 +109,93 @@ export default {
 
   data() {
     return {
-      firstName: "",
-      lastName: "",
-      questTitle: "",
-      dateOfCompletion: "",
-      questTitles: [
-        { id: 1, title: "Baseline Data,ML,AI" },
-        { id: 2, title: "Baseline Infrastructure" },
-        { id: 3, title: "BigQuery Basics for Data Analysts" },
-        { id: 4, title: "Cloud Engineering" },
-        { id: 5, title: "DevOps Essentials" },
-        { id: 6, title: "GCP Essentials" },
-        { id: 7, title: "Google Developer Essentials" },
-        { id: 8, title: "OK Google: Build Interactive Apps with Google Assistant" },
-      ],
+      firstName: null,
+      lastName: null,
+      quests: [],
+      selectedQuest: null,
+      selectedQuestIndex: null,
+      completionDate: null,
+      image: null,
+      imageUrl: "",
+      path: null,
+      questsDict: [],
     };
+  },
+
+  created() {
+    // START OF QUEST
+    db.collection("quests")
+      .orderBy("name")
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          const data = {
+            id: doc.id,
+            index: doc.data().index,
+            name: doc.data().name,
+          };
+          this.questsDict[data.name] = data.index;
+          this.quests.push(data);
+        });
+      });
+    // END OF QUEST
   },
 
   computed: {
     isFormComplete() {
-      return this.firstName && this.lastName && this.questTitle && this.dateOfCompletion;
+      return (
+        this.firstName &&
+        this.lastName &&
+        this.selectedQuest &&
+        this.completionDate
+      );
     },
   },
 
   methods: {
-    login(e) {
+    onFilePicked(event) {
+      const storageRef = firebase.storage().ref();
+      const storeRef = storageRef.child("finishers_imgs/");
+      let imgRef = storeRef.child(this.firstName + this.lastName);
+      const firstFile = event.target.files[0];
+      let uploadTask = imgRef.put(firstFile);
+      uploadTask.on("state_changed", function progress(snapshot) {
+        console.log(snapshot.totalBytesTransferred);
+      });
+    },
+
+    onRegister(e) {
       e.preventDefault();
-      const modal = document.querySelector(".modal");
-      const registerContainer = document.querySelector(".register-container");
       if (confirm("Confirm?")) {
+        const storageRef = firebase.storage().ref();
+        const storeRef = storageRef.child("finishers_imgs/");
+        let imgRef = storeRef.child(this.firstName + " " + this.lastName);
+
+        const modal = document.querySelector(".modal");
+        const registerContainer = document.querySelector(".register-container");
         modal.style.display = "flex";
         registerContainer.style.filter = "brightness(70%)";
+
+        if (this.image == "") {
+          this.path = "finishers-imgs/Waving_GREEN.png";
+        } else {
+          this.path = imgRef.fullPath;
+        }
+
+        db.collection("finishers")
+          .add({
+            firstName: this.firstName,
+            lastName: this.lastName,
+            quest: this.selectedQuest,
+            index: this.questsDict[this.selectedQuest],
+            completionDate: this.completionDate,
+            image: this.path,
+            isVerified: false,
+          })
+          .then(() => {
+            console.log("Document successfully written!");
+          })
+          .catch((error) => console.error("Error writing document: ", error));
       }
     },
   },
@@ -260,7 +325,7 @@ input {
 
 .submit-btn:hover {
   background-color: white;
-  color:#48d08f;
+  color: #48d08f;
 }
 
 .register-photo {
