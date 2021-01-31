@@ -113,6 +113,7 @@ footer span {
   font-size: 18.5px;
   line-height: 23px;
   color: #ffffff;
+  margin-left: 5px;
 }
 footer a {
   text-decoration: none;
