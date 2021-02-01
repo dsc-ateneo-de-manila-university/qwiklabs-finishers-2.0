@@ -34,7 +34,7 @@
 
           <p class="view-more__par m-top">{{ description }}</p>
 
-          <div class="view-more__objectives m-top">
+          <!-- <div class="view-more__objectives m-top">
             <div class="view-more__obj" v-for="obj in objectives" :key="obj">
               <img
                 src="@/assets/images/vectors/checkmark.png"
@@ -42,9 +42,13 @@
               />
               <span class="obj-par">{{ obj }}</span>
             </div>
-          </div>
+          </div> -->
 
-          <button class="btn btn-reverse m-top">Enroll Quest</button>
+          <a
+            :href="`https://www.qwiklabs.com/quests/${index}`"
+            class="btn btn-reverse m-top"
+            >Enroll Quest</a
+          >
           <p class="view-more__instruction">
             Clicking ‘Enroll Quest’ will redirect you to the Qwiklabs’ page for
             this quest.
@@ -141,7 +145,7 @@ export default {
             finisherRef = gsReference.child("Waving_GREEN.png");
           }
 
-          finisherRef.getDownloadURL().then(function (url) {
+          finisherRef.getDownloadURL().then(function(url) {
             data.image = url;
           });
 
@@ -226,7 +230,6 @@ export default {
   },
 };
 </script>
-
 
 <style scoped>
 .m-top {
