@@ -24,6 +24,7 @@ import firebase from "firebase";
 import db from "../../public/scripts/firebaseInit.js";
 
 export default {
+  name: "Admin",
   data() {
     return {
       courses: [],
@@ -55,6 +56,7 @@ export default {
         })
       );
   },
+
   components: {
     AdminCourseCard,
   },
