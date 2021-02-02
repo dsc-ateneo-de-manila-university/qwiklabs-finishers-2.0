@@ -11,14 +11,14 @@ export const bus = new Vue();
 
 Vue.config.productionTip = false
 
-
-const app = new Vue({
-  router,
-  render:h => h(App),
-})
-
+let app;
 firebase.auth().onAuthStateChanged(()=>{
-  app.$mount('#app');
+  if(!app){
+    app = new Vue({
+      render: h => h(App),
+      router,
+    }).$mount('#app')
+  }
 })
 
 

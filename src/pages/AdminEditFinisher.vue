@@ -1,46 +1,60 @@
 <template>
-  <main class="view-more">
-    <div class="top-lining"></div>
+  <main>
+    <div class="container admin-course__content">
+      <h4>
+        <router-link style="text-decoration: none" to="/admin"
+          >Admin</router-link
+        >
+        > <strong><router-link to="/admin">Courses</router-link></strong> >
+        <strong
+          ><router-link :to="`/admin/${index}`">{{
+            quest
+          }}</router-link></strong
+        >
+        >
+        <strong>{{ firstName }} {{ lastName }}</strong>
+      </h4>
 
-    <section class="view-more__content">
-      <article class="view-more__quest m-top">
-        <div class="container">
-          <form @submit.prevent="updateFinisher">
-            <img
-              class="view-more__img"
-              :src="image"
-              :alt="`${firstName} ${lastName}`"
-            />
+      <section class="view-more__content">
+        <article class="view-more__quest m-top">
+          <div class="container">
+            <form @submit.prevent="updateFinisher">
+              <img
+                class="view-more__img"
+                :src="image"
+                :alt="`${firstName} ${lastName}`"
+              />
 
-            <h1>{{ firstName }} {{ lastName }}</h1>
+              <h1>{{ firstName }} {{ lastName }}</h1>
 
-            <div class="view-more__level">
-              <div class="view-card-icon">
-                <span>{{ quest }}</span>
+              <div class="view-more__level">
+                <div class="view-card-icon">
+                  <span>{{ quest }}</span>
+                </div>
+
+                <div class="view-card-icon">
+                  <!-- <span>Date: {{ formattedCompletionDate }}</span> -->
+                  <input type="date" v-model="completionDate" />
+                </div>
+                <div class="view-card-icon">
+                  <span v-if="isVerified" style="color: green">Verified</span>
+                  <span v-else style="color: red">Unverified</span>
+                  <input
+                    style="margin-left: 5px"
+                    v-model="isVerified"
+                    type="checkbox"
+                  />
+                </div>
               </div>
 
-              <div class="view-card-icon">
-                <!-- <span>Date: {{ formattedCompletionDate }}</span> -->
-                <input type="date" v-model="completionDate" />
-              </div>
-              <div class="view-card-icon">
-                <span v-if="isVerified" style="color: green">Verified</span>
-                <span v-else style="color: red">Unverified</span>
-                <input
-                  style="margin-left: 5px"
-                  v-model="isVerified"
-                  type="checkbox"
-                />
-              </div>
-            </div>
-
-            <button type="submit" class="btn btn-reverse m-top">
-              Update Finisher
-            </button>
-          </form>
-        </div>
-      </article>
-    </section>
+              <button type="submit" class="btn btn-reverse m-top">
+                Update Finisher
+              </button>
+            </form>
+          </div>
+        </article>
+      </section>
+    </div>
   </main>
 </template>
 
@@ -192,14 +206,18 @@ export default {
 </script>
 
 <style scoped>
+.admin-course__content {
+  padding: 30px 0 50px;
+}
+
 .m-top {
   margin-top: 28px;
 }
 
 main {
-  margin-top: 70px;
+  margin-top: 76px;
+  min-height: 100vh;
 }
-
 .top-lining {
   height: 16px;
   background: #ffd457;

@@ -1,7 +1,12 @@
 <template>
   <main>
     <div class="container admin__content">
-      <h1>Admin > <strong>Courses</strong></h1>
+      <h1 style="text-decoration: none">
+        <router-link style="text-decoration: none" to="/admin"
+          >Admin</router-link
+        >
+        > <strong><router-link to="/admin">Courses</router-link></strong>
+      </h1>
       <div class="courses">
         <AdminCourseCard
           v-for="course in courses"

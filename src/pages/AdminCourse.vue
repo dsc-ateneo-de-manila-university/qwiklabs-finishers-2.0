@@ -1,10 +1,38 @@
 <template>
   <main style="min-height: 100vh">
     <div class="container admin-course__content">
-      <h1>
-        Admin > <strong>Courses</strong> >
-        <strong>{{ finishers[0].quest }}</strong>
+      <h1 style="text-decoration: none">
+        <router-link style="text-decoration: none" to="/admin"
+          >Admin</router-link
+        >
+        > <strong><router-link to="/admin">Courses</router-link></strong> >
+        <strong
+          ><router-link :to="`/admin/${index}`">
+            {{ finishers[0].quest }}
+          </router-link></strong
+        >
       </h1>
+
+      <div
+        style="display: flex; justify-content: space-between; margin: 20px 0px"
+      >
+        <select v-model="selectVerificationStatus">
+          <option value="All">View All</option>
+          <option value="Verified" selected>Verified</option>
+          <option value="Unverified">Unverified</option>
+        </select>
+
+        <div class="search-box">
+          <input
+            type="text"
+            placeholder="ex. Juan Dela Cruz"
+            v-model="searchFinisher"
+            required
+          />
+          <img src="@/assets/images/vectors/search.png" />
+        </div>
+      </div>
+
       <div class="finisher-table">
         <table>
           <thead>
@@ -38,7 +66,7 @@
           <tbody>
             <tr
               class="body-row"
-              v-for="finisher in finishers"
+              v-for="finisher in filteredFinishers"
               :key="finisher.id"
             >
               <td>{{ finisher.firstName }}</td>
@@ -76,8 +104,38 @@ export default {
   data() {
     return {
       finishers: [],
+      selectVerificationStatus: "All",
+      searchFinisher: "",
     };
   },
+
+  computed: {
+    filteredFinishers() {
+      return this.finishers.filter((finisher) => {
+        if (this.searchFinisher) {
+          return (
+            finisher.lastName
+              .toLowerCase()
+              .includes(this.searchFinisher.toLowerCase()) ||
+            finisher.firstName
+              .toLowerCase()
+              .includes(this.searchFinisher.toLowerCase())
+          );
+        } else if (this.selectVerificationStatus == "All") {
+          return finisher;
+        } else if (this.selectVerificationStatus == "Verified") {
+          if (finisher.isVerified) {
+            return finisher;
+          }
+        } else if (this.selectVerificationStatus == "Unverified") {
+          if (!finisher.isVerified) {
+            return finisher;
+          }
+        }
+      });
+    },
+  },
+
   created() {
     db.collection("finishers")
       .orderBy("completionDate")
@@ -140,5 +198,23 @@ tbody .body-row:nth-child(odd) {
 
 .admin-course__content {
   padding: 30px 0 50px;
+}
+
+.search-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  border: 1px solid #c4c4c4;
+  width: 200px;
+}
+
+.search-box input {
+  border: none;
+  background: none;
+}
+
+.search-box input:focus {
+  outline: none;
 }
 </style>
