@@ -15,7 +15,7 @@
         <strong>{{ firstName }} {{ lastName }}</strong>
       </h4>
 
-      <section class="view-more__content">
+      <section class="finisher-information">
         <article class="view-more__quest m-top">
           <div class="container">
             <form @submit.prevent="updateFinisher">
@@ -206,6 +206,13 @@ export default {
 </script>
 
 <style scoped>
+.finisher-information {
+  padding: 40px 20px;
+  background-color: white;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
 .admin-course__content {
   padding: 30px 0 50px;
 }

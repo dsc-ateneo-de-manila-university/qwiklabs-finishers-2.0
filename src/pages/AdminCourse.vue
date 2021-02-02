@@ -8,7 +8,7 @@
         > <strong><router-link to="/admin">Courses</router-link></strong> >
         <strong
           ><router-link :to="`/admin/${index}`">
-            {{ finishers[0].quest }}
+            {{ quest }}
           </router-link></strong
         >
       </h1>
@@ -33,7 +33,7 @@
         </div>
       </div>
 
-      <div class="finisher-table">
+      <div v-if="finishers.length > 0" class="finisher-table">
         <table>
           <thead>
             <tr>
@@ -90,6 +90,40 @@
           </tbody>
         </table>
       </div>
+
+      <div v-else style="width: 100%; text-align: center">
+        <table>
+          <thead>
+            <tr>
+              <th>
+                First Name
+                <!-- <img src="@/assets/images/vectors/down-arrow.png" alt=""> -->
+              </th>
+              <th>
+                Last Name
+                <!-- <img src="@/assets/images/vectors/down-arrow.png"> -->
+              </th>
+              <th>
+                Quest Title
+                <!-- <img src="@/assets/images/vectors/down-arrow.png"> -->
+              </th>
+              <th>
+                Date of Completion
+                <!-- <img src="@/assets/images/vectors/down-arrow.png"> -->
+              </th>
+              <!-- <th>Date of Registration  -->
+              <!-- <img src="@/assets/images/vectors/down-arrow.png"> -->
+              <!-- </th> -->
+              <th>
+                Status
+                <!-- <img src="@/assets/images/vectors/down-arrow.png"> -->
+              </th>
+              <th>Edit</th>
+            </tr>
+          </thead>
+        </table>
+        <h3 style="margin-top: 30px">No Finishers</h3>
+      </div>
     </div>
   </main>
 </template>
@@ -110,6 +144,13 @@ export default {
   },
 
   computed: {
+    quest() {
+      if (this.finishers.length > 0) {
+        return this.finishers[0].quest;
+      }
+      return null;
+    },
+
     filteredFinishers() {
       return this.finishers.filter((finisher) => {
         if (this.searchFinisher) {
