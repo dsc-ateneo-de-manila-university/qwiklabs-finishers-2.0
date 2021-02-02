@@ -4,8 +4,14 @@
       <!-- START: HEADER -->
       <div class="finisher-more-page-header">
         <h1>
-          Finishers > <span>{{ name }}</span>
+          <router-link
+            style="text-decoration: none; color: #222222"
+            to="/finishers"
+            >Finishers</router-link
+          >
+          > <strong>{{ name }}</strong>
         </h1>
+
         <div class="finisher-more-page-search">
           <input
             type="text"
