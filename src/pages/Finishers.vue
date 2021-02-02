@@ -242,7 +242,7 @@ export default {
   flex-direction: column;
   width: 100%;
   background-color: #fbfbfb;
-  padding: 64px 96px;
+  padding: 0px 60px;
   box-sizing: border-box;
   min-height: 100vh;
 }

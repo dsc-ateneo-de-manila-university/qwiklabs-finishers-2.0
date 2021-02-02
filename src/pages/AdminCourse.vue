@@ -1,6 +1,6 @@
 <template>
-  <main>
-    <div class="admin-course__content container">
+  <main style="min-height: 100vh">
+    <div class="container admin-course__content">
       <h1>
         Admin > <strong>Courses</strong> >
         <strong>{{ finishers[0].quest }}</strong>
@@ -28,6 +28,11 @@
               <!-- <th>Date of Registration  -->
               <!-- <img src="@/assets/images/vectors/down-arrow.png"> -->
               <!-- </th> -->
+              <th>
+                Status
+                <!-- <img src="@/assets/images/vectors/down-arrow.png"> -->
+              </th>
+              <th>Edit</th>
             </tr>
           </thead>
           <tbody>
@@ -39,8 +44,20 @@
               <td>{{ finisher.firstName }}</td>
               <td>{{ finisher.lastName }}</td>
               <td>{{ finisher.quest }}</td>
-              <td>{{ finisher.completed }}</td>
-              <!-- <td>{{ finisher.registered }}</td> -->
+              <td>{{ finisher.completionDate }}</td>
+              <td>
+                <p v-if="finisher.isVerified" style="color: green">Verified</p>
+                <p v-else style="color: red">Unverified</p>
+              </td>
+              <td>
+                <router-link
+                  :to="{
+                    name: 'AdminEditFinisher',
+                    params: { id: finisher.id },
+                  }"
+                  >Edit</router-link
+                >
+              </td>
             </tr>
           </tbody>
         </table>
@@ -50,9 +67,10 @@
 </template>
 
 <script>
-// other imports
-// import firebase from "firebase";
+// START: IMPORTS
+import moment from "moment";
 import db from "../../public/scripts/firebaseInit.js";
+// END: IMPORTS
 
 export default {
   data() {
@@ -72,7 +90,10 @@ export default {
             firstName: doc.data().firstName,
             lastName: doc.data().lastName,
             quest: doc.data().quest,
-            completed: doc.data().completionDate,
+            completionDate: moment(doc.data().completionDate).format(
+              "MMM D, YYYY"
+            ),
+            isVerified: doc.data().isVerified,
           };
 
           this.finishers.push(data);
@@ -85,6 +106,7 @@ export default {
 <style>
 main {
   margin-top: 76px;
+  min-height: 100vh;
 }
 
 .finisher-table {

@@ -156,7 +156,8 @@ export default {
     onFilePicked(event) {
       const storageRef = firebase.storage().ref();
       const storeRef = storageRef.child("finishers_imgs/");
-      let imgRef = storeRef.child(this.firstName + this.lastName);
+      let imgRef = storeRef.child(this.firstName + " " + this.lastName);
+
       const firstFile = event.target.files[0];
       let uploadTask = imgRef.put(firstFile);
       uploadTask.on("state_changed", function progress(snapshot) {
@@ -181,6 +182,8 @@ export default {
         } else {
           this.path = imgRef.fullPath;
         }
+
+        console.log(imgRef.fullPath);
 
         db.collection("finishers")
           .add({
