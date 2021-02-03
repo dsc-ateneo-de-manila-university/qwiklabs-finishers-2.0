@@ -60,7 +60,7 @@
                 Status
                 <!-- <img src="@/assets/images/vectors/down-arrow.png"> -->
               </th>
-              <th>Edit</th>
+              <th class="edit">Edit</th>
             </tr>
           </thead>
           <tbody>
@@ -225,6 +225,10 @@ th,
 td {
   text-align: left;
   padding: 16px 25px;
+}
+
+.edit:hover {
+  text-decoration: underline;
 }
 
 thead {
