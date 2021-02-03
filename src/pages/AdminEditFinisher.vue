@@ -157,6 +157,7 @@ export default {
             } else {
               finisherRef = gsReference.child("Waving_GREEN.png");
             }
+
             finisherRef.getDownloadURL().then((url) => {
               this.image = url;
             });
@@ -206,6 +207,20 @@ export default {
 </script>
 
 <style scoped>
+
+a {
+  color: #000000;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+h4 {
+  margin-bottom: 15px;
+}
+
 .finisher-information {
   padding: 40px 20px;
   background-color: white;

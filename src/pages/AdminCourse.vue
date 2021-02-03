@@ -140,6 +140,7 @@ export default {
       finishers: [],
       selectVerificationStatus: "All",
       searchFinisher: "",
+      index: null
     };
   },
 
@@ -178,6 +179,7 @@ export default {
   },
 
   created() {
+    this.index = this.$route.params.index;
     db.collection("finishers")
       .orderBy("completionDate")
       .where("index", "==", this.$route.params.index)
@@ -247,7 +249,6 @@ tbody .body-row:nth-child(odd) {
   align-items: center;
   padding: 5px;
   border: 1px solid #c4c4c4;
-  width: 200px;
 }
 
 .search-box input {

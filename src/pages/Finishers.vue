@@ -147,7 +147,6 @@ export default {
             ),
             isVerified: doc.data().isVerified,
           };
-          console.log(data);
           this.finishers.push(data);
         });
       });
