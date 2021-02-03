@@ -8,7 +8,7 @@
         > <strong><router-link to="/admin">Courses</router-link></strong> >
         <strong
           ><router-link :to="`/admin/${index}`">
-            {{ quest }}
+            {{ questName }}
           </router-link></strong
         >
       </h1>
@@ -138,20 +138,14 @@ export default {
   data() {
     return {
       finishers: [],
+      questName: "",
       selectVerificationStatus: "All",
       searchFinisher: "",
-      index: null
+      index: null,
     };
   },
 
   computed: {
-    quest() {
-      if (this.finishers.length > 0) {
-        return this.finishers[0].quest;
-      }
-      return null;
-    },
-
     filteredFinishers() {
       return this.finishers.filter((finisher) => {
         if (this.searchFinisher) {
@@ -179,7 +173,6 @@ export default {
   },
 
   created() {
-    this.index = this.$route.params.index;
     db.collection("finishers")
       .orderBy("completionDate")
       .where("index", "==", this.$route.params.index)
@@ -200,11 +193,28 @@ export default {
           this.finishers.push(data);
         })
       );
+
+    db.collection("quests")
+      .where("index", "==", this.$route.params.index)
+      .get()
+      .then((snapshot) => {
+        snapshot.forEach((doc) => {
+          console.log(doc.data().name);
+          this.questName = doc.data().name;
+        });
+      });
   },
 };
 </script>
 
 <style>
+.router-link-active,
+a:active,
+a:-webkit-any-link {
+  color: inherit;
+  text-decoration: none !important;
+}
+
 main {
   margin-top: 76px;
   min-height: 100vh;

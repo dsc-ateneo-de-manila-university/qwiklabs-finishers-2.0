@@ -3,9 +3,17 @@
     <div class="text-container">
       <div class="navigation-primary">
         <router-link tag="a" to="/">
-          <img src="../assets/images/logo1.png" alt = "Qwiklabs logo"/>
+          <img
+            class="logo1"
+            src="../assets/images/logo1.png"
+            alt="Qwiklabs logo"
+          />
           <span> FINISHERS</span>
-          <img src="../assets/images/logo2.png" alt = "PH Icon"/>
+          <img
+            class="logo2"
+            src="../assets/images/logo2.png"
+            alt="PH Icon"
+          />
         </router-link>
       </div>
 
@@ -29,34 +37,33 @@
 
 <script>
 export default {
-  name: 'Navbar',
+  name: "Navbar",
   methods: {
     showMenu: function() {
       const navSecondary = document.querySelector(".navigation-secondary");
       const burgerBtn = document.querySelector(".burger_button");
       window.addEventListener("resize", () => {
-          if(window.innerWidth > 850){
-              navSecondary.style.display = "inline-block";
-          } else {
-              navSecondary.style.display = "none";
-          }
-      })
-
-      if(navSecondary.style.display !== "flex"){
-          navSecondary.style.display = "flex";
-          burgerBtn.classList.add("open");
-      } else {
+        if (window.innerWidth > 850) {
+          navSecondary.style.display = "inline-block";
+        } else {
           navSecondary.style.display = "none";
-          burgerBtn.classList.remove("open");
+        }
+      });
+
+      if (navSecondary.style.display !== "flex") {
+        navSecondary.style.display = "flex";
+        burgerBtn.classList.add("open");
+      } else {
+        navSecondary.style.display = "none";
+        burgerBtn.classList.remove("open");
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
 nav {
   position: fixed;
   top: 0;
@@ -73,7 +80,16 @@ nav {
 
 nav img {
   vertical-align: middle;
-  margin-top: -2px;
+  margin-top: -3px;
+}
+
+.logo1 {
+  width: 128px;
+}
+
+.logo2 {
+  width: 20px;
+  margin-left: 7px;
 }
 
 nav a {
@@ -87,8 +103,7 @@ nav span {
   font-style: normal;
   font-weight: 900;
   font-size: 18.5px;
-  line-height: 23px;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.04em;
   color: #222222;
 }
 
@@ -106,6 +121,9 @@ nav span {
 
 .navigation-primary {
   margin-left: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .navigation-primary a:hover {
@@ -142,7 +160,6 @@ nav span {
   background-color: white;
 }
 
-
 .burger_button {
   display: none;
   position: absolute;
@@ -150,17 +167,18 @@ nav span {
   right: 25px;
   cursor: pointer;
   margin: 0 16px;
-  -webkit-transition: .5s ease-in-out;
-  -moz-transition: .5s ease-in-out;
-  -o-transition: .5s ease-in-out;
-  transition: .5s ease-in-out;
+  -webkit-transition: 0.5s ease-in-out;
+  -moz-transition: 0.5s ease-in-out;
+  -o-transition: 0.5s ease-in-out;
+  transition: 0.5s ease-in-out;
 }
 
-#regBtn:hover, #regBtn2:hover {
-  background-color: #333; 
+#regBtn:hover,
+#regBtn2:hover {
+  background-color: #333;
   color: #fff;
   cursor: pointer;
-}; 
+}
 
 .burger_button div {
   width: 25px;
@@ -170,10 +188,10 @@ nav span {
   opacity: 1;
   left: 0;
   background-color: #333;
-  -webkit-transition: .25s ease-in-out;
-  -moz-transition: .25s ease-in-out;
-  -o-transition: .25s ease-in-out;
-  transition: .25s ease-in-out;
+  -webkit-transition: 0.25s ease-in-out;
+  -moz-transition: 0.25s ease-in-out;
+  -o-transition: 0.25s ease-in-out;
+  transition: 0.25s ease-in-out;
 }
 
 .burger_button div:nth-child(1) {
@@ -186,13 +204,14 @@ nav span {
   opacity: 1;
   left: 0;
   background-color: #333;
-  -webkit-transition: .25s ease-in-out;
-  -moz-transition: .25s ease-in-out;
-  -o-transition: .25s ease-in-out;
-  transition: .25s ease-in-out;
+  -webkit-transition: 0.25s ease-in-out;
+  -moz-transition: 0.25s ease-in-out;
+  -o-transition: 0.25s ease-in-out;
+  transition: 0.25s ease-in-out;
 }
-  
-.burger_button div:nth-child(2),.burger_button div:nth-child(3) {
+
+.burger_button div:nth-child(2),
+.burger_button div:nth-child(3) {
   top: 1px;
   /*won't inherit from .burger_button div*/
   width: 25px;
@@ -202,25 +221,25 @@ nav span {
   opacity: 1;
   left: 0;
   background-color: #333;
-  -webkit-transition: .25s ease-in-out;
-  -moz-transition: .25s ease-in-out;
-  -o-transition: .25s ease-in-out;
-  transition: .25s ease-in-out;
+  -webkit-transition: 0.25s ease-in-out;
+  -moz-transition: 0.25s ease-in-out;
+  -o-transition: 0.25s ease-in-out;
+  transition: 0.25s ease-in-out;
 }
-  
+
 .burger_button.open div:nth-child(1) {
   top: 3px;
   width: 0%;
   left: 50%;
 }
-  
+
 .burger_button.open div:nth-child(2) {
   -webkit-transform: rotate(45deg);
   -moz-transform: rotate(45deg);
   -o-transform: rotate(45deg);
   transform: rotate(45deg);
 }
-  
+
 .burger_button.open div:nth-child(3) {
   -webkit-transform: rotate(-45deg);
   -moz-transform: rotate(-45deg);
@@ -228,19 +247,19 @@ nav span {
   transform: translateY(-6px) rotate(-45deg);
 }
 
-#quest-title, #completionDate {
+#quest-title,
+#completionDate {
   cursor: pointer;
 }
 
 @media screen and (max-width: 850px) {
-
-  .text-container{
+  .text-container {
     display: flex;
     align-items: center;
     margin-top: 5px;
   }
 
-  .navigation-primary{
+  .navigation-primary {
     position: relative;
     left: auto;
     right: auto;
@@ -251,16 +270,16 @@ nav span {
     height: 20px;
   }
 
-  img[alt = "PH Icon"]{
+  img[alt="PH Icon"] {
     height: 20px;
     width: 20px;
   }
 
-  nav span{
+  nav span {
     font-size: 0.8em;
   }
 
-  .navigation-secondary{
+  .navigation-secondary {
     display: none;
     flex-direction: column;
     justify-content: space-around;
@@ -276,7 +295,7 @@ nav span {
     box-shadow: 0 4px 6px -6px #222;
   }
 
-  .burger_button{
+  .burger_button {
     display: block;
   }
 
@@ -286,8 +305,7 @@ nav span {
 }
 
 @media screen and (max-width: 320px) {
-
-  .navigation-primary{
+  .navigation-primary {
     margin-left: 25px;
   }
 
@@ -296,10 +314,9 @@ nav span {
     height: 18px;
   }
 
-  img[alt = "PH Icon"]{
+  img[alt="PH Icon"] {
     height: 16px;
     width: 16px;
   }
 }
-
 </style>

@@ -70,6 +70,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
 main {
   margin-top: 76px;
   min-height: 100vh;

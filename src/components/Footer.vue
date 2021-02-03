@@ -3,7 +3,11 @@
     <div class="footer-container">
       <div>
         <router-link tag="a" to="/">
-          <img src="../assets/images/logo1.png" alt="Qwiklabs logo" />
+          <img
+            src="../assets/images/logo1.png"
+            alt="Qwiklabs logo"
+            class="logo1"
+          />
           <span>FINISHERS</span>
         </router-link>
       </div>
@@ -113,6 +117,10 @@ footer .footer-container {
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
+}
+
+.logo1 {
+  width: 137px;
 }
 
 footer span {
