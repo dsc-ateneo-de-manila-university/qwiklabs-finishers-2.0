@@ -35,10 +35,15 @@
       </div>
       <div class="login-container">
         <div v-if="!isLoggedIn">
-          <a href="#" id="admin-login" @click="openLoginModal">Admin Log in</a>
+          <a href="#" class="admin-login" @click="openLoginModal"
+            >Admin Log in</a
+          >
         </div>
         <div v-if="isLoggedIn">
-          <a href="#" id="admin-login" @click="logout">Admin Log out</a>
+          <router-link to="/admin" style="margin: 0px 20px" class="admin-login"
+            >Admin</router-link
+          >
+          <a href="#" class="admin-login" @click="logout">Admin Log out</a>
           <!-- <a href="#" id="admin-login" @click="openLogoutModal"
             >Admin Log out</a
           > -->
@@ -81,8 +86,10 @@ export default {
         .auth()
         .signOut()
         .then(() => {
-          alert(`You are now logged out`);
-          this.$router.go({ path: this.$router.path });
+          if (confirm("Are you sure?")) {
+            alert(`You are now logged out`);
+            this.$router.go({ path: this.$router.path });
+          }
         });
     },
   },
@@ -216,12 +223,24 @@ footer #footer-finisher {
   align-items: flex-end;
 }
 
-.footer-container-lower .login-container #admin-login {
+.footer-container-lower .login-container {
   font-weight: normal;
   font-size: 12.8px;
   line-height: 16px;
   text-align: right;
   color: #8e8e8e;
+}
+
+.admin-login {
+  font-weight: normal;
+  font-size: 12.8px;
+  line-height: 16px;
+  text-align: right;
+  color: #8e8e8e !important;
+  text-decoration: none;
+}
+
+.admin-login:hover {
   text-decoration: underline;
 }
 
@@ -299,7 +318,7 @@ footer #footer-finisher {
     display: none;
   }
 
-  .footer-container-lower .login-container #admin-login {
+  .footer-container-lower .login-container {
     font-size: 10.8px;
   }
 }

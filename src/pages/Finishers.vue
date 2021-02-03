@@ -43,7 +43,7 @@
           <label for="quest">Quest Title</label>
           <select id="quest-title" name="quest-name" v-model="searchQuest">
             <option disabled hidden value="">Select a quest</option>
-            <option>View All</option>
+            <option value="">View All</option>
 
             <option
               v-for="finisherGroup in organisedData"
@@ -141,12 +141,12 @@ export default {
             quest: doc.data().quest,
             firstName: doc.data().firstName,
             lastName: doc.data().lastName,
+            fullName: doc.data().firstName + " " + doc.data().lastName,
             completionDate: moment(doc.data().completionDate).format(
               "MMM D, YYYY"
             ),
             isVerified: doc.data().isVerified,
           };
-          console.log(data);
           this.finishers.push(data);
         });
       });
@@ -173,19 +173,14 @@ export default {
           this.Quest = "";
           this.searchCompletionDate = "";
           this.formattedSearchCompletionDate = "";
-          return (
-            finisher.lastName
-              .toLowerCase()
-              .includes(this.searchFinisher.toLowerCase()) ||
-            finisher.firstName
-              .toLowerCase()
-              .includes(this.searchFinisher.toLowerCase())
-          );
+          return finisher.fullName
+            .toLowerCase()
+            .includes(this.searchFinisher.toLowerCase());
         } else if (this.searchQuest) {
           this.searchFinisher = "";
           this.searchCompletionDate = "";
           this.formattedSearchCompletionDate = "";
-          return this.searchQuest !== "View All"
+          return this.searchQuest !== ""
             ? finisher.quest.includes(this.searchQuest)
             : finisher;
         } else if (this.formattedSearchCompletionDate) {
@@ -242,9 +237,10 @@ export default {
   flex-direction: column;
   width: 100%;
   background-color: #fbfbfb;
-  padding: 64px 96px;
+  padding: 60px 60px;
   box-sizing: border-box;
-  min-height: 100vh;
+
+  min-height: calc(100vh - 72px - 300px);
 }
 
 .finisher-page-header {

@@ -1,20 +1,51 @@
 <template>
   <div class="finisher-member">
     <img :src="finisher.finisherImage" :alt="finisher.name" />
-    <h5>{{ finisher.firstName }} {{ finisher.lastName }}</h5>
+    <router-link
+      class="routerLink"
+      :to="{
+        name: 'AdminEditFinisher',
+        params: { id: finisher.id },
+      }"
+      v-if="isLoggedIn"
+      ><h5>{{ finisher.firstName }} {{ finisher.lastName }}</h5></router-link
+    >
+
+    <h5 v-else>{{ finisher.firstName }} {{ finisher.lastName }}</h5>
+
     <p>{{ finisher.completionDate }}</p>
     <br />
   </div>
 </template>
 
 <script>
+import firebase from "firebase";
 export default {
   name: "FinisherMember",
-  props: ["finisher"]
+  props: ["finisher"],
+  data() {
+    return {
+      isLoggedIn: false,
+    };
+  },
+
+  created() {
+    if (firebase.auth().currentUser) {
+      this.isLoggedIn = true;
+    }
+  },
 };
 </script>
 
 <style scoped>
+.routerLink {
+  text-decoration: none;
+  color: #222222;
+}
+.routerLink:hover {
+  text-decoration: underline;
+}
+
 .finisher-member {
   display: flex;
   justify-content: center;

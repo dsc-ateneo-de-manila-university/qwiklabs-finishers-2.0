@@ -59,13 +59,16 @@ export default {
           () => {
             this.isHidden = !this.isHidden;
             bus.$emit("hideOverflow");
-            this.$router.push("/admin");
+            alert("Login Successful");
+
+            this.$router.go({ path: this.$router.path });
           },
           (err) => alert(err.message)
         );
       e.preventDefault();
     },
   },
+
   created() {
     bus.$on("openLoginModal", this.toggleModal);
   },

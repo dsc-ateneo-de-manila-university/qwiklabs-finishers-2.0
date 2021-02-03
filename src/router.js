@@ -72,6 +72,14 @@ const router = new Router({
       }
     },
     {
+      path: "/admin/finisher/:id",
+      name:'AdminEditFinisher',
+      component: () => import("./pages/AdminEditFinisher.vue"),
+      meta:{
+        requiresAuth:true,
+      }
+    },
+    {
       path: "*",
       component: () => import("./pages/NotFound.vue")
     }
