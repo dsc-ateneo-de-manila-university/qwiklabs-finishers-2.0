@@ -60,7 +60,7 @@
                 Status
                 <!-- <img src="@/assets/images/vectors/down-arrow.png"> -->
               </th>
-              <th class="edit">Edit</th>
+              <th>Edit</th>
             </tr>
           </thead>
           <tbody>
@@ -77,7 +77,7 @@
                 <p v-if="finisher.isVerified" style="color: green">Verified</p>
                 <p v-else style="color: red">Unverified</p>
               </td>
-              <td>
+              <td class="edit">
                 <router-link
                   :to="{
                     name: 'AdminEditFinisher',
@@ -228,7 +228,7 @@ td {
 }
 
 .edit:hover {
-  text-decoration: underline;
+  text-decoration: underline !important;
 }
 
 thead {
