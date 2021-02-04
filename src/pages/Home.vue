@@ -150,7 +150,7 @@ export default {
             finisherRef = gsReference.child("Waving_GREEN.png");
           }
 
-          finisherRef.getDownloadURL().then(function (url) {
+          finisherRef.getDownloadURL().then(function(url) {
             data.image = url;
           });
 
@@ -363,6 +363,12 @@ p {
 
   .home-quest {
     padding: 64px 13px;
+  }
+}
+
+@media screen and (max-width: 850px) and (max-height: 450px) and (orientation: landscape) {
+  .home-hero-container {
+    height: 600px;
   }
 }
 </style>

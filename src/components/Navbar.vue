@@ -265,20 +265,6 @@ nav span {
     right: auto;
   }
 
-  nav img {
-    width: 124px;
-    height: 20px;
-  }
-
-  img[alt="PH Icon"] {
-    height: 20px;
-    width: 20px;
-  }
-
-  nav span {
-    font-size: 0.8em;
-  }
-
   .navigation-secondary {
     display: none;
     flex-direction: column;
@@ -309,14 +295,14 @@ nav span {
     margin-left: 25px;
   }
 
-  nav img {
+  .logo1 {
     width: 100px;
-    height: 18px;
+    margin: 0;
   }
 
-  img[alt="PH Icon"] {
-    height: 16px;
-    width: 16px;
+  nav span {
+    font-size: 13px;
   }
+
 }
 </style>

@@ -153,5 +153,9 @@ export default {
   .home-card-btn {
     width: 70%;
   }
+
+  .home-card-title {
+    overflow: hidden;
+  }
 }
 </style>
