@@ -252,24 +252,6 @@ export default {
         modal.style.display = "flex";
         registerContainer.style.filter = "brightness(70%)";
 
-        // PROBLEMATIC SCENARIO:
-        // if finisher is not existing but not upload, android
-        // -> if finisher already exists but not upload,  android
-        // -> if finisher already exists but uploads, path
-        // -> if finisher already exists but not upload,  path
-        //  (what about the ones assigned with the android)
-
-        // WORKS:
-        // if finisher is not existing but uploads, path
-        // -> if finisher is already existing but not upload, path
-        // -> if finisher is already existing but uploads, path
-        // -> if finisher is already existing but not upload, path
-
-        // if existing,
-        // -> get latest entry, then get the path
-        // if not existing
-        // -> android
-
         if (this.isAlreadyExisting) {
           //IF ALREADY EXISTING
           if (this.image == null) {
@@ -285,16 +267,6 @@ export default {
             this.path = imgRef.fullPath; // if not existing and does upload, get the path.
           }
         }
-
-        // if (this.image == null) {
-        //   if (this.isAlreadyExisting) {
-        //     this.path = imgRef.fullPath;
-        //   } else {
-        //     this.path = "finishers-imgs/Waving_GREEN.png";
-        //   }
-        // } else {
-        //   this.path = imgRef.fullPath;
-        // }
 
         db.collection("finishers")
           .add({
