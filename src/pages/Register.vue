@@ -75,7 +75,7 @@
               type="submit"
               :disabled="!isFormComplete"
             >
-              Submit
+              Submit {{ isAlreadyExisting }}
             </button>
           </div>
         </form>
@@ -119,6 +119,7 @@ export default {
       imageUrl: "",
       path: null,
       questsDict: [],
+      finishers: [],
     };
   },
 
@@ -139,6 +140,46 @@ export default {
         });
       });
     // END OF QUEST
+
+    db.collection("finishers")
+      .orderBy("completionDate", "desc")
+      .get()
+      .then((snapshot) =>
+        snapshot.forEach((doc) => {
+          // START: Get Images for Each Finisher
+          const gsReferenceFinisher = firebase
+            .storage()
+            .refFromURL(
+              "gs://qwiklabs-finishers-ph-e7667.appspot.com/finishers_imgs/"
+            );
+          let finisherRef = gsReferenceFinisher.child("Waving_GREEN.png");
+
+          if (doc.data().image !== "finishers-imgs/Waving_GREEN.png") {
+            finisherRef = gsReferenceFinisher.child(
+              doc.data().firstName + " " + doc.data().lastName
+            );
+          } else {
+            finisherRef = gsReferenceFinisher.child("Waving_GREEN.png");
+          }
+
+          finisherRef.getDownloadURL().then(function (url) {
+            data.finisherImage = url;
+          });
+          // END: Get Images for Each Finisher
+
+          const data = {
+            id: doc.id,
+            index: doc.data().index,
+            finisherImage: "",
+            quest: doc.data().quest,
+            firstName: doc.data().firstName,
+            lastName: doc.data().lastName,
+            isVerified: doc.data().isVerified,
+          };
+
+          this.finishers.push(data);
+        })
+      );
   },
 
   computed: {
@@ -150,6 +191,40 @@ export default {
         this.completionDate
       );
     },
+
+    //START: Check if finisher already existing
+    isAlreadyExisting() {
+      let answer = false;
+      let fullName = this.firstName + " " + this.lastName;
+
+      for (let finisher of this.finishers) {
+        let existingFullName = finisher.firstName + " " + finisher.lastName;
+
+        if (fullName.toLowerCase().includes(existingFullName.toLowerCase())) {
+          answer = true;
+          break;
+        }
+      }
+
+      return answer;
+    },
+
+    pastImage() {
+      let answer = null;
+      let fullName = this.firstName + " " + this.lastName;
+
+      for (let finisher of this.finishers) {
+        let existingFullName = finisher.firstName + " " + finisher.lastName;
+
+        if (fullName.toLowerCase().includes(existingFullName.toLowerCase())) {
+          answer = finisher.finisherImage;
+          break;
+        }
+      }
+
+      return answer;
+    },
+    //END: Check if finisher already existing
   },
 
   methods: {
@@ -177,13 +252,49 @@ export default {
         modal.style.display = "flex";
         registerContainer.style.filter = "brightness(70%)";
 
-        if (this.image == "") {
-          this.path = "finishers-imgs/Waving_GREEN.png";
+        // PROBLEMATIC SCENARIO:
+        // if finisher is not existing but not upload, android
+        // -> if finisher already exists but not upload,  android
+        // -> if finisher already exists but uploads, path
+        // -> if finisher already exists but not upload,  path
+        //  (what about the ones assigned with the android)
+
+        // WORKS:
+        // if finisher is not existing but uploads, path
+        // -> if finisher is already existing but not upload, path
+        // -> if finisher is already existing but uploads, path
+        // -> if finisher is already existing but not upload, path
+
+        // if existing,
+        // -> get latest entry, then get the path
+        // if not existing
+        // -> android
+
+        if (this.isAlreadyExisting) {
+          //IF ALREADY EXISTING
+          if (this.image == null) {
+            this.path = this.pastImage;
+          } else {
+            this.path = imgRef.fullPath; // if not existing and does upload, get the path.
+          }
         } else {
-          this.path = imgRef.fullPath;
+          //IF NEW
+          if (this.image == null) {
+            this.path = "finishers-imgs/Waving_GREEN.png"; // if not existing and doesnt upload, get android
+          } else {
+            this.path = imgRef.fullPath; // if not existing and does upload, get the path.
+          }
         }
 
-        console.log(imgRef.fullPath);
+        // if (this.image == null) {
+        //   if (this.isAlreadyExisting) {
+        //     this.path = imgRef.fullPath;
+        //   } else {
+        //     this.path = "finishers-imgs/Waving_GREEN.png";
+        //   }
+        // } else {
+        //   this.path = imgRef.fullPath;
+        // }
 
         db.collection("finishers")
           .add({

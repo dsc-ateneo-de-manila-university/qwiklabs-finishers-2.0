@@ -37,6 +37,7 @@
         <table>
           <thead>
             <tr>
+              <th>id</th>
               <th>
                 First Name
                 <!-- <img src="@/assets/images/vectors/down-arrow.png" alt=""> -->
@@ -69,6 +70,7 @@
               v-for="finisher in filteredFinishers"
               :key="finisher.id"
             >
+              <td>{{ finisher.id }}</td>
               <td>{{ finisher.firstName }}</td>
               <td>{{ finisher.lastName }}</td>
               <td>{{ finisher.quest }}</td>
@@ -95,6 +97,10 @@
         <table>
           <thead>
             <tr>
+              <th>
+                id
+                <!-- <img src="@/assets/images/vectors/down-arrow.png" alt=""> -->
+              </th>
               <th>
                 First Name
                 <!-- <img src="@/assets/images/vectors/down-arrow.png" alt=""> -->
