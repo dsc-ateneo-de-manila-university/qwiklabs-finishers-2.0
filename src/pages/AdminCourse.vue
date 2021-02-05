@@ -205,7 +205,6 @@ export default {
       .get()
       .then((snapshot) => {
         snapshot.forEach((doc) => {
-          console.log(doc.data().name);
           this.questName = doc.data().name;
         });
       });
