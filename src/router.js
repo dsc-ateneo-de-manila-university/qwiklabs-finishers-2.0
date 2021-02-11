@@ -1,6 +1,8 @@
 import Vue from "vue";
 import Router from "vue-router";
 
+import firebase from "firebase";
+
 Vue.use(Router);
 
 const router = new Router({
@@ -8,31 +10,74 @@ const router = new Router({
   routes: [
     {
       path: "/",
-      component: () => import("./pages/Home.vue")
+      name:'Home',
+      component: () => import("./pages/Home.vue"),
+      meta:{
+        requiresAuth:false,
+      }
     },
     {
       path: "/quests",
-      component: () => import("./pages/Quests.vue")
+      name:'Quests',
+      component: () => import("./pages/Quests.vue"),
+      meta:{
+        requiresAuth:false,
+      }
     },
     {
-      path: "/quests/:id",
-      component: () => import("./pages/QuestsViewMore.vue")
+      path: "/quests/:index",
+      name:'QuestsViewMore',
+      component: () => import("./pages/QuestsViewMore.vue"),
+      meta:{
+        requiresAuth:false,
+      }
     },
     {
       path: "/finishers",
-      component: () => import("./pages/Finishers.vue")
+      name:'Finishers',
+      component: () => import("./pages/Finishers.vue"),
+      meta:{
+        requiresAuth:false,
+      }
     },
     {
-      path: "/finishers/:id",
-      component: () => import("./pages/FinishersViewMore.vue")
+      path: "/finishers/:index",
+      name:'FinishersViewMore',
+      component: () => import("./pages/FinishersViewMore.vue"),
+      meta:{
+        requiresAuth:false,
+      }
     },
     {
       path: "/register",
-      component: () => import("./pages/Register.vue")
+      name:'Register',
+      component: () => import("./pages/Register.vue"),
+      meta:{
+        requiresAuth:false,
+      }
     },
     {
       path: "/admin",
-      component: () => import("./pages/Admin.vue")
+      name:'Admin',
+      component: () => import("./pages/Admin.vue"),
+      meta:{
+        requiresAuth:true,
+      }
+    },
+    {
+      path: "/admin/:index",
+      component: () => import("./pages/AdminCourse.vue"),
+      meta:{
+        requiresAuth:true,
+      }
+    },
+    {
+      path: "/admin/finisher/:id",
+      name:'AdminEditFinisher',
+      component: () => import("./pages/AdminEditFinisher.vue"),
+      meta:{
+        requiresAuth:true,
+      }
     },
     {
       path: "*",
@@ -51,5 +96,20 @@ const router = new Router({
   }
 });
 
-
+router.beforeEach((to,from,next)=>{
+  if(to.matched.some(record=>record.meta.requiresAuth)){
+    if(!firebase.auth().currentUser){
+      next({
+        path:'/',
+        query:{
+          redirect:to.fullPath
+        }
+      })
+    }else{
+      next();
+    }
+  }else{
+    next();
+  }
+})
 export default router;

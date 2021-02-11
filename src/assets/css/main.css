@@ -1,0 +1,54 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: "Google Sans", sans-serif;
+  letter-spacing: 0.02em;
+  background: #fbfbfb;
+}
+
+button:focus,
+button:visited {
+  outline: none;
+}
+
+.btn,
+.linkBtn {
+  display: inline-block;
+  border: 3px solid #222222;
+  background: white;
+  padding: 10px 25px;
+  font-weight: bold;
+  font-family: inherit;
+  color: #222222;
+  text-decoration: none;
+}
+
+.btn-reverse {
+  background-color: #222222;
+  color: white;
+}
+
+.btn:hover,
+.linkBtn:hover {
+  background-color: #333;
+  color: #fff;
+  cursor: pointer;
+}
+
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-gap: 2rem;
+  margin: 25px 0;
+}
+
+.container {
+  width: 90%;
+  margin: 0 auto;
+}
