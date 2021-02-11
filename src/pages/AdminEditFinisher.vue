@@ -78,6 +78,7 @@ export default {
       completionDate: null,
       isVerified: null,
       image: null,
+      imageURL: null,
       quest: null,
       index: null,
     };
@@ -122,6 +123,9 @@ export default {
             vm.isVerified = doc.data().isVerified;
             vm.quest = doc.data().quest;
             vm.index = doc.data().index;
+            vm.imageURL = doc.data().image;
+
+            // console.log("Before Route Enter: " + vm.imageURL);
           });
         });
       });
@@ -169,6 +173,9 @@ export default {
             this.isVerified = doc.data().isVerified;
             this.quest = doc.data().quest;
             this.index = doc.data().index;
+            this.imageURL = doc.data().image;
+
+            // console.log("Fetch Data: " + this.imageURL);
           });
         });
     },
@@ -191,7 +198,7 @@ export default {
                   completionDate: this.completionDate,
                   isVerified: this.isVerified,
                   index: this.index,
-                  image: this.image,
+                  image: this.imageURL,
                 })
                 .then(() =>
                   this.$router.push({
@@ -200,6 +207,7 @@ export default {
                 );
             });
           });
+        // console.log("Update Finisher: " + this.imageURL);
       }
     },
   },
@@ -207,7 +215,6 @@ export default {
 </script>
 
 <style scoped>
-
 a {
   color: #000000;
   text-decoration: none;
