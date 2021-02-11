@@ -66,7 +66,6 @@
                 @change="onFilePicked"
               />
             </div>
-            <img :src="imageUrl" height="150" />
           </div>
           <div>
             <button
@@ -75,7 +74,7 @@
               type="submit"
               :disabled="!isFormComplete"
             >
-              Submit {{ isAlreadyExisting }}
+              Submit
             </button>
           </div>
         </form>
@@ -115,8 +114,7 @@ export default {
       selectedQuest: null,
       selectedQuestIndex: null,
       completionDate: null,
-      image: null,
-      imageUrl: "",
+      isUploaded: false,
       path: null,
       questsDict: [],
       finishers: [],
@@ -175,6 +173,7 @@ export default {
             firstName: doc.data().firstName,
             lastName: doc.data().lastName,
             isVerified: doc.data().isVerified,
+            image: doc.data().image,
           };
 
           this.finishers.push(data);
@@ -217,7 +216,7 @@ export default {
         let existingFullName = finisher.firstName + " " + finisher.lastName;
 
         if (fullName.toLowerCase().includes(existingFullName.toLowerCase())) {
-          answer = finisher.finisherImage;
+          answer = finisher.image;
           break;
         }
       }
@@ -229,6 +228,8 @@ export default {
 
   methods: {
     onFilePicked(event) {
+      this.isUploaded = true;
+
       const storageRef = firebase.storage().ref();
       const storeRef = storageRef.child("finishers_imgs/");
       let imgRef = storeRef.child(this.firstName + " " + this.lastName);
@@ -254,17 +255,32 @@ export default {
 
         if (this.isAlreadyExisting) {
           //IF ALREADY EXISTING
-          if (this.image == null) {
-            this.path = this.pastImage;
-          } else {
+          if (this.isUploaded) {
+            console.log(
+              "Already Existing, but uploaded new: " + imgRef.fullPath
+            );
             this.path = imgRef.fullPath; // if not existing and does upload, get the path.
+
+            this.isUploaded = false;
+          } else {
+            console.log(
+              "Already Existing, but not uploaded: " + this.pastImage
+            );
+            this.path = this.pastImage;
           }
         } else {
           //IF NEW
-          if (this.image == null) {
-            this.path = "finishers-imgs/Waving_GREEN.png"; // if not existing and doesnt upload, get android
-          } else {
+          if (this.isUploaded) {
+            console.log("New Finisher, but uploaded new: " + imgRef.fullPath);
             this.path = imgRef.fullPath; // if not existing and does upload, get the path.
+          } else {
+            console.log(
+              "New Finisher, but not uploaded: " +
+                "finishers-imgs/Waving_GREEN.png"
+            );
+            this.path = "finishers-imgs/Waving_GREEN.png"; // if not existing and doesnt upload, get android
+
+            this.isUploaded = false;
           }
         }
 
